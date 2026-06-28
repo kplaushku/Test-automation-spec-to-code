@@ -13,6 +13,8 @@ resolves them - so the UI suite actually runs against the real selectors.
 | `speckit.qa.bind-locators` | Open the live app via a browser, read the DOM/accessibility tree, fill the structural-locator file the adapters reference. Realizes the **locator-binding / MCP** app-access strategy. |
 | `speckit.qa.run` | Run the generated suite; for UI/web failures, capture screenshot + DOM + console evidence and propose a minimal, correctly-scoped fix. |
 | `speckit.qa.investigate` | Deep root-cause of a single failing or flaky test: reproduce, isolate one variable, fix minimally. |
+| `speckit.qa.verify` | Confirm a generated test truly exercises its requirement against real behavior - runs with observation on and falsifies it, flagging `weak` and `false-green` tests. |
+| `speckit.qa.review` | Pre-landing quality review of the generated test code: separation, real assertions, flakiness, locator quality, edge-case coverage, reuse. Complements core `analyze`/`checklist`. |
 
 ## Browser drivers
 
@@ -40,9 +42,12 @@ layers.
 ## Attribution
 
 The QA approach (live-browser dogfooding, evidence-first failure triage,
-single-variable investigation) is adapted from the **gstack** skills
+single-variable investigation, behavior verification, and pre-landing review) is
+adapted from the **gstack** skills
 [`browse`](https://github.com/garrytan/gstack/tree/main/browse),
-[`qa`](https://github.com/garrytan/gstack/tree/main/qa), and
-[`investigate`](https://github.com/garrytan/gstack/tree/main/investigate) by
-Garry Tan (MIT). The concepts are re-implemented natively as Specto commands;
-no gstack code is vendored. See [github.com/garrytan/gstack](https://github.com/garrytan/gstack).
+[`qa`](https://github.com/garrytan/gstack/tree/main/qa),
+[`investigate`](https://github.com/garrytan/gstack/tree/main/investigate),
+[`verify`](https://github.com/garrytan/gstack/tree/main/verify), and
+[`review`](https://github.com/garrytan/gstack/tree/main/review) by Garry Tan
+(MIT). The concepts are re-implemented natively as Specto commands; no gstack
+code is vendored. See [github.com/garrytan/gstack](https://github.com/garrytan/gstack).

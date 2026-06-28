@@ -36,6 +36,12 @@ provides:
     - name: speckit.qa.investigate
       file: commands/speckit.qa.investigate.md
       description: "Root-cause a single failing test: reproduce, inspect console/network, isolate, propose the minimal fix"
+    - name: speckit.qa.verify
+      file: commands/speckit.qa.verify.md
+      description: "Verify a generated test truly exercises its requirement against real behavior (catches weak and false-green tests)"
+    - name: speckit.qa.review
+      file: commands/speckit.qa.review.md
+      description: "Pre-landing quality review of the generated test code: separation, assertions, flakiness, coverage, reuse"
 
   config:
     - name: "qa-config.yml"

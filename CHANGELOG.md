@@ -24,6 +24,9 @@ history.
   `speckit.qa.investigate` (single-failure root-cause). Closes the app-access
   gap for UI/web tests; wired into the plan app-access strategy, the UI
   adapters, and `implement` via `__BIND__:<name>` locator placeholders.
+  Also `speckit.qa.verify` (confirm a test truly exercises its requirement;
+  flags weak / false-green tests) and `speckit.qa.review` (pre-landing quality
+  review of the generated test code), adapted from gstack `verify` / `review`.
 - Worked, runnable example in `examples/test-kit-demo/` (Robot 3/3 + Playwright
   3/3 against a live API from one neutral spec).
 - Original project branding: `media/logo.svg`, rebranded CLI tagline, rewritten
