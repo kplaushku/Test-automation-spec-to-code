@@ -1,0 +1,4 @@
+{
+  "_note": "Structural locators. Unbound entries are __BIND__:<name> placeholders that speckit.qa.bind-locators resolves against the live app.",
+  "dashboard_greeting": "__BIND__:dashboard-greeting"
+}

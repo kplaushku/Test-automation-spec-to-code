@@ -1,0 +1,4 @@
+{
+  "valid": { "email": "demo@example.com", "password": "correct-horse" },
+  "wrong": { "email": "demo@example.com", "password": "nope" }
+}
