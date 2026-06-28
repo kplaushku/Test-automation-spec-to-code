@@ -105,7 +105,7 @@ def build_request(url: str, extra_headers: dict[str, str] | None = None) -> urll
     if extra_headers:
         # Strip Authorization from extra_headers to prevent bypass
         headers.update({k: v for k, v in extra_headers.items() if k.lower() != "authorization"})
-    # Auth headers applied last — cannot be overridden by extra_headers
+    # Auth headers applied last - cannot be overridden by extra_headers
     entries = find_entries_for_url(url, _load_config())
     for entry in entries:
         provider = get_provider(entry.provider)
@@ -157,7 +157,7 @@ def open_url(
         if extra_headers:
             # Strip Authorization from extra_headers to prevent bypass
             merged.update({k: v for k, v in extra_headers.items() if k.lower() != "authorization"})
-        # Auth headers applied last — cannot be overridden by extra_headers
+        # Auth headers applied last - cannot be overridden by extra_headers
         merged.update(auth_headers)
         return urllib.request.Request(url, headers=merged)
 
@@ -180,7 +180,7 @@ def open_url(
                 continue  # try next entry
             raise
 
-    # No entry worked (or none matched) — unauthenticated fallback
+    # No entry worked (or none matched) - unauthenticated fallback
     req = _make_req({})
     if redirect_validator is not None:
         opener = urllib.request.build_opener(_StripAuthOnRedirect((), redirect_validator))

@@ -6,9 +6,9 @@ A three-step bug triage workflow for Specto: assess, fix, and validate. Each bug
 
 This extension delivers an opinionated, repeatable bug workflow that any AI coding agent can drive:
 
-1. **Assess** — read a bug report (pasted text or a URL), judge whether it is a real bug, locate suspected code paths, and propose a remediation.
-2. **Fix** — apply the proposed remediation and record exactly what changed.
-3. **Test** — re-run the reproduction and any added tests, then record the verification result.
+1. **Assess** - read a bug report (pasted text or a URL), judge whether it is a real bug, locate suspected code paths, and propose a remediation.
+2. **Fix** - apply the proposed remediation and record exactly what changed.
+3. **Test** - re-run the reproduction and any added tests, then record the verification result.
 
 The three stages communicate through three Markdown files in a single per-bug directory:
 
@@ -31,9 +31,9 @@ The three stages communicate through three Markdown files in a single per-bug di
 
 A *slug* is the per-bug directory name under `.specify/bugs/`. It is the only handle the three commands share.
 
-- **User-provided**: any shape the user wants, normalized to lowercase kebab-case (e.g. `login-timeout`, `cve-2026-001`, `oauth-redirect-500`). The slug is preserved verbatim after normalization — no timestamps or numbers are appended automatically.
+- **User-provided**: any shape the user wants, normalized to lowercase kebab-case (e.g. `login-timeout`, `cve-2026-001`, `oauth-redirect-500`). The slug is preserved verbatim after normalization - no timestamps or numbers are appended automatically.
 - **Asked for**: in interactive use, `speckit.bug.assess` asks for a slug when none is supplied, suggesting a kebab-case default derived from the bug summary.
-- **Automated**: when no human is available to answer, the agent generates a slug itself. The generated slug **MUST** produce a unique directory — if `.specify/bugs/<slug>/` already exists, the agent appends the shortest disambiguating suffix needed (`-2`, `-3`, …) or a short date (`-20260605`). Existing bug directories are never overwritten.
+- **Automated**: when no human is available to answer, the agent generates a slug itself. The generated slug **MUST** produce a unique directory - if `.specify/bugs/<slug>/` already exists, the agent appends the shortest disambiguating suffix needed (`-2`, `-3`, …) or a short date (`-20260605`). Existing bug directories are never overwritten.
 
 ## Installation
 

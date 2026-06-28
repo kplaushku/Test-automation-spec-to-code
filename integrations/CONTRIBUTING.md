@@ -9,7 +9,7 @@ Built-in integrations are maintained by the Specto core team and ship with the C
 ### Checklist
 
 1. **Create the integration subpackage** under `src/specify_cli/integrations/<package_dir>/`
-   — `<package_dir>` matches the integration key when it contains no hyphens (e.g., `gemini`), or replaces hyphens with underscores when it does (e.g., key `cursor-agent` → directory `cursor_agent/`, key `kiro-cli` → directory `kiro_cli/`). Python package names cannot use hyphens.
+   - `<package_dir>` matches the integration key when it contains no hyphens (e.g., `gemini`), or replaces hyphens with underscores when it does (e.g., key `cursor-agent` → directory `cursor_agent/`, key `kiro-cli` → directory `kiro_cli/`). Python package names cannot use hyphens.
 2. **Implement the integration class** extending `MarkdownIntegration`, `TomlIntegration`, or `SkillsIntegration`
 3. **Register the integration** in `src/specify_cli/integrations/__init__.py`
 4. **Add tests** under `tests/integrations/test_integration_<package_dir>.py`
@@ -43,11 +43,11 @@ Community integrations are contributed by external developers and listed in `int
 
 ### Prerequisites
 
-1. **Working integration** — tested with `specify integration install`
-2. **Public repository** — hosted on GitHub or similar
-3. **`integration.yml` descriptor** — valid descriptor file (see below)
-4. **Documentation** — README with usage instructions
-5. **License** — open source license file
+1. **Working integration** - tested with `specify integration install`
+2. **Public repository** - hosted on GitHub or similar
+3. **`integration.yml` descriptor** - valid descriptor file (see below)
+4. **Documentation** - README with usage instructions
+5. **License** - open source license file
 
 ### `integration.yml` Descriptor
 
@@ -128,10 +128,10 @@ To update your integration version in the catalog:
 
 The `specify integration upgrade` command supports diff-aware upgrades:
 
-1. **Hash comparison** — the manifest records SHA-256 hashes of all installed files
-2. **Modified file detection** — files changed since installation are flagged
-3. **Safe default** — the upgrade blocks if any installed files were modified since installation
-4. **Forced reinstall** — passing `--force` overwrites modified files with the latest version
+1. **Hash comparison** - the manifest records SHA-256 hashes of all installed files
+2. **Modified file detection** - files changed since installation are flagged
+3. **Safe default** - the upgrade blocks if any installed files were modified since installation
+4. **Forced reinstall** - passing `--force` overwrites modified files with the latest version
 
 ```bash
 # Upgrade current integration (blocks if files are modified)

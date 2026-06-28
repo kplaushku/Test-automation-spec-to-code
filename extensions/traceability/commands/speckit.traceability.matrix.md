@@ -12,7 +12,7 @@ $ARGUMENTS
 
 Produce a **requirement-to-test traceability matrix**. The mechanism is neutral:
 it keys on the `REQ-NNN` identifier that every adapter writes in its framework's
-native form. Do not assume a single framework — a project may mix several.
+native form. Do not assume a single framework - a project may mix several.
 
 1. Read `.specify/feature.json` for the feature directory.
 
@@ -34,18 +34,18 @@ native form. Do not assume a single framework — a project may mix several.
    | Requirement | Name | Tests | Framework(s) | Status |
    |-------------|------|-------|--------------|--------|
    | REQ-001 | create order | tests/test_orders.py::test_create_order_returns_201 | playwright | ✅ |
-   | REQ-002 | ... | — | — | ❌ uncovered |
+   | REQ-002 | ... | - | - | ❌ uncovered |
 
 5. **Flag gaps both ways:**
    - **Uncovered requirements:** any `REQ-NNN` in the spec with no test. List
-     them explicitly — this is the headline output.
+     them explicitly - this is the headline output.
    - **Orphan markers:** any `REQ-NNN` found in tests but absent from the spec
      (typo or stale id).
 
 6. **Summary line:** `N/M requirements covered (X%)`, compared against the
    coverage threshold in `.specify/memory/constitution.md`. State pass/fail
    against that threshold. Coverage here is **requirement coverage**, not code
-   coverage — keep them distinct.
+   coverage - keep them distinct.
 
 7. Do not modify spec, plan, tasks, or test files. This command only reads them
    and writes `traceability.md`.

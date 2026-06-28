@@ -136,7 +136,7 @@ def _collect_files(
             if name in EXCLUDE_NAMES:
                 continue
             if artifact_re is not None and artifact_re.match(name):
-                # A prior build artifact for this bundle — never re-package it.
+                # A prior build artifact for this bundle - never re-package it.
                 continue
             if path.is_symlink():
                 # Skip symlinked files to avoid escaping the bundle directory.

@@ -1,4 +1,4 @@
-"""Switch step — multi-branch dispatch."""
+"""Switch step - multi-branch dispatch."""
 
 from __future__ import annotations
 

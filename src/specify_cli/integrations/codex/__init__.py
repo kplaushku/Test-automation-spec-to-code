@@ -1,4 +1,4 @@
-"""Codex CLI integration — skills-based agent.
+"""Codex CLI integration - skills-based agent.
 
 Codex uses the ``.agents/skills/speckit-<name>/SKILL.md`` layout.
 Commands are deprecated; ``--skills`` defaults to ``True``.

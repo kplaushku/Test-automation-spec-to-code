@@ -1,4 +1,4 @@
-"""Forge integration — forgecode.dev AI coding agent.
+"""Forge integration - forgecode.dev AI coding agent.
 
 Forge has several unique behaviors compared to standard markdown agents:
 - Uses `{{parameters}}` instead of `$ARGUMENTS` for argument passing

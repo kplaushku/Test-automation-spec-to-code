@@ -3,7 +3,7 @@
 Large or complex features often run smoothly through `/speckit.specify`,
 `/speckit.plan`, and `/speckit.tasks`, then degrade during implementation. In
 the middle of a long `/speckit.implement` run, agents can start to lose track of
-the plan, ignore tasks, or hallucinate — usually right before or after context
+the plan, ignore tasks, or hallucinate - usually right before or after context
 compaction is triggered.
 
 The underlying cause is context window exhaustion. When a single
@@ -44,8 +44,8 @@ delegate individual tasks:
 /speckit.implement delegate each parallel [P] task to a sub-agent
 ```
 
-Each sub-agent gets a focused context — one task plus the relevant plan
-excerpts — rather than the full feature context, so compaction never triggers
+Each sub-agent gets a focused context - one task plus the relevant plan
+excerpts - rather than the full feature context, so compaction never triggers
 in the main session.
 
 ## Option 3: Combine Both

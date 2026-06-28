@@ -2,8 +2,8 @@
 
 Provides ``build_github_request()`` for attaching GITHUB_TOKEN / GH_TOKEN
 credentials to requests targeting GitHub-hosted domains, and
-``resolve_github_release_asset_api_url()`` — used by extensions, presets,
-and workflow URL resolution — to translate browser release-download URLs
+``resolve_github_release_asset_api_url()`` - used by extensions, presets,
+and workflow URL resolution - to translate browser release-download URLs
 into GitHub REST API asset URLs. Authenticated downloads themselves go
 through the config-driven helpers in :mod:`specify_cli.authentication.http`.
 """
@@ -73,7 +73,7 @@ def resolve_github_release_asset_api_url(
 
     Works for public ``github.com`` and for GitHub Enterprise Server (GHES)
     hosts. A host is treated as GHES when it matches one of *github_hosts*
-    (exact hostname or ``*.suffix``) — supply the hosts the user has trusted
+    (exact hostname or ``*.suffix``) - supply the hosts the user has trusted
     under a ``github`` provider in ``auth.json``. This allowlist is the
     security gate: unlisted hosts never receive GHES API treatment, so a
     malicious catalog cannot induce an API request to an arbitrary host.
@@ -112,7 +112,7 @@ def resolve_github_release_asset_api_url(
             and segments[3:5] == ["releases", "assets"]
         )
 
-    # Already a REST API asset URL — use it directly. Pure passthrough induces
+    # Already a REST API asset URL - use it directly. Pure passthrough induces
     # no new request: the caller fetches this same URL regardless, so it is
     # gated on path shape alone rather than the GHES allowlist. The token stays
     # independently gated by auth.json in the download helper, and only the

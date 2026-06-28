@@ -1,4 +1,4 @@
-"""Tests for INTEGRATION_REGISTRY — mechanics, completeness, and registrar alignment."""
+"""Tests for INTEGRATION_REGISTRY - mechanics, completeness, and registrar alignment."""
 
 import json
 import os
@@ -20,13 +20,13 @@ from .conftest import StubIntegration
 # Every integration key that must be registered (Stage 2 + Stage 3 + Stage 4 + Stage 5).
 ALL_INTEGRATION_KEYS = [
     "copilot",
-    # Stage 3 — standard markdown integrations
+    # Stage 3 - standard markdown integrations
     "claude", "qwen", "opencode", "junie", "kilocode", "auggie",
     "roo", "rovodev", "codebuddy", "qodercli", "amp", "shai", "bob", "trae",
     "pi", "iflow", "kiro-cli", "windsurf", "vibe", "cursor-agent", "firebender",
-    # Stage 4 — TOML integrations
+    # Stage 4 - TOML integrations
     "gemini", "tabnine",
-    # Stage 5 — skills, generic & option-driven integrations
+    # Stage 5 - skills, generic & option-driven integrations
     "codex", "kimi", "agy", "zed", "generic",
 ]
 
@@ -139,7 +139,7 @@ class TestRegistryCompleteness:
 class TestRegistrarKeyAlignment:
     """Every integration key must have a matching AGENT_CONFIGS entry.
 
-    ``generic`` is excluded because it has no fixed directory — its
+    ``generic`` is excluded because it has no fixed directory - its
     output path comes from ``--commands-dir`` at runtime.
     """
 

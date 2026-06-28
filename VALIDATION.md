@@ -27,7 +27,7 @@ Evidence collected against the project spec's acceptance criteria (section 13).
   in files this fork has not modified. None are caused by Specto changes.
 - **End-to-end CLI install verified.** In a throwaway project:
   `specify init demo-project --integration claude --preset test-kit` installs the
-  preset (`preset list` → "Test Kit v0.1.0 — enabled"); the delivered
+  preset (`preset list` → "Test Kit v0.1.0 - enabled"); the delivered
   `speckit-specify` skill carries the test-generation content ("neutral test
   specification", `REQ-NNN`, precondition→input→object→output); and
   `preset resolve spec-template` resolves to the test-kit layer.

@@ -257,7 +257,7 @@ class TestExtensionManifest:
         """
         import yaml
 
-        valid_manifest_data["extension"]["description"] = "中文测试 — émojis 🚀"
+        valid_manifest_data["extension"]["description"] = "中文测试 - émojis 🚀"
         manifest_path = temp_dir / "extension.yml"
         # Write UTF-8 bytes explicitly so the test exercises the read path,
         # not the (locale-dependent) write path.
@@ -266,7 +266,7 @@ class TestExtensionManifest:
         )
 
         manifest = ExtensionManifest(manifest_path)
-        assert manifest.description == "中文测试 — émojis 🚀"
+        assert manifest.description == "中文测试 - émojis 🚀"
 
     def test_invalid_utf8_bytes_raises_validation_error(self, temp_dir):
         """Negative case: file containing invalid UTF-8 bytes raises ValidationError, not raw UnicodeDecodeError."""
@@ -464,7 +464,7 @@ class TestExtensionManifest:
             ExtensionManifest(manifest_path)
 
     def test_alias_free_form_accepted(self, temp_dir, valid_manifest_data):
-        """Aliases are free-form — a 'speckit.command' alias must be accepted unchanged."""
+        """Aliases are free-form - a 'speckit.command' alias must be accepted unchanged."""
         import yaml
 
         valid_manifest_data["provides"]["commands"][0]["aliases"] = ["speckit.hello"]
@@ -1277,7 +1277,7 @@ class TestExtensionManager:
             manager.install_from_directory(ext_dir, "0.1.0", register_commands=False)
 
     def test_install_accepts_free_form_alias(self, temp_dir, project_dir):
-        """Aliases are free-form — a short 'speckit.shortcut' alias must be preserved unchanged."""
+        """Aliases are free-form - a short 'speckit.shortcut' alias must be preserved unchanged."""
         import yaml
 
         ext_dir = temp_dir / "alias-shortcut"
@@ -2696,7 +2696,7 @@ class TestIntegration:
         assert agent_file.exists()
         assert prompt_file.exists()
 
-        # Use the extension manager to remove — exercises the copilot prompt cleanup code
+        # Use the extension manager to remove - exercises the copilot prompt cleanup code
         result = manager.remove("test-ext")
         assert result is True
 
@@ -3383,7 +3383,7 @@ class TestExtensionCatalog:
         self, temp_dir, cached_payload
     ):
         """A poisoned cache silently falls back to the network instead of
-        crashing — cached payloads pass through the same shape validation
+        crashing - cached payloads pass through the same shape validation
         as freshly-fetched ones.
 
         Without this, a cache poisoned by an older spec-kit version (or a
@@ -3391,7 +3391,7 @@ class TestExtensionCatalog:
         before the network guards landed) would re-crash every invocation
         of ``_get_merged_extensions`` despite the cache being "valid" by
         age. The recovery contract is: if the cached payload fails
-        validation, drop it and refetch — never propagate
+        validation, drop it and refetch - never propagate
         ``AttributeError`` to the caller.
         """
         from unittest.mock import patch, MagicMock
@@ -3454,7 +3454,7 @@ class TestExtensionCatalog:
     def test_fetch_catalog_rejects_malformed_payload(self, temp_dir, payload):
         """Legacy ``fetch_catalog`` reuses the same shape-validation helper.
 
-        Before this change ``fetch_catalog`` only checked key presence — so
+        Before this change ``fetch_catalog`` only checked key presence - so
         a payload like ``42`` would crash with
         ``TypeError: argument of type 'int' is not iterable`` during the
         ``"schema_version" in catalog_data`` check, and an entry mapping
@@ -3533,7 +3533,7 @@ class TestExtensionCatalog:
         catalog = self._make_catalog(temp_dir)
         catalog.cache_dir.mkdir(parents=True, exist_ok=True)
         catalog.cache_file.write_text("{}", encoding="utf-8")
-        # Bytes that are not valid UTF-8 — ``read_text(encoding="utf-8")``
+        # Bytes that are not valid UTF-8 - ``read_text(encoding="utf-8")``
         # will raise ``UnicodeDecodeError`` (subclass of ``UnicodeError``).
         catalog.cache_metadata_file.write_bytes(b"\xff\xfe\x00bad")
 
@@ -3572,7 +3572,7 @@ class TestExtensionCatalog:
         The cache-validity check calls ``metadata.get("cached_at", "")``
         immediately after ``json.loads``. If the metadata file is valid
         JSON but parses to a non-mapping (``[]``, ``"oops"``, ``42``,
-        ``true``, ``null``), ``.get`` raises ``AttributeError`` — which
+        ``true``, ``null``), ``.get`` raises ``AttributeError`` - which
         previously slipped past the except tuple and crashed the
         caller. The contract documented on ``is_cache_valid`` says any
         decode/shape failure should return ``False`` so ``fetch_catalog``
@@ -3587,7 +3587,7 @@ class TestExtensionCatalog:
             non_mapping_metadata, encoding="utf-8"
         )
 
-        # Must not raise — the contract is "any decode/shape failure → False".
+        # Must not raise - the contract is "any decode/shape failure → False".
         assert catalog.is_cache_valid() is False
 
     def test_fetch_catalog_writes_cache_as_utf8(self, temp_dir, monkeypatch):
@@ -3598,7 +3598,7 @@ class TestExtensionCatalog:
         through ``json.dumps`` and ``read_text(encoding="utf-8")``.
         Because ``json.dumps`` defaults to ``ensure_ascii=True``, "café"
         was serialized as the all-ASCII escape ``caf\\u00e9`` before it
-        ever reached ``write_text`` — the bytes on disk were identical
+        ever reached ``write_text`` - the bytes on disk were identical
         regardless of the encoding kwarg, so a locale-encoded write
         would have round-tripped just fine. The drift Copilot's review
         flagged wasn't actually being caught.
@@ -3702,7 +3702,7 @@ class TestExtensionCatalog:
         """Per-entry guard: one malformed entry shouldn't poison the merge.
 
         ``_fetch_single_catalog`` validates that ``extensions`` is a mapping,
-        but it doesn't (and shouldn't) validate every entry inside it — a
+        but it doesn't (and shouldn't) validate every entry inside it - a
         single bad entry in an otherwise-valid catalog should be skipped, not
         crash the whole resolve path. Mirrors the per-entry skip in
         ``integrations/catalog.py``: a malformed entry returns no error,
@@ -3848,7 +3848,7 @@ class TestExtensionCatalog:
 
     def test_download_extension_rejects_sha256_mismatch(self, temp_dir):
         """A catalog ``sha256`` that does not match the downloaded archive
-        aborts the install — a tampered or swapped archive is rejected.
+        aborts the install - a tampered or swapped archive is rejected.
         """
         from unittest.mock import patch
 
@@ -4622,7 +4622,7 @@ class TestExtensionIgnore:
         manager.install_from_directory(ext_dir, "0.1.0", register_commands=False)
 
         dest = proj_dir / ".specify" / "extensions" / "test-ext"
-        # Everything should still be copied — the '..' pattern matches nothing inside
+        # Everything should still be copied - the '..' pattern matches nothing inside
         assert (dest / "README.md").exists()
         assert (dest / "extension.yml").exists()
         assert (dest / "commands" / "hello.md").exists()
@@ -4644,7 +4644,7 @@ class TestExtensionIgnore:
         manager.install_from_directory(ext_dir, "0.1.0", register_commands=False)
 
         dest = proj_dir / ".specify" / "extensions" / "test-ext"
-        # Nothing matches — /etc/passwd is anchored to root and there's no 'etc' dir
+        # Nothing matches - /etc/passwd is anchored to root and there's no 'etc' dir
         assert (dest / "README.md").exists()
         assert (dest / "passwd").exists()
 
@@ -4700,7 +4700,7 @@ class TestExtensionIgnore:
         ``Path.read_text`` defaults to the system locale codec on Windows
         (cp1252 / gb2312 / cp932). Without an explicit ``encoding="utf-8"``,
         a pattern like ``ドキュメント/`` written by a UTF-8 host becomes
-        mojibake on a cp1252 host and silently fails to match — leaking
+        mojibake on a cp1252 host and silently fails to match - leaking
         files the author intended to exclude. The existing
         ``test_extensionignore_windows_backslash_patterns`` already shows
         the codebase treats this as a Windows-author-friendly file; UTF-8
@@ -4741,8 +4741,8 @@ class TestExtensionIgnore:
         ``.extensionignore`` written in some other codec (cp1252, etc.)
         now triggers ``UnicodeDecodeError`` instead of silently
         mojibake-ing patterns. Wrap that exception as ``ValidationError``
-        with a pointer to the offending byte — the same pattern
-        ``ExtensionManifest._load_yaml`` uses for ``extension.yml`` —
+        with a pointer to the offending byte - the same pattern
+        ``ExtensionManifest._load_yaml`` uses for ``extension.yml`` -
         so installation aborts with a user-friendly message instead of a
         raw Python traceback.
         """
@@ -5737,7 +5737,7 @@ class TestExtensionUpdateCLI:
         import yaml
 
         # Isolate home directory so Hermes' global ~/.hermes/skills/ doesn't
-        # interfere — without a real skills dir, Hermes is skipped during
+        # interfere - without a real skills dir, Hermes is skipped during
         # command registration, keeping the test focused on Claude/Codex/etc.
         fake_home = tmp_path / "home"
         fake_home.mkdir()

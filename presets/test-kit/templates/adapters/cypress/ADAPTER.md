@@ -1,4 +1,4 @@
-# Adapter: Cypress — PLANNED (not active)
+# Adapter: Cypress - PLANNED (not active)
 
 Web-UI / API (`cy.request`) adapter. Not part of the current API-first increment
 with Robot + Playwright. To activate: implement the rendering rules below and add

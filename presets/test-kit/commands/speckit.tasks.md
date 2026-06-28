@@ -21,7 +21,7 @@ they verify, not how any framework renders them.
 3. Resolve the `tasks-template` and write `<feature_directory>/tasks.md`. One
    task per test case:
 
-   - `- [ ] T### [REQ-NNN] <group> — <neutral test case name>`
+   - `- [ ] T### [REQ-NNN] <group> - <neutral test case name>`
    - Each task names the **requirement id(s)** it covers (`REQ-NNN`). A task may
      cover more than one; a requirement may need more than one task.
    - Record the **group** so `implement` knows which framework (from the plan)

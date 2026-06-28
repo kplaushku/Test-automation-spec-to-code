@@ -1,19 +1,19 @@
 # Presets
 
-Presets are stackable, priority-ordered collections of template and command overrides for Specto. They let you customize both the artifacts produced by the Spec-Driven Development workflow (specs, plans, tasks, checklists, constitutions) and the commands that guide the LLM in creating them — without forking or modifying core files.
+Presets are stackable, priority-ordered collections of template and command overrides for Specto. They let you customize both the artifacts produced by the Spec-Driven Development workflow (specs, plans, tasks, checklists, constitutions) and the commands that guide the LLM in creating them - without forking or modifying core files.
 
 ## How It Works
 
 When Specto needs a template (e.g. `spec-template`), it walks a resolution stack:
 
-1. `.specify/templates/overrides/` — project-local one-off overrides
-2. `.specify/presets/<preset-id>/templates/` — installed presets (sorted by priority)
-3. `.specify/extensions/<ext-id>/templates/` — extension-provided templates
-4. `.specify/templates/` — core templates shipped with Specto
+1. `.specify/templates/overrides/` - project-local one-off overrides
+2. `.specify/presets/<preset-id>/templates/` - installed presets (sorted by priority)
+3. `.specify/extensions/<ext-id>/templates/` - extension-provided templates
+4. `.specify/templates/` - core templates shipped with Specto
 
-If no preset is installed, core templates are used — exactly the same behavior as before presets existed.
+If no preset is installed, core templates are used - exactly the same behavior as before presets existed.
 
-Template resolution happens **at runtime** — although preset files are copied into `.specify/presets/<id>/` during installation, Specto walks the resolution stack on every template lookup rather than merging templates into a single location.
+Template resolution happens **at runtime** - although preset files are copied into `.specify/presets/<id>/` during installation, Specto walks the resolution stack on every template lookup rather than merging templates into a single location.
 
 For detailed resolution and command registration flows, see [ARCHITECTURE.md](ARCHITECTURE.md).
 
@@ -89,7 +89,7 @@ provides:
 |------|-----------|-----------|----------|--------|
 | **template** | ✓ (default) | ✓ | ✓ | ✓ |
 | **command** | ✓ (default) | ✓ | ✓ | ✓ |
-| **script** | ✓ (default) | — | — | ✓ |
+| **script** | ✓ (default) | - | - | ✓ |
 
 Multiple composing presets chain recursively. For example, a security preset with `prepend` and a compliance preset with `append` will produce: security header + core content + compliance footer.
 
@@ -98,7 +98,7 @@ Multiple composing presets chain recursively. For example, a security preset wit
 Presets are discovered through catalogs. By default, Specto uses the official and community catalogs:
 
 > [!NOTE]
-> Community presets are independently created and maintained by their respective authors. Maintainers only verify that catalog entries are complete and correctly formatted — they do **not review, audit, endorse, or support the preset code itself**. Review preset source code before installation and use at your own discretion.
+> Community presets are independently created and maintained by their respective authors. Maintainers only verify that catalog entries are complete and correctly formatted - they do **not review, audit, endorse, or support the preset code itself**. Review preset source code before installation and use at your own discretion.
 
 ```bash
 # List active catalogs
@@ -154,5 +154,5 @@ The token is attached automatically to requests targeting GitHub domains. Non-Gi
 
 The following enhancements are under consideration for future releases:
 
-- **Structural merge strategies** — Parsing Markdown sections for per-section granularity (e.g., "replace only ## Security").
-- **Conflict detection** — `specify preset lint` / `specify preset doctor` for detecting composition conflicts.
+- **Structural merge strategies** - Parsing Markdown sections for per-section granularity (e.g., "replace only ## Security").
+- **Conflict detection** - `specify preset lint` / `specify preset doctor` for detecting composition conflicts.

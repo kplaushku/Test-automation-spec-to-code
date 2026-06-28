@@ -6,7 +6,7 @@
 - AI coding agent: [Claude Code](https://www.anthropic.com/claude-code), [GitHub Copilot](https://code.visualstudio.com/), [Codebuddy CLI](https://www.codebuddy.ai/cli), [Gemini CLI](https://github.com/google-gemini/gemini-cli), [Pi Coding Agent](https://pi.dev), or [Oh My Pi](https://www.npmjs.com/package/@oh-my-pi/pi-coding-agent)
 - [uv](https://docs.astral.sh/uv/) for package management (recommended) or [pipx](https://pipx.pypa.io/) for persistent installation
 - [Python 3.11+](https://www.python.org/downloads/)
-- [Git](https://git-scm.com/downloads) _(optional — required only when the git extension is enabled)_
+- [Git](https://git-scm.com/downloads) _(optional - required only when the git extension is enabled)_
 
 ## Installation
 
@@ -32,12 +32,12 @@ specify init <PROJECT_NAME> --integration copilot
 
 ### One-time Usage
 
-Run directly without installing — see the [One-time usage (uvx)](install/one-time.md) guide.
+Run directly without installing - see the [One-time usage (uvx)](install/one-time.md) guide.
 
 ### Alternative Package Managers
 
-- **pipx** — see the [pipx installation guide](install/pipx.md)
-- **Enterprise / Air-Gapped** — see the [air-gapped installation guide](install/air-gapped.md)
+- **pipx** - see the [pipx installation guide](install/pipx.md)
+- **Enterprise / Air-Gapped** - see the [air-gapped installation guide](install/air-gapped.md)
 
 ### Specify Integration
 
@@ -89,7 +89,7 @@ specify version
 
 This helps verify you are running the official Specto build from GitHub, not an unrelated package with the same name.
 
-**Stay current:** Run `specify self check` periodically to learn whether a newer release is available — it is read-only and never modifies your installation. When you are ready to upgrade, follow the [Upgrade Guide](./upgrade.md).
+**Stay current:** Run `specify self check` periodically to learn whether a newer release is available - it is read-only and never modifies your installation. When you are ready to upgrade, follow the [Upgrade Guide](./upgrade.md).
 
 After initialization, you should see the following commands available in your coding agent:
 
@@ -106,8 +106,8 @@ After initialization, you should see the following commands available in your co
 
 Scripts are installed into a variant subdirectory matching the chosen script type:
 
-- `.specify/scripts/bash/` — contains `.sh` scripts (default on Linux/macOS)
-- `.specify/scripts/powershell/` — contains `.ps1` scripts (default on Windows)
+- `.specify/scripts/bash/` - contains `.sh` scripts (default on Linux/macOS)
+- `.specify/scripts/powershell/` - contains `.ps1` scripts (default on Windows)
 
 ## Troubleshooting
 

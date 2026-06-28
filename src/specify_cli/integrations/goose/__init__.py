@@ -1,4 +1,4 @@
-"""Goose integration — Block's open source AI agent."""
+"""Goose integration - Block's open source AI agent."""
 
 from ..base import YamlIntegration
 

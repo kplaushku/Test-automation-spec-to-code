@@ -58,7 +58,7 @@ Either `token` or `token_env` must be set for `bearer` and `basic-pat` schemes.
 |---|---|---|
 | `bearer` | `Authorization: Bearer <token>` | PATs, fine-grained PATs, OAuth tokens, GitHub App tokens |
 
-**Example — PAT via environment variable:**
+**Example - PAT via environment variable:**
 
 ```json
 {
@@ -74,7 +74,7 @@ Either `token` or `token_env` must be set for `bearer` and `basic-pat` schemes.
 To use a private catalog or extension hosted on a GitHub Enterprise Server
 instance, add a `github` entry listing your GHES host(s). The same entry
 authenticates both catalog JSON fetches **and** private release-asset
-downloads — Specify recognizes the listed hosts as GitHub Enterprise and
+downloads - Specify recognizes the listed hosts as GitHub Enterprise and
 resolves release downloads through the GHES REST API (`/api/v3`).
 
 ```json
@@ -90,7 +90,7 @@ resolves release downloads through the GHES REST API (`/api/v3`).
 }
 ```
 
-List the **bare** web host (e.g. `ghes.example.com`) — release-download URLs
+List the **bare** web host (e.g. `ghes.example.com`) - release-download URLs
 live there. If your instance uses subdomain isolation, also list the `raw.`
 and `codeload.` subdomains your catalog/extension URLs use. A
 `*.ghes.example.com` wildcard matches subdomains but **not** the bare host,
@@ -105,7 +105,7 @@ so always include the bare host explicitly.
 | `azure-cli` | `Authorization: Bearer <token>` | Token acquired via `az account get-access-token` |
 | `azure-ad` | `Authorization: Bearer <token>` | Token acquired via OAuth2 client credentials flow |
 
-**Example — PAT via environment variable:**
+**Example - PAT via environment variable:**
 
 ```json
 {
@@ -116,7 +116,7 @@ so always include the bare host explicitly.
 }
 ```
 
-**Example — Azure CLI (interactive login):**
+**Example - Azure CLI (interactive login):**
 
 ```json
 {
@@ -128,7 +128,7 @@ so always include the bare host explicitly.
 
 Requires `az login` to have been run beforehand.
 
-**Example — Azure AD service principal (CI/automation):**
+**Example - Azure AD service principal (CI/automation):**
 
 ```json
 {
@@ -174,7 +174,7 @@ You can configure multiple entries for different hosts or organizations:
 4. After all matching entries are exhausted, an unauthenticated request
    is attempted as a final fallback.
 5. On redirects, the `Authorization` header is stripped if the redirect
-   target leaves the entry's declared hosts — preventing credential
+   target leaves the entry's declared hosts - preventing credential
    leakage to CDNs or third-party services.
 
 ## Template

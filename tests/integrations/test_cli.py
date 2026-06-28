@@ -277,7 +277,7 @@ class TestInitIntegrationFlag:
         scripts_dir.mkdir(parents=True)
 
         # Legacy orphan the current bundle no longer ships, recorded in the
-        # manifest as a managed file (hash matches on disk) — a pre-refactor install.
+        # manifest as a managed file (hash matches on disk) - a pre-refactor install.
         stale_rel = ".specify/scripts/bash/update-agent-context.sh"
         (scripts_dir / "update-agent-context.sh").write_text("# legacy orphan\n", encoding="utf-8")
         manifest = IntegrationManifest("speckit", project, version="test")
@@ -379,7 +379,7 @@ class TestInitIntegrationFlag:
 
     def test_shared_infra_stale_cleanup_ignores_unsafe_manifest_keys(self, tmp_path):
         """A corrupted/hand-edited manifest key with a ``..`` segment is skipped
-        before any filesystem access — its traversal target is never deleted
+        before any filesystem access - its traversal target is never deleted
         (#3076 review, containment guard)."""
         import hashlib
         import json
@@ -398,8 +398,8 @@ class TestInitIntegrationFlag:
         victim.write_bytes(victim_bytes)
 
         # Hand-crafted manifest: a key under the script prefix but with a ``..``
-        # segment, with the *matching* hash so that — absent the containment guard
-        # — stale-cleanup would consider it managed and unlink the target.
+        # segment, with the *matching* hash so that - absent the containment guard
+        # - stale-cleanup would consider it managed and unlink the target.
         traversal_key = ".specify/scripts/bash/../keep-me.sh"
         (manifest_dir / "speckit.manifest.json").write_text(
             json.dumps({
@@ -419,9 +419,9 @@ class TestInitIntegrationFlag:
     def test_shared_infra_stale_cleanup_skips_escaping_key_without_failing(
         self, tmp_path, monkeypatch
     ):
-        """A key that passes the lexical guard but escapes containment — e.g. a
+        """A key that passes the lexical guard but escapes containment - e.g. a
         Windows drive-relative ``C:tmp`` that is not ``is_absolute()`` yet discards
-        the project root when joined — is skipped via ``_validate_rel_path``, never
+        the project root when joined - is skipped via ``_validate_rel_path``, never
         unlinked, and never turned into an install-time hard failure (#3076 review
         round 4). Simulated portably by forcing ``_validate_rel_path`` to reject the
         managed key, since real drive-relative paths only escape on Windows."""

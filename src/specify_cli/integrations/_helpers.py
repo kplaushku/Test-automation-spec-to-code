@@ -1,4 +1,4 @@
-"""specify integration helpers — internal utilities shared across command modules."""
+"""specify integration helpers - internal utilities shared across command modules."""
 from __future__ import annotations
 
 import os
@@ -30,7 +30,7 @@ def _get_speckit_version() -> str:
     that monkeypatch ``specify_cli.integrations._commands.get_speckit_version``
     still affect helpers called from the command handlers.
     """
-    from . import _commands  # noqa: PLC0415 — intentional late import to avoid circular + enable patching
+    from . import _commands  # noqa: PLC0415 - intentional late import to avoid circular + enable patching
     return _commands.get_speckit_version()
 
 
@@ -435,7 +435,7 @@ def _register_extensions_for_agent(
     agent (init-options track a single ``ai`` / ``ai_skills`` pair). A
     skills-mode agent registered while it is *not* the active agent (e.g.
     Copilot ``--skills`` registered while non-active) therefore
-    receives command files rather than skills here — matching ``extension
+    receives command files rather than skills here - matching ``extension
     add``'s multi-agent behavior. ``use`` / ``switch`` avoid this because they
     make the target the active agent first. Per-agent skills parity is tracked in
     #2948.

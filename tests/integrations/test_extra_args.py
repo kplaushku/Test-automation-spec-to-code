@@ -3,7 +3,7 @@
 
 The hooks are implemented in `IntegrationBase._apply_extra_args_env_var` and
 `IntegrationBase._resolve_executable` and wired into every concrete
-`build_exec_args` — `MarkdownIntegration`, `TomlIntegration`,
+`build_exec_args` - `MarkdownIntegration`, `TomlIntegration`,
 `SkillsIntegration`, plus override integrations.
 These tests cover both the shared mechanisms (via `SkillsIntegration` stubs
 near the top of the file) and override integrations end-to-end (further down).
@@ -62,7 +62,7 @@ class _KiroCliStub(SkillsIntegration):
 
 
 class _NoCliStub(SkillsIntegration):
-    """SkillsIntegration with requires_cli=False — build_exec_args
+    """SkillsIntegration with requires_cli=False - build_exec_args
     must return None and the env-var hook must not fire."""
 
     key = "no-cli"
@@ -83,7 +83,7 @@ class _NoCliStub(SkillsIntegration):
 
 
 class _MarkdownAgentStub(MarkdownIntegration):
-    """Bare MarkdownIntegration subclass — does NOT override
+    """Bare MarkdownIntegration subclass - does NOT override
     `build_exec_args`. Locks the base implementation in
     `MarkdownIntegration.build_exec_args` for the common case
     (most concrete integrations: Amp, Auggie, Generic, …)."""
@@ -106,7 +106,7 @@ class _MarkdownAgentStub(MarkdownIntegration):
 
 
 class _TomlAgentStub(TomlIntegration):
-    """Bare TomlIntegration subclass — does NOT override
+    """Bare TomlIntegration subclass - does NOT override
     `build_exec_args`. Locks the base implementation in
     `TomlIntegration.build_exec_args` (Gemini, Tabnine)."""
 
@@ -234,7 +234,7 @@ def test_key_normalization_hyphen_to_underscore_uppercase(monkeypatch):
 
 
 def test_requires_cli_false_returns_none(monkeypatch):
-    """`requires_cli: False` short-circuits to None — the env-var
+    """`requires_cli: False` short-circuits to None - the env-var
     hook is never reached and no argv is built."""
     monkeypatch.setenv("SPECKIT_INTEGRATION_NO_CLI_EXTRA_ARGS", "--should-not-appear")
     assert _NoCliStub().build_exec_args("p") is None
@@ -245,15 +245,15 @@ def test_requires_cli_false_returns_none(monkeypatch):
 #
 # Most integrations inherit `build_exec_args` from `MarkdownIntegration`
 # or `TomlIntegration` without overriding it. The tests above use
-# `SkillsIntegration` stubs (which share the same hook mechanism) — these
+# `SkillsIntegration` stubs (which share the same hook mechanism) - these
 # tests exercise the two other base implementations directly so all three
 # concrete bases are covered.
 # ---------------------------------------------------------------------------
 
 
 def test_markdown_integration_base_honours_extra_args(monkeypatch):
-    """A bare `MarkdownIntegration` subclass — which does not override
-    `build_exec_args` — must honour the env var via the base
+    """A bare `MarkdownIntegration` subclass - which does not override
+    `build_exec_args` - must honour the env var via the base
     implementation. Covers the most common integration pattern."""
     monkeypatch.setenv(
         "SPECKIT_INTEGRATION_MD_AGENT_EXTRA_ARGS", "--debug --max-tokens 100"
@@ -272,8 +272,8 @@ def test_markdown_integration_base_honours_extra_args(monkeypatch):
 
 
 def test_toml_integration_base_honours_extra_args(monkeypatch):
-    """A bare `TomlIntegration` subclass — which does not override
-    `build_exec_args` — must honour the env var via the base
+    """A bare `TomlIntegration` subclass - which does not override
+    `build_exec_args` - must honour the env var via the base
     implementation. Covers Gemini/Tabnine-style integrations."""
     monkeypatch.setenv(
         "SPECKIT_INTEGRATION_TOML_AGENT_EXTRA_ARGS", "--yolo"
@@ -408,7 +408,7 @@ def test_copilot_integration_honours_extra_args(monkeypatch):
 # `build_exec_args` directly. `IntegrationBase.dispatch_command` delegates
 # to `build_exec_args` (so the override fixes above flow through), but
 # `CopilotIntegration` overrides `dispatch_command` and constructs
-# `cli_args` inline — the hook must be invoked there too or the env var
+# `cli_args` inline - the hook must be invoked there too or the env var
 # is silently ignored at workflow runtime. These tests monkeypatch
 # `subprocess.run` and assert the env-var args reach the executed argv.
 # ---------------------------------------------------------------------------
@@ -620,7 +620,7 @@ def test_executable_env_var_copilot_dispatch_command(monkeypatch):
 
 def test_executable_and_extra_args_both_honoured(monkeypatch):
     """Both the executable override and extra args env vars can be set
-    simultaneously — they are independent hooks."""
+    simultaneously - they are independent hooks."""
     monkeypatch.setenv("SPECKIT_INTEGRATION_CLAUDE_EXECUTABLE", "/opt/claude")
     monkeypatch.setenv(
         "SPECKIT_INTEGRATION_CLAUDE_EXTRA_ARGS", "--dangerously-skip-permissions"

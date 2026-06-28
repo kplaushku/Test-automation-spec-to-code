@@ -1,13 +1,13 @@
 """Workflow engine for multi-step, resumable automation workflows.
 
 Provides:
-- ``StepBase`` — abstract base every step type must implement.
-- ``StepContext`` — execution context passed to each step.
-- ``StepResult`` — return value from step execution.
-- ``STEP_REGISTRY`` — maps ``type_key`` to ``StepBase`` subclass instances.
-- ``WorkflowEngine`` — orchestrator that loads, validates, and executes
+- ``StepBase`` - abstract base every step type must implement.
+- ``StepContext`` - execution context passed to each step.
+- ``StepResult`` - return value from step execution.
+- ``STEP_REGISTRY`` - maps ``type_key`` to ``StepBase`` subclass instances.
+- ``WorkflowEngine`` - orchestrator that loads, validates, and executes
   workflow YAML definitions.
-- ``load_custom_steps`` — loads community-installed step types into STEP_REGISTRY.
+- ``load_custom_steps`` - loads community-installed step types into STEP_REGISTRY.
 """
 
 from __future__ import annotations
@@ -185,8 +185,8 @@ def load_custom_steps(project_root: Path) -> list[str]:
             finally:
                 # If the step wasn't successfully registered (failed import,
                 # no matching StepBase subclass, or registration error), remove
-                # the synthetic module — and any submodules loaded via relative
-                # imports (e.g. ``from .helpers import …``) — from sys.modules so
+                # the synthetic module - and any submodules loaded via relative
+                # imports (e.g. ``from .helpers import …``) - from sys.modules so
                 # a broken/skipped step package leaves no lingering import state
                 # behind.
                 if not registered:

@@ -1,4 +1,4 @@
-"""Kimi Code integration — skills-based agent (Moonshot AI).
+"""Kimi Code integration - skills-based agent (Moonshot AI).
 
 Kimi uses the ``.kimi-code/skills/speckit-<name>/SKILL.md`` layout with
 ``/skill:speckit-<name>`` invocation syntax.
@@ -199,7 +199,7 @@ def _is_safe_legacy_dir(path: Path, project_root: Path) -> bool:
     Legacy migration and cleanup ``shutil.move()`` and ``shutil.rmtree()``
     directories, so a symlinked ``.kimi``/``.kimi/skills`` (or one reached
     through a symlinked parent) must never be followed: doing so could
-    relocate or delete content living outside the project tree — or operate
+    relocate or delete content living outside the project tree - or operate
     on an unrelated in-tree directory (e.g. ``.kimi -> .`` makes
     ``.kimi/skills`` resolve to ``./skills``).
 
@@ -275,7 +275,7 @@ def _migrate_legacy_kimi_skills_dir(
             migrated_count += 1
             continue
 
-        # Target exists — only remove legacy if SKILL.md is identical.
+        # Target exists - only remove legacy if SKILL.md is identical.
         # Skip when the target dir or its SKILL.md is a symlink (or the dir is
         # not a real directory) so the byte comparison never follows a link
         # outside the project. (legacy_skill is already guaranteed to be a real
@@ -385,7 +385,7 @@ def _migrate_legacy_kimi_context_file(
     - ``AGENTS.md`` is a symlink (it could redirect the write to a file
       outside the project root), exists as a non-file (e.g. a directory),
       or is unreadable/unwritable.
-    - ``KIMI.md`` has a corrupted managed section — only one marker is
+    - ``KIMI.md`` has a corrupted managed section - only one marker is
       present, or the end marker precedes the start. Stripping is only done
       when both markers are present and well-ordered, so a partial managed
       block is never copied into ``AGENTS.md``; the user repairs it manually.
@@ -470,7 +470,7 @@ def _migrate_legacy_kimi_context_file(
 
 
 def _migrate_legacy_kimi_dotted_skills(skills_dir: Path) -> tuple[int, int]:
-    """Compatibility shim — migrate legacy dotted skill dirs in place.
+    """Compatibility shim - migrate legacy dotted skill dirs in place.
 
     .. deprecated::
         Kept for direct callers/tests. New code should call

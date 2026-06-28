@@ -45,11 +45,11 @@ tests/
 
 ## Locators / Structural Identifiers
 
-> API layer: base URLs, endpoints, headers — in `config/`, never inline.
+> API layer: base URLs, endpoints, headers - in `config/`, never inline.
 > (UI/mobile, future: semantic locators in tests, structural ones in a locator file.)
 
 ## App-Access Strategy
 
-- **API / contract:** none required — work from the contract.
-- **UI / mobile (future):** [MCP | source | locator-binding] — declare before
+- **API / contract:** none required - work from the contract.
+- **UI / mobile (future):** [MCP | source | locator-binding] - declare before
   generating any such test.

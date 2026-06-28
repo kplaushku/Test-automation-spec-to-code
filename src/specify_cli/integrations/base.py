@@ -1,13 +1,13 @@
 """Base classes for AI-assistant integrations.
 
 Provides:
-- ``IntegrationOption`` — declares a CLI option an integration accepts.
-- ``IntegrationBase`` — abstract base every integration must implement.
-- ``MarkdownIntegration`` — concrete base for standard Markdown-format
-  integrations (the common case — subclass, set three class attrs, done).
-- ``TomlIntegration`` — concrete base for TOML-format integrations
-  (Gemini, Tabnine — subclass, set three class attrs, done).
-- ``SkillsIntegration`` — concrete base for integrations that install
+- ``IntegrationOption`` - declares a CLI option an integration accepts.
+- ``IntegrationBase`` - abstract base every integration must implement.
+- ``MarkdownIntegration`` - concrete base for standard Markdown-format
+  integrations (the common case - subclass, set three class attrs, done).
+- ``TomlIntegration`` - concrete base for TOML-format integrations
+  (Gemini, Tabnine - subclass, set three class attrs, done).
+- ``SkillsIntegration`` - concrete base for integrations that install
   commands as agent skills (``speckit-<name>/SKILL.md`` layout).
 """
 
@@ -76,7 +76,7 @@ class IntegrationOption:
 
 
 # ---------------------------------------------------------------------------
-# IntegrationBase — abstract base class
+# IntegrationBase - abstract base class
 # ---------------------------------------------------------------------------
 
 
@@ -85,13 +85,13 @@ class IntegrationBase(ABC):
 
     Subclasses must set the following class-level attributes:
 
-    * ``key``              — unique identifier, matches actual CLI tool name
-    * ``config``           — dict compatible with ``AGENT_CONFIG`` entries
-    * ``registrar_config`` — dict compatible with ``CommandRegistrar.AGENT_CONFIGS``
+    * ``key``              - unique identifier, matches actual CLI tool name
+    * ``config``           - dict compatible with ``AGENT_CONFIG`` entries
+    * ``registrar_config`` - dict compatible with ``CommandRegistrar.AGENT_CONFIGS``
 
     And may optionally set:
 
-    * ``context_file``     — path (relative to project root) of the agent
+    * ``context_file``     - path (relative to project root) of the agent
                              context/instructions file (e.g. ``"CLAUDE.md"``)
 
     Projects may additionally opt into managing multiple context files by
@@ -103,7 +103,7 @@ class IntegrationBase(ABC):
     # -- Must be set by every subclass ------------------------------------
 
     key: str = ""
-    """Unique integration key — should match the actual CLI tool name."""
+    """Unique integration key - should match the actual CLI tool name."""
 
     config: dict[str, Any] | None = None
     """Metadata dict matching the ``AGENT_CONFIG`` shape."""
@@ -176,7 +176,7 @@ class IntegrationBase(ABC):
 
         Checks ``SPECKIT_INTEGRATION_<KEY>_EXECUTABLE`` first, allowing
         operators to override the binary path without modifying the
-        integration configuration — useful when the tool is installed in
+        integration configuration - useful when the tool is installed in
         a non-standard location or a specific version must be pinned.
         Hyphens in the integration key are replaced with underscores and
         the key is uppercased so that, for example, ``kiro-cli`` maps to
@@ -208,7 +208,7 @@ class IntegrationBase(ABC):
         Useful in CI / non-interactive contexts where the spawned agent
         needs flags that change its prompt-handling behaviour.
         Default behaviour (env var unset or whitespace-only) is a no-op
-        — *args* is unchanged. Multi-token values are parsed via
+        - *args* is unchanged. Multi-token values are parsed via
         `shlex.split`.
 
         See issue #2595.
@@ -235,7 +235,7 @@ class IntegrationBase(ABC):
 
         The CLI tools discover and execute commands from installed files
         on disk.  This method builds the invocation string the CLI
-        expects — e.g. ``"/speckit.specify my-feature"`` for markdown
+        expects - e.g. ``"/speckit.specify my-feature"`` for markdown
         agents or ``"/speckit-specify my-feature"`` for skills agents.
 
         *command_name* may be a full dotted name like
@@ -307,7 +307,7 @@ class IntegrationBase(ABC):
         cwd = str(project_root) if project_root else None
 
         if stream:
-            # No timeout when streaming — the user sees live output and
+            # No timeout when streaming - the user sees live output and
             # can Ctrl+C at any time.  The timeout parameter is only
             # applied in the captured (non-streaming) branch below.
             try:
@@ -341,7 +341,7 @@ class IntegrationBase(ABC):
             "stderr": result.stderr,
         }
 
-    # -- Primitives — building blocks for setup() -------------------------
+    # -- Primitives - building blocks for setup() -------------------------
 
     def shared_commands_dir(self) -> Path | None:
         """Return path to the shared command templates directory.
@@ -433,7 +433,7 @@ class IntegrationBase(ABC):
         subdir = self.config.get("commands_subdir", "commands")
         return project_root / folder / subdir
 
-    # -- File operations — granular primitives for setup() ----------------
+    # -- File operations - granular primitives for setup() ----------------
 
     @staticmethod
     def copy_command_to_directory(
@@ -572,7 +572,7 @@ class IntegrationBase(ABC):
         ):
             return content
 
-        # alwaysApply exists but wrong value — fix in place while preserving
+        # alwaysApply exists but wrong value - fix in place while preserving
         # indentation and any trailing inline comment.
         if _re.search(r"(?m)^[ \t]*alwaysApply[ \t]*:", fm_text):
             fm_text = _re.sub(
@@ -862,10 +862,10 @@ class IntegrationBase(ABC):
                     end_of_marker += 1
                 new_content = content[:start_idx] + section + content[end_of_marker:]
             elif start_idx != -1:
-                # Corrupted: start marker without end — replace from start through EOF
+                # Corrupted: start marker without end - replace from start through EOF
                 new_content = content[:start_idx] + section
             elif end_idx != -1:
-                # Corrupted: end marker without start — replace BOF through end marker
+                # Corrupted: end marker without start - replace BOF through end marker
                 end_of_marker = end_idx + len(marker_end)
                 if end_of_marker < len(content) and content[end_of_marker] == "\r":
                     end_of_marker += 1
@@ -873,7 +873,7 @@ class IntegrationBase(ABC):
                     end_of_marker += 1
                 new_content = section + content[end_of_marker:]
             else:
-                # No markers found — append
+                # No markers found - append
                 if content:
                     if not content.endswith("\n"):
                         content += "\n"
@@ -1125,7 +1125,7 @@ class IntegrationBase(ABC):
         # 6. Replace __CONTEXT_FILE__
         content = content.replace("__CONTEXT_FILE__", context_file)
 
-        # 7. Rewrite paths — delegate to the shared implementation in
+        # 7. Rewrite paths - delegate to the shared implementation in
         #    CommandRegistrar so extension-local paths are preserved and
         #    boundary rules stay consistent across the codebase.
         from specify_cli.agents import CommandRegistrar
@@ -1149,7 +1149,7 @@ class IntegrationBase(ABC):
         Returns the list of files created.  Copies raw templates without
         processing.  Integrations that need placeholder replacement
         (e.g. ``{SCRIPT}``, ``__AGENT__``) should override ``setup()``
-        and call ``process_template()`` in their own loop — see
+        and call ``process_template()`` in their own loop - see
         ``CopilotIntegration`` for an example.
         """
         templates = self.list_command_templates()
@@ -1212,7 +1212,7 @@ class IntegrationBase(ABC):
         parsed_options: dict[str, Any] | None = None,
         **opts: Any,
     ) -> list[Path]:
-        """High-level install — calls ``setup()`` and returns created files."""
+        """High-level install - calls ``setup()`` and returns created files."""
         return self.setup(project_root, manifest, parsed_options=parsed_options, **opts)
 
     def uninstall(
@@ -1222,12 +1222,12 @@ class IntegrationBase(ABC):
         *,
         force: bool = False,
     ) -> tuple[list[Path], list[Path]]:
-        """High-level uninstall — calls ``teardown()``."""
+        """High-level uninstall - calls ``teardown()``."""
         return self.teardown(project_root, manifest, force=force)
 
 
 # ---------------------------------------------------------------------------
-# MarkdownIntegration — covers ~20 standard agents
+# MarkdownIntegration - covers ~20 standard agents
 # ---------------------------------------------------------------------------
 
 
@@ -1315,7 +1315,7 @@ class MarkdownIntegration(IntegrationBase):
 
 
 # ---------------------------------------------------------------------------
-# TomlIntegration — TOML-format agents (Gemini, Tabnine)
+# TomlIntegration - TOML-format agents (Gemini, Tabnine)
 # ---------------------------------------------------------------------------
 
 
@@ -1524,7 +1524,7 @@ class TomlIntegration(IntegrationBase):
 
 
 # ---------------------------------------------------------------------------
-# YamlIntegration — YAML-format agents (Goose)
+# YamlIntegration - YAML-format agents (Goose)
 # ---------------------------------------------------------------------------
 
 
@@ -1731,7 +1731,7 @@ class YamlIntegration(IntegrationBase):
 
 
 # ---------------------------------------------------------------------------
-# SkillsIntegration — skills-format agents (Codex, Kimi, Agy)
+# SkillsIntegration - skills-format agents (Codex, Kimi, Agy)
 # ---------------------------------------------------------------------------
 
 
@@ -1842,7 +1842,7 @@ class SkillsIntegration(IntegrationBase):
         the integration inject agent-specific frontmatter or body
         transformations.  The base implementation injects shared skills
         guidance for converting dotted hook command names to hyphenated
-        slash commands.  Subclasses may override — see ``ClaudeIntegration``.
+        slash commands.  Subclasses may override - see ``ClaudeIntegration``.
         """
         return self._inject_hook_command_note(content)
 
@@ -1914,7 +1914,7 @@ class SkillsIntegration(IntegrationBase):
                 context_file=context_file_display,
                 invoke_separator=self.invoke_separator,
             )
-            # Strip the processed frontmatter — we rebuild it for skills.
+            # Strip the processed frontmatter - we rebuild it for skills.
             # Preserve leading whitespace in the body to match release ZIP
             # output byte-for-byte (the template body starts with \n after
             # the closing ---).
@@ -1923,7 +1923,7 @@ class SkillsIntegration(IntegrationBase):
                 if len(parts) >= 3:
                     processed_body = parts[2]
 
-            # Select description — use the original template description
+            # Select description - use the original template description
             # to stay byte-for-byte identical with release ZIP output.
             description = frontmatter.get("description", "")
             if not description:

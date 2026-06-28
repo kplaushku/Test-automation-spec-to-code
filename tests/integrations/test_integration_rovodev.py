@@ -274,7 +274,7 @@ class TestRovodevIntegration:
 
     def test_init_writes_integration_manifest_and_options(self, rovodev_init_project):
         """Full init must produce an integration manifest and well-formed
-        init-options.json — used by extensions, presets, and uninstall."""
+        init-options.json - used by extensions, presets, and uninstall."""
         import json
 
         project = rovodev_init_project

@@ -1,6 +1,6 @@
 # Workflows
 
-Workflows automate multi-step Spec-Driven Development processes — chaining commands, prompts, shell steps, and human checkpoints into repeatable sequences. They support conditional logic, loops, fan-out/fan-in, and can be paused and resumed from the exact point of interruption.
+Workflows automate multi-step Spec-Driven Development processes - chaining commands, prompts, shell steps, and human checkpoints into repeatable sequences. They support conditional logic, loops, fan-out/fan-in, and can be paused and resumed from the exact point of interruption.
 
 ## Run a Workflow
 
@@ -37,7 +37,7 @@ specify workflow run my-pipeline.yml --json
 }
 ```
 
-`workflow_id` is the `workflow.id` declared inside the YAML, not the file name. The object is printed exactly as shown — pretty-printed with two-space indentation, on plain stdout with no Rich markup — so it always parses. While the workflow runs under `--json`, any progress a step would print (for example a gate prompt, or output from a prompt step's CLI subprocess) is redirected to stderr, so stdout carries only the JSON object. Read the object from stdout; leave stderr attached to the terminal or capture it separately.
+`workflow_id` is the `workflow.id` declared inside the YAML, not the file name. The object is printed exactly as shown - pretty-printed with two-space indentation, on plain stdout with no Rich markup - so it always parses. While the workflow runs under `--json`, any progress a step would print (for example a gate prompt, or output from a prompt step's CLI subprocess) is redirected to stderr, so stdout carries only the JSON object. Read the object from stdout; leave stderr attached to the terminal or capture it separately.
 
 > **Note:** Most workflow commands require a project already initialized with `specify init`. The exception is `specify workflow run <local-file.{yml,yaml}>`, which can run outside a project; in that case, run state is stored under the current directory's `.specify/workflows/runs/<run_id>/`.
 
@@ -152,10 +152,10 @@ Removes a catalog by its index in the catalog list.
 
 Catalogs are resolved in this order (first match wins):
 
-1. **Environment variable** — `SPECKIT_WORKFLOW_CATALOG_URL` overrides all catalogs
-2. **Project config** — `.specify/workflow-catalogs.yml`
-3. **User config** — `~/.specify/workflow-catalogs.yml`
-4. **Built-in defaults** — official catalog + community catalog
+1. **Environment variable** - `SPECKIT_WORKFLOW_CATALOG_URL` overrides all catalogs
+2. **Project config** - `.specify/workflow-catalogs.yml`
+3. **User config** - `~/.specify/workflow-catalogs.yml`
+4. **Built-in defaults** - official catalog + community catalog
 
 ## Workflow Definition
 
@@ -270,7 +270,7 @@ specify workflow run speckit -i spec="Build a kanban board with drag-and-drop ta
 | `fan-out`    | Dispatch a step for each item in a list          |
 | `fan-in`     | Aggregate results from a fan-out step            |
 
-> **Security note:** a `shell` step runs a local command with **your** privileges. There is no capability sandbox — `requires` is an advisory pre-condition block (spec-kit version, integrations), not a runtime gate, so it does **not** restrict what a step can do. In particular there is no `requires.permissions` capability gate: it is rejected by validation precisely because it would imply a sandbox that does not exist. Review any catalog or downloaded workflow before running it, and use a `gate` step to require explicit approval before sensitive or destructive shell commands.
+> **Security note:** a `shell` step runs a local command with **your** privileges. There is no capability sandbox - `requires` is an advisory pre-condition block (spec-kit version, integrations), not a runtime gate, so it does **not** restrict what a step can do. In particular there is no `requires.permissions` capability gate: it is rejected by validation precisely because it would imply a sandbox that does not exist. Review any catalog or downloaded workflow before running it, and use a `gate` step to require explicit approval before sensitive or destructive shell commands.
 
 ## Expressions
 
@@ -304,9 +304,9 @@ message: "{{ status | default('pending') }}"
 
 Each workflow run persists its state at `.specify/workflows/runs/<run_id>/`:
 
-- `state.json` — current run state and step progress
-- `inputs.json` — resolved input values
-- `log.jsonl` — step-by-step execution log
+- `state.json` - current run state and step progress
+- `inputs.json` - resolved input values
+- `log.jsonl` - step-by-step execution log
 
 This enables `specify workflow resume` to continue from the exact step where a run was paused (e.g., at a gate) or failed.
 

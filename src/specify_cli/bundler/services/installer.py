@@ -65,8 +65,8 @@ def install_bundle(
     Atomicity is scoped, not global: on failure only the components newly
     installed during *this* call are rolled back, and the provenance record is
     written solely on full success (a failure records nothing). Components that
-    were already installed beforehand — including those re-applied when *refresh*
-    is True — are never rolled back.
+    were already installed beforehand - including those re-applied when *refresh*
+    is True - are never rolled back.
 
     When *refresh* is True (used by ``specify bundle update``), components that
     are already installed are re-applied through the primitive machinery so they
@@ -97,7 +97,7 @@ def install_bundle(
     # Components already attributed to a *different* installed bundle: these are
     # legitimately shareable (refcounted on removal), so this bundle may also
     # claim them. A component that is installed on disk but tracked by no bundle
-    # was installed independently and must NOT be attributed here — otherwise
+    # was installed independently and must NOT be attributed here - otherwise
     # removing this bundle would uninstall it (collateral removal, FR-022).
     other_tracked = {
         (c.kind, c.id)
@@ -114,7 +114,7 @@ def install_bundle(
             if installer.is_installed(project_root, component):
                 # A component is "ours" only when this bundle (or a sibling
                 # bundle) already owns it. Independently-installed components
-                # are never attributed and — crucially — never refreshed, so
+                # are never attributed and - crucially - never refreshed, so
                 # ``bundle update`` cannot make collateral changes to things it
                 # does not own (FR-022).
                 owned = key in prior_ours or key in other_tracked

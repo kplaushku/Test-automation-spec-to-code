@@ -7,11 +7,11 @@ reimplement or fake primitive behaviour).
 
 Routing strategy per kind:
 
-* **presets** / **extensions** — wired through their reusable managers
+* **presets** / **extensions** - wired through their reusable managers
   (``install_from_directory`` / ``install_from_zip``). Bundled assets shipped
   with Spec Kit install fully offline; catalog assets are fetched only when
   network access is permitted.
-* **workflows** / **steps** — their install/remove orchestration lives in the
+* **workflows** / **steps** - their install/remove orchestration lives in the
   CLI command layer rather than a reusable service method, so the bundler
   delegates to those existing command callables in-process (with the project
   root as the working directory) instead of duplicating their download and

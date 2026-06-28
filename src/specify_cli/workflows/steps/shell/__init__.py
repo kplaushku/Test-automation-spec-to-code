@@ -1,4 +1,4 @@
-"""Shell step — run a local shell command."""
+"""Shell step - run a local shell command."""
 
 from __future__ import annotations
 
@@ -54,7 +54,7 @@ class ShellStep(StepBase):
                 # Opt-in structured output: expose the parsed stdout under
                 # ``output.data`` so later steps can consume typed values
                 # (e.g. a fan-out's ``items:``). A parse failure fails the
-                # step — declaring ``output_format: json`` is a contract.
+                # step - declaring ``output_format: json`` is a contract.
                 try:
                     output["data"] = json.loads(proc.stdout)
                 except json.JSONDecodeError as exc:

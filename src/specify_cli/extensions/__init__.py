@@ -320,7 +320,7 @@ class ExtensionManifest:
                         "must follow pattern 'speckit.{extension}.{command}'"
                     )
 
-            # Validate alias types; no pattern enforcement on aliases — they are
+            # Validate alias types; no pattern enforcement on aliases - they are
             # intentionally free-form to preserve community extension compatibility
             # (e.g. 'speckit.verify' short aliases used by existing extensions).
             aliases = cmd.get("aliases")
@@ -841,12 +841,12 @@ class ExtensionManager:
         # locale codec on Windows (cp1252 / gb2312 / cp932), which silently
         # corrupts multibyte patterns when the file is shared across
         # machines with different locales. The next line already
-        # normalises backslashes "so Windows-authored files work" — the
+        # normalises backslashes "so Windows-authored files work" - the
         # codebase already expects Windows authors to write this file.
         #
         # A file that is not valid UTF-8 is a user-authoring mistake, so
         # surface it as ``ValidationError`` with a pointer to the offending
-        # byte — the same pattern ``ExtensionManifest._load_yaml`` uses
+        # byte - the same pattern ``ExtensionManifest._load_yaml`` uses
         # for ``extension.yml`` (see ``UnicodeDecodeError`` handler in
         # this module). Without the wrap, the raw ``UnicodeDecodeError``
         # would abort installation with a Python traceback instead of a
@@ -1049,7 +1049,7 @@ class ExtensionManager:
             created_now = not skill_subdir.exists()
             skill_subdir.mkdir(parents=True, exist_ok=True)
 
-            # Parse the command file — guard against IsADirectoryError / decode errors
+            # Parse the command file - guard against IsADirectoryError / decode errors
             try:
                 content = source_file.read_text(encoding="utf-8")
             except (OSError, UnicodeDecodeError):
@@ -1179,8 +1179,8 @@ class ExtensionManager:
                 if not skill_subdir.is_dir():
                     continue
                 # Safety check: only delete if SKILL.md exists and its
-                # metadata.source matches exactly this extension — mirroring
-                # the fallback branch — so a corrupted registry entry cannot
+                # metadata.source matches exactly this extension - mirroring
+                # the fallback branch - so a corrupted registry entry cannot
                 # delete an unrelated user skill.
                 skill_md = skill_subdir / "SKILL.md"
                 if not skill_md.is_file():
@@ -1346,7 +1346,7 @@ class ExtensionManager:
         # Reject manifests that would shadow core commands or installed extensions.
         self._validate_install_conflicts(manifest)
 
-        # Refuse to install an extension from its own install destination — with
+        # Refuse to install an extension from its own install destination - with
         # --force this would delete the source before copying it (issue #2990).
         dest_dir = self.extensions_dir / manifest.id
         try:
@@ -1416,7 +1416,7 @@ class ExtensionManager:
         if did_remove:
             backup_config_dir = self.extensions_dir / ".backup" / manifest.id
             # is_symlink first: is_dir() follows symlinks, but rmtree()
-            # raises on them — and we shouldn't follow symlinks to restore.
+            # raises on them - and we shouldn't follow symlinks to restore.
             if backup_config_dir.is_symlink():
                 backup_config_dir.unlink()
             elif backup_config_dir.is_dir():
@@ -1748,8 +1748,8 @@ class ExtensionManager:
                 # Extension *skills* are only ever rendered for the active agent:
                 # `_register_extension_skills` resolves the skills dir and
                 # frontmatter from init-options["ai"], ignoring ``agent_name``.
-                # When this method runs for a non-active agent — as install/upgrade
-                # now do for a secondary integration (#2886) — the skills pass would
+                # When this method runs for a non-active agent - as install/upgrade
+                # now do for a secondary integration (#2886) - the skills pass would
                 # re-render the *active* agent's extension skills as a side effect,
                 # resurrecting skill files the user deliberately deleted. Skip it
                 # unless the target is the active agent; `switch` is unaffected
@@ -2091,7 +2091,7 @@ class ExtensionCatalog(CatalogStackBase):
 
         Args:
             catalog_data: Parsed JSON payload from the catalog source.
-            url: Source URL — used in the error message so the user can
+            url: Source URL - used in the error message so the user can
                 tell which catalog in a multi-catalog stack is malformed.
 
         Raises:
@@ -2112,7 +2112,7 @@ class ExtensionCatalog(CatalogStackBase):
         """Get the ordered list of active catalogs.
 
         Resolution order:
-        1. SPECKIT_CATALOG_URL env var — single catalog replacing all defaults
+        1. SPECKIT_CATALOG_URL env var - single catalog replacing all defaults
         2. Project-level .specify/extension-catalogs.yml
         3. User-level ~/.specify/extension-catalogs.yml
         4. Built-in default stack (default + community)
@@ -2251,7 +2251,7 @@ class ExtensionCatalog(CatalogStackBase):
                     pass
 
         # Use cache if valid. A previously-cached payload must clear the
-        # same shape checks as a freshly-fetched one — otherwise a once-
+        # same shape checks as a freshly-fetched one - otherwise a once-
         # poisoned cache (older spec-kit version, manual edit, upstream
         # served a bad payload before the network-side guards were added)
         # would re-crash on every invocation despite the cache being
@@ -2355,7 +2355,7 @@ class ExtensionCatalog(CatalogStackBase):
                 # Per-entry guard: ``_fetch_single_catalog`` already validates
                 # that ``catalog_data["extensions"]`` is a mapping, but it
                 # does not (and should not) validate every entry shape there
-                # — one malformed entry shouldn't poison an otherwise valid
+                # - one malformed entry shouldn't poison an otherwise valid
                 # catalog. Skip non-mapping entries here so a payload like
                 # ``{"extensions": {"foo": [], "bar": {...}}}`` still merges
                 # the valid entries without crashing on ``**ext_data``.
@@ -2459,7 +2459,7 @@ class ExtensionCatalog(CatalogStackBase):
 
             # Save to cache. Explicit UTF-8 on both writes mirrors the
             # ``read_text(encoding="utf-8")`` on the read side and the
-            # ``integrations/catalog.py`` precedent — otherwise platforms
+            # ``integrations/catalog.py`` precedent - otherwise platforms
             # whose default encoding isn't UTF-8 would write locale-encoded
             # bytes the read path can't decode, forcing an unnecessary
             # refetch on every invocation. Like the read side, the write

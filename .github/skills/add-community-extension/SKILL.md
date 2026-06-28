@@ -89,8 +89,8 @@ Use the existing entries as the format template. Required fields:
 }
 ```
 
-**Category** — free-form string; common values: `docs`, `code`, `process`, `integration`, `visibility`
-**Effect** — one of: `read-only`, `read-write`
+**Category** - free-form string; common values: `docs`, `code`, `process`, `integration`, `visibility`
+**Effect** - one of: `read-only`, `read-write`
 
 If the extension has optional tool dependencies, add a `"tools"` array inside `"requires"`:
 
@@ -118,8 +118,8 @@ Determine the category and effect from the extension's behavior:
 | <Name> | <Description> | `<category>` | <Effect> | [<repo-name>](<repository-url>) |
 ```
 
-**Category** — free-form; common values: `docs`, `code`, `process`, `integration`, `visibility`
-**Effect** — write canonical values `read-only` or `read-write` in `extension.yml` and `catalog.community.json`; use `Read-only`/`Read+Write` only for the docs table display
+**Category** - free-form; common values: `docs`, `code`, `process`, `integration`, `visibility`
+**Effect** - write canonical values `read-only` or `read-write` in `extension.yml` and `catalog.community.json`; use `Read-only`/`Read+Write` only for the docs table display
 
 ### 6. Commit, push, and open PR
 
@@ -165,10 +165,10 @@ Then create a PR to `upstream` (`github/spec-kit`) with:
 
 ## Common Pitfalls
 
-- **Alphabetical order matters** — entries must be sorted by ID in the JSON and by name in the docs table.
-- **Don't forget the catalog `updated_at`** — the top-level timestamp in `catalog.community.json` must be refreshed.
-- **Validate JSON after editing** — a trailing comma or missing brace will break the catalog.
-- **Use `Closes` not `Fixes`** — `Closes #N` is the correct keyword for submission issues.
-- **Match the proposed entry but verify** — the issue may include a proposed JSON block, but always validate field values against the actual repository state.
-- **Preserve `created_at` on updates** — keep the original `created_at` value; only change `updated_at`.
-- **Preserve `downloads` and `stars` on updates** — these reflect usage metrics and must not be reset.
+- **Alphabetical order matters** - entries must be sorted by ID in the JSON and by name in the docs table.
+- **Don't forget the catalog `updated_at`** - the top-level timestamp in `catalog.community.json` must be refreshed.
+- **Validate JSON after editing** - a trailing comma or missing brace will break the catalog.
+- **Use `Closes` not `Fixes`** - `Closes #N` is the correct keyword for submission issues.
+- **Match the proposed entry but verify** - the issue may include a proposed JSON block, but always validate field values against the actual repository state.
+- **Preserve `created_at` on updates** - keep the original `created_at` value; only change `updated_at`.
+- **Preserve `downloads` and `stars` on updates** - these reflect usage metrics and must not be reset.

@@ -5,11 +5,11 @@ Spec-Driven Development: discovery, specification, and roadmap planning.
 
 ## What it installs
 
-- **Extension** `agent-context` — keeps the agent context file in sync.
-- **Preset** `product-discovery` (priority 10, append) — discovery-oriented
+- **Extension** `agent-context` - keeps the agent context file in sync.
+- **Preset** `product-discovery` (priority 10, append) - discovery-oriented
   command set.
-- **Steps** `draft-spec`, `review-spec` — specification authoring steps.
-- **Workflow** `spec-to-roadmap` — turns an approved spec into a roadmap.
+- **Steps** `draft-spec`, `review-spec` - specification authoring steps.
+- **Workflow** `spec-to-roadmap` - turns an approved spec into a roadmap.
 
 This bundle is **integration-agnostic**: it inherits whatever integration the
 project already uses (e.g. `copilot`, `claude`).

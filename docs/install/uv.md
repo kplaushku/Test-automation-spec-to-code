@@ -7,7 +7,7 @@
 
 ## Installation
 
-### macOS and Linux — Standalone Installer
+### macOS and Linux - Standalone Installer
 
 The quickest way to install uv on macOS or Linux is the official shell script:
 
@@ -17,7 +17,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 After the script finishes, follow any instructions printed by the installer to add uv to your `PATH`, then open a new terminal.
 
-### Windows — Standalone Installer
+### Windows - Standalone Installer
 
 Run the following in **Command Prompt or PowerShell**:
 
@@ -27,19 +27,19 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 
 After the script finishes, open a new terminal so the `uv` binary is on your `PATH`.
 
-### macOS — Homebrew
+### macOS - Homebrew
 
 ```bash
 brew install uv
 ```
 
-### Windows — WinGet
+### Windows - WinGet
 
 ```powershell
 winget install --id=astral-sh.uv -e
 ```
 
-### Windows — Scoop
+### Windows - Scoop
 
 ```powershell
 scoop install uv

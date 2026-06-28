@@ -18,15 +18,15 @@ from specify_cli.integrations.manifest import IntegrationManifest
 
 
 class SkillsIntegrationTests:
-    """Mixin — set class-level constants and inherit these tests.
+    """Mixin - set class-level constants and inherit these tests.
 
     Required class attrs on subclass::
 
-        KEY: str              — integration registry key
-        FOLDER: str           — e.g. ".agents/"
-        COMMANDS_SUBDIR: str  — e.g. "skills"
-        REGISTRAR_DIR: str    — e.g. ".agents/skills"
-        CONTEXT_FILE: str     — e.g. "AGENTS.md"
+        KEY: str              - integration registry key
+        FOLDER: str           - e.g. ".agents/"
+        COMMANDS_SUBDIR: str  - e.g. "skills"
+        REGISTRAR_DIR: str    - e.g. ".agents/skills"
+        CONTEXT_FILE: str     - e.g. "AGENTS.md"
     """
 
     KEY: str

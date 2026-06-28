@@ -13,15 +13,15 @@ from specify_cli.integrations.manifest import IntegrationManifest
 
 
 class MarkdownIntegrationTests:
-    """Mixin — set class-level constants and inherit these tests.
+    """Mixin - set class-level constants and inherit these tests.
 
     Required class attrs on subclass::
 
-        KEY: str              — integration registry key
-        FOLDER: str           — e.g. ".claude/"
-        COMMANDS_SUBDIR: str  — e.g. "commands"
-        REGISTRAR_DIR: str    — e.g. ".claude/commands"
-        CONTEXT_FILE: str     — e.g. "CLAUDE.md"
+        KEY: str              - integration registry key
+        FOLDER: str           - e.g. ".claude/"
+        COMMANDS_SUBDIR: str  - e.g. "commands"
+        REGISTRAR_DIR: str    - e.g. ".claude/commands"
+        CONTEXT_FILE: str     - e.g. "CLAUDE.md"
     """
 
     KEY: str

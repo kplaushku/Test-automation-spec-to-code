@@ -1,4 +1,4 @@
-"""specify preset * command handlers — app objects and register() entry point.
+"""specify preset * command handlers - app objects and register() entry point.
 
 Moved out of __init__.py (PR-6/8). Handlers reference helpers that remain in
 the package root (`_require_specify_project`, `get_speckit_version`,
@@ -53,7 +53,7 @@ def preset_list():
     for pack in installed:
         status = "[green]enabled[/green]" if pack.get("enabled", True) else "[red]disabled[/red]"
         pri = pack.get('priority', 10)
-        console.print(f"  [bold]{pack['name']}[/bold] ({pack['id']}) v{pack['version']} — {status} — priority {pri}")
+        console.print(f"  [bold]{pack['name']}[/bold] ({pack['id']}) v{pack['version']} - {status} - priority {pri}")
         console.print(f"    {pack['description']}")
         if pack.get("tags"):
             tags_str = ", ".join(pack["tags"])
@@ -351,7 +351,7 @@ def preset_resolve(
                     strategy_label = "base"
                 console.print(f"    {i + 1}. [{strategy_label}] {layer['source']} → {layer['path']}")
     else:
-        # No layers found — fall back to resolve_with_source for non-composition cases
+        # No layers found - fall back to resolve_with_source for non-composition cases
         result = resolver.resolve_with_source(template_name)
         if result:
             console.print(f"  [bold]{template_name}[/bold]: {result['path']}")

@@ -12,7 +12,7 @@ $ARGUMENTS
 
 This is the **only framework-specific command.** It turns neutral tasks into
 runnable tests by routing each group to its framework's adapter. The neutral
-artifacts (`spec.md`, `plan.md`, `tasks.md`) are inputs only — never edit them.
+artifacts (`spec.md`, `plan.md`, `tasks.md`) are inputs only - never edit them.
 
 1. Read `.specify/feature.json` for the feature directory.
 
@@ -35,7 +35,7 @@ artifacts (`spec.md`, `plan.md`, `tasks.md`) are inputs only — never edit them
    - **Separation.** Test logic, test data, and locators/config live in separate
      files. No inline URLs, payloads, selectors, or credentials.
    - **Requirement marker.** Every generated test carries its `REQ-NNN` id,
-     written in that framework's native way (the adapter specifies how — a Robot
+     written in that framework's native way (the adapter specifies how - a Robot
      `[Tags]` entry, a Playwright tag/annotation). This is what the traceability
      command reads.
    - **Suite layout.** Follow the structure declared in `plan.md`.

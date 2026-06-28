@@ -4,7 +4,7 @@ Each per-agent test file sets ``KEY``, ``FOLDER``, ``COMMANDS_SUBDIR``,
 ``REGISTRAR_DIR``, and ``CONTEXT_FILE``, then inherits all verification
 logic from ``TomlIntegrationTests``.
 
-Mirrors ``MarkdownIntegrationTests`` closely — same test structure,
+Mirrors ``MarkdownIntegrationTests`` closely - same test structure,
 adapted for TOML output format.
 """
 
@@ -19,15 +19,15 @@ from specify_cli.integrations.manifest import IntegrationManifest
 
 
 class TomlIntegrationTests:
-    """Mixin — set class-level constants and inherit these tests.
+    """Mixin - set class-level constants and inherit these tests.
 
     Required class attrs on subclass::
 
-        KEY: str              — integration registry key
-        FOLDER: str           — e.g. ".gemini/"
-        COMMANDS_SUBDIR: str  — e.g. "commands"
-        REGISTRAR_DIR: str    — e.g. ".gemini/commands"
-        CONTEXT_FILE: str     — e.g. "GEMINI.md"
+        KEY: str              - integration registry key
+        FOLDER: str           - e.g. ".gemini/"
+        COMMANDS_SUBDIR: str  - e.g. "commands"
+        REGISTRAR_DIR: str    - e.g. ".gemini/commands"
+        CONTEXT_FILE: str     - e.g. "GEMINI.md"
     """
 
     KEY: str

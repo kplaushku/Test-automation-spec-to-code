@@ -1,4 +1,4 @@
-"""Copilot integration — GitHub Copilot in VS Code.
+"""Copilot integration - GitHub Copilot in VS Code.
 
 Copilot has several unique behaviors compared to standard markdown agents:
 - Commands use ``.agent.md`` extension (not ``.md``)
@@ -61,7 +61,7 @@ def _allow_all() -> bool:
 class _CopilotSkillsHelper(SkillsIntegration):
     """Internal helper used when Copilot is scaffolded in skills mode.
 
-    Not registered in the integration registry — only used as a delegate
+    Not registered in the integration registry - only used as a delegate
     by ``CopilotIntegration`` when ``--skills`` is passed.
     """
 
@@ -110,7 +110,7 @@ class CopilotIntegration(IntegrationBase):
     }
     context_file = ".github/copilot-instructions.md"
 
-    # Mutable flag set by setup() — indicates the active scaffolding mode.
+    # Mutable flag set by setup() - indicates the active scaffolding mode.
     _skills_mode: bool = False
 
     def effective_invoke_separator(
@@ -173,7 +173,7 @@ class CopilotIntegration(IntegrationBase):
     def build_command_invocation(self, command_name: str, args: str = "") -> str:
         """Build the native invocation for a Copilot command.
 
-        Default mode: agents are not slash-commands — return args as prompt.
+        Default mode: agents are not slash-commands - return args as prompt.
         Skills mode: ``/speckit-<stem>`` slash-command dispatch.
         """
         if self._skills_mode:
@@ -233,7 +233,7 @@ class CopilotIntegration(IntegrationBase):
         # Honour SPECKIT_INTEGRATION_COPILOT_EXTRA_ARGS for real workflow
         # runs.  `dispatch_command` builds cli_args inline rather than
         # going through `build_exec_args`, so the hook must be invoked
-        # here too — otherwise the env var is silently ignored.
+        # here too - otherwise the env var is silently ignored.
         self._apply_extra_args_env_var(cli_args)
         if not skills_mode:
             cli_args.extend(["--agent", agent_name])
@@ -388,7 +388,7 @@ class CopilotIntegration(IntegrationBase):
             dst_settings = project_root / ".vscode" / "settings.json"
             dst_settings.parent.mkdir(parents=True, exist_ok=True)
             if dst_settings.exists():
-                # Merge into existing — don't track since we can't safely
+                # Merge into existing - don't track since we can't safely
                 # remove the user's settings file on uninstall.
                 self._merge_vscode_settings(settings_src, dst_settings)
             else:

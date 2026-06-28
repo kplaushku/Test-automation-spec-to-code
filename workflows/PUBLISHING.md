@@ -141,8 +141,8 @@ specify workflow add your-workflow
 
 Specto uses a dual-catalog system:
 
-- **`catalog.json`** — Official, verified workflows (install allowed by default)
-- **`catalog.community.json`** — Community-contributed workflows (discovery only by default)
+- **`catalog.json`** - Official, verified workflows (install allowed by default)
+- **`catalog.community.json`** - Community-contributed workflows (discovery only by default)
 
 All community workflows should be submitted to `catalog.community.json`.
 
@@ -230,11 +230,11 @@ git push origin add-your-workflow
 
 After submission, maintainers will review:
 
-1. **Definition validation** — valid `workflow.yml`, correct schema
-2. **Step correctness** — all step types used correctly, no dangling references
-3. **Input design** — clear prompts, sensible defaults and enums
-4. **Security** — no malicious shell commands, safe operations
-5. **Documentation** — clear README explaining what the workflow does and when to use it
+1. **Definition validation** - valid `workflow.yml`, correct schema
+2. **Step correctness** - all step types used correctly, no dangling references
+3. **Input design** - clear prompts, sensible defaults and enums
+4. **Security** - no malicious shell commands, safe operations
+5. **Documentation** - clear README explaining what the workflow does and when to use it
 
 Once verified, the workflow appears in `specify workflow search`.
 
@@ -255,23 +255,23 @@ When releasing a new version:
 
 ### Step Design
 
-- **Use gates at decision points** — place `gate` steps after each major output so users can review before proceeding
-- **Keep steps focused** — each step should do one thing; prefer more steps over complex single steps
-- **Provide clear gate messages** — explain what to review and what approve/reject means
+- **Use gates at decision points** - place `gate` steps after each major output so users can review before proceeding
+- **Keep steps focused** - each step should do one thing; prefer more steps over complex single steps
+- **Provide clear gate messages** - explain what to review and what approve/reject means
 
 ### Inputs
 
-- **Use descriptive prompts** — the `prompt` field is shown to users when running the workflow
-- **Set sensible defaults** — optional inputs should have defaults that work for the common case
-- **Constrain with enums** — when there's a fixed set of valid values, use `enum` for validation
-- **Type appropriately** — use `number` for counts, `boolean` for flags, `string` for names
+- **Use descriptive prompts** - the `prompt` field is shown to users when running the workflow
+- **Set sensible defaults** - optional inputs should have defaults that work for the common case
+- **Constrain with enums** - when there's a fixed set of valid values, use `enum` for validation
+- **Type appropriately** - use `number` for counts, `boolean` for flags, `string` for names
 
 ### Shell Steps
 
-- **Shell runs with the user's privileges** — a `shell` step executes a local command directly; there is no capability sandbox. `requires` is an advisory pre-condition block (recognised keys: `speckit_version`, `integrations`), **not** a runtime permission gate — there is no `requires.permissions`. Gate sensitive commands explicitly with a `gate` step.
-- **Avoid destructive commands** — don't delete files or directories without explicit confirmation via a gate
-- **Quote variables** — use proper quoting in shell commands to handle spaces
-- **Check exit codes** — shell step failures stop the workflow; make sure commands are robust
+- **Shell runs with the user's privileges** - a `shell` step executes a local command directly; there is no capability sandbox. `requires` is an advisory pre-condition block (recognised keys: `speckit_version`, `integrations`), **not** a runtime permission gate - there is no `requires.permissions`. Gate sensitive commands explicitly with a `gate` step.
+- **Avoid destructive commands** - don't delete files or directories without explicit confirmation via a gate
+- **Quote variables** - use proper quoting in shell commands to handle spaces
+- **Check exit codes** - shell step failures stop the workflow; make sure commands are robust
 
 #### Security: shell steps execute arbitrary code
 
@@ -279,19 +279,19 @@ Workflow `shell` steps execute their `run` field through `/bin/sh` (POSIX) or th
 
 Catalog-listed workflows are reviewed at submission time (see [Verification Process](#verification-process)), but you should still treat every install as code-execution from an untrusted source until you have read the `workflow.yml`:
 
-- **Before installing a workflow**, fetch the raw YAML and audit every `shell` step's `run` field directly. `specify workflow info <name>` only shows metadata (name, version, inputs, step IDs/types) — not the shell content that would actually execute.
+- **Before installing a workflow**, fetch the raw YAML and audit every `shell` step's `run` field directly. `specify workflow info <name>` only shows metadata (name, version, inputs, step IDs/types) - not the shell content that would actually execute.
 - **Prefer explicit commands over interpolation** in `run` blocks: `{{ inputs.something }}` substitutions should be quoted and constrained via `enum` so a malicious input can't inject shell syntax.
 - **Limit privilege**: shell steps inherit the user's environment. Workflows that need elevated access (sudo, secrets, GitHub tokens) should call them out explicitly in the README so reviewers can spot the requirement.
 - **Authors**: if your workflow has shell steps that look risky out of context (deletions, network calls, credential reads), document the rationale in your README. Maintainers will reject submissions whose shell steps can't be justified at review time.
 
 ### Integration Flexibility
 
-- **Set `integration` at workflow level** — use the `workflow.integration` field as the default
-- **Allow per-step overrides** — let individual steps specify a different integration if needed
-- **Document required integrations** — list which integrations must be installed in `requires.integrations`
+- **Set `integration` at workflow level** - use the `workflow.integration` field as the default
+- **Allow per-step overrides** - let individual steps specify a different integration if needed
+- **Document required integrations** - list which integrations must be installed in `requires.integrations`
 
 ### Expression References
 
-- **Only reference prior steps** — expressions like `{{ steps.plan.output.file }}` only work if `plan` ran before the current step
-- **Use `default` filter** — `{{ val | default('fallback') }}` prevents failures from missing values
-- **Keep expressions simple** — complex logic should be in shell steps, not expressions
+- **Only reference prior steps** - expressions like `{{ steps.plan.output.file }}` only work if `plan` ran before the current step
+- **Use `default` filter** - `{{ val | default('fallback') }}` prevents failures from missing values
+- **Keep expressions simple** - complex logic should be in shell steps, not expressions

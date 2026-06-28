@@ -1,4 +1,4 @@
-"""Devin for Terminal integration — skills-based agent.
+"""Devin for Terminal integration - skills-based agent.
 
 Devin uses the ``.devin/skills/speckit-<name>/SKILL.md`` layout and
 reads project context from ``AGENTS.md`` at the repo root. The CLI

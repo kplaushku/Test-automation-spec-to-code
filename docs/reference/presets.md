@@ -1,6 +1,6 @@
 # Presets
 
-Presets customize how Specto works — overriding templates, commands, and terminology without changing any tooling. They let you enforce organizational standards, adapt the workflow to your methodology, or localize the entire experience. Multiple presets can be stacked with priority ordering.
+Presets customize how Specto works - overriding templates, commands, and terminology without changing any tooling. They let you enforce organizational standards, adapt the workflow to your methodology, or localize the entire experience. Multiple presets can be stacked with priority ordering.
 
 ## Search Available Presets
 
@@ -119,10 +119,10 @@ Removes a catalog from the project configuration.
 
 Catalogs are resolved in this order (first match wins):
 
-1. **Environment variable** — `SPECKIT_PRESET_CATALOG_URL` overrides all catalogs
-2. **Project config** — `.specify/preset-catalogs.yml`
-3. **User config** — `~/.specify/preset-catalogs.yml`
-4. **Built-in defaults** — official catalog + community catalog
+1. **Environment variable** - `SPECKIT_PRESET_CATALOG_URL` overrides all catalogs
+2. **Project config** - `.specify/preset-catalogs.yml`
+3. **User config** - `~/.specify/preset-catalogs.yml`
+4. **Built-in defaults** - official catalog + community catalog
 
 Example `.specify/preset-catalogs.yml`:
 
@@ -145,10 +145,10 @@ By default, files use a **replace** strategy: the first match in the priority st
 
 The resolution stack, from highest to lowest precedence:
 
-1. **Project-local overrides** — `.specify/templates/overrides/`
-2. **Installed presets** — sorted by priority (lower = checked first)
-3. **Installed extensions** — sorted by priority
-4. **Specto core** — `.specify/templates/`
+1. **Project-local overrides** - `.specify/templates/overrides/`
+2. **Installed presets** - sorted by priority (lower = checked first)
+3. **Installed extensions** - sorted by priority
+4. **Specto core** - `.specify/templates/`
 
 ### Resolution Stack
 
@@ -157,8 +157,8 @@ flowchart TB
     subgraph stack [" "]
         direction TB
         A["⬆ Highest precedence<br/><br/>1. Project-local overrides<br/>.specify/templates/overrides/"]
-        B["2. Presets — by priority<br/>.specify/presets/‹id›/"]
-        C["3. Extensions — by priority<br/>.specify/extensions/‹id›/"]
+        B["2. Presets - by priority<br/>.specify/presets/‹id›/"]
+        C["3. Extensions - by priority<br/>.specify/extensions/‹id›/"]
         D["4. Specto core<br/>.specify/templates/<br/><br/>⬇ Lowest precedence"]
     end
 
@@ -207,7 +207,7 @@ For any file that both provide, `compliance` wins (priority 5 < 10). For files o
 
 ### Can I use multiple presets at the same time?
 
-Yes. Presets stack by priority — each file is resolved independently from the highest-priority source that provides it. Use `specify preset set-priority` to control the order.
+Yes. Presets stack by priority - each file is resolved independently from the highest-priority source that provides it. Use `specify preset set-priority` to control the order.
 
 ### How do I see which file is actually being used?
 
@@ -217,7 +217,7 @@ Run `specify preset resolve <name>` to trace the resolution stack and see which 
 
 **Disabling** (`specify preset disable`) keeps the preset installed but excludes it from future template and script resolution. Previously registered commands remain available in your AI coding agent until preset removal, so use removal when you need command changes to stop taking effect. Disabling is useful for temporarily testing template/script behavior without a preset, or comparing template/script output with and without it. Re-enable anytime with `specify preset enable`.
 
-**Removing** (`specify preset remove`) fully uninstalls the preset — deletes its files, unregisters its commands from your AI coding agent, and removes it from the registry.
+**Removing** (`specify preset remove`) fully uninstalls the preset - deletes its files, unregisters its commands from your AI coding agent, and removes it from the registry.
 
 ### Who maintains presets?
 

@@ -1,5 +1,5 @@
 ---
-description: "Process community extension submission issues — validate, add to catalog, and open a PR for maintainer review"
+description: "Process community extension submission issues - validate, add to catalog, and open a PR for maintainer review"
 emoji: "🧩"
 
 on:
@@ -57,7 +57,7 @@ added is `extension-submission`. By the time you run, that condition has already
 passed. Before processing, verify that the issue title starts with `[Extension]:`.
 If it does not, stop without commenting.
 
-## Step 1 — Read and Parse the Issue
+## Step 1 - Read and Parse the Issue
 
 Read issue #${{ github.event.issue.number }}.
 
@@ -88,7 +88,7 @@ The issue body uses GitHub's issue form format. Each field appears under a
 heading matching the field label (e.g., `### Extension ID` followed by the
 value). Parse accordingly.
 
-## Step 2 — Validate the Submission
+## Step 2 - Validate the Submission
 
 Run **all** of the following validation checks. Collect all results before
 deciding pass/fail:
@@ -101,7 +101,7 @@ deciding pass/fail:
 - Must follow semver: `X.Y.Z` (digits only, no `v` prefix)
 
 ### 2c. Repository validation
-- Fetch the repository URL — confirm it exists and is publicly accessible
+- Fetch the repository URL - confirm it exists and is publicly accessible
 - Confirm the repository contains an `extension.yml` file
 - Confirm the repository contains a `README.md` file
 - Confirm the repository contains a `LICENSE` file
@@ -123,21 +123,21 @@ If **any** validation fails:
 1. Add a comment on the issue listing each failed check with a clear explanation
    of what's wrong and how to fix it
 2. Add the `validation-failed` label
-3. **Stop — do not proceed further**
+3. **Stop - do not proceed further**
 
 If all validations pass:
 1. Add the `validation-passed` label
 2. Continue to Step 3
 
-## Step 3 — Determine Add vs Update
+## Step 3 - Determine Add vs Update
 
 Search `extensions/catalog.community.json` for the extension ID.
 
 - **Not found** → this is a **new addition**
-- **Found** → this is an **update** — replace the existing entry in-place;
+- **Found** → this is an **update** - replace the existing entry in-place;
   preserve `created_at`, `downloads`, and `stars` from the existing entry
 
-## Step 4 — Update `extensions/catalog.community.json`
+## Step 4 - Update `extensions/catalog.community.json`
 
 Edit `extensions/catalog.community.json` to add or update the extension entry.
 
@@ -203,7 +203,7 @@ python3 -c "import json; json.load(open('extensions/catalog.community.json')); p
 
 If validation fails, fix the JSON and re-validate before continuing.
 
-## Step 5 — Update `docs/community/extensions.md`
+## Step 5 - Update `docs/community/extensions.md`
 
 Edit `docs/community/extensions.md` to add or update a row in the Community
 Extensions table.
@@ -217,21 +217,21 @@ Insert a new row in **alphabetical order by extension name**:
 ```
 
 Determine the category from the extension's behavior:
-- `docs` — reads, validates, or generates spec artifacts
-- `code` — reviews, validates, or modifies source code
-- `process` — orchestrates workflow across phases
-- `integration` — syncs with external platforms
-- `visibility` — reports on project health or progress
+- `docs` - reads, validates, or generates spec artifacts
+- `code` - reviews, validates, or modifies source code
+- `process` - orchestrates workflow across phases
+- `integration` - syncs with external platforms
+- `visibility` - reports on project health or progress
 
 Determine the effect:
-- `Read-only` — produces reports only
-- `Read+Write` — modifies project files
+- `Read-only` - produces reports only
+- `Read+Write` - modifies project files
 
 ### For an update
 
 Find the existing row and update any changed fields in-place.
 
-## Step 6 — Create Pull Request
+## Step 6 - Create Pull Request
 
 Create a pull request with the changes. Use this branch naming convention:
 
@@ -268,22 +268,22 @@ Include:
 - A summary of what changed
 - Validation results (all checks passed)
 - `Closes #${{ github.event.issue.number }}`
-- `cc @<issue-author>` — mention the submitter
+- `cc @<issue-author>` - mention the submitter
 
 ## Important Rules
 
-- **Alphabetical order matters** — entries must be sorted by ID in the JSON and
+- **Alphabetical order matters** - entries must be sorted by ID in the JSON and
   by name in the docs table
-- **Always validate JSON** after editing — a trailing comma or missing brace
+- **Always validate JSON** after editing - a trailing comma or missing brace
   will break the catalog
-- **Use `Closes` not `Fixes`** — `Closes #N` is the correct keyword for
+- **Use `Closes` not `Fixes`** - `Closes #N` is the correct keyword for
   submission issues
-- **Match the proposed entry but verify** — the issue may include a proposed
+- **Match the proposed entry but verify** - the issue may include a proposed
   JSON block, but always validate field values against the actual repository
   state rather than blindly trusting the submitter's JSON
-- **Preserve `created_at` on updates** — keep the original value; only update
+- **Preserve `created_at` on updates** - keep the original value; only update
   `updated_at`
-- **Preserve `downloads` and `stars` on updates** — these reflect usage metrics
+- **Preserve `downloads` and `stars` on updates** - these reflect usage metrics
   and must not be reset
-- **Do not modify any other files** — only `extensions/catalog.community.json`
+- **Do not modify any other files** - only `extensions/catalog.community.json`
   and `docs/community/extensions.md`

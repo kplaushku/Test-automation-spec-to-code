@@ -1,6 +1,6 @@
 # Workflow System Architecture
 
-This document describes the internal architecture of the workflow engine — how definitions are parsed, steps are dispatched, state is persisted, and catalogs are resolved.
+This document describes the internal architecture of the workflow engine - how definitions are parsed, steps are dispatched, state is persisted, and catalogs are resolved.
 
 For usage instructions, see [README.md](README.md).
 
@@ -51,7 +51,7 @@ Steps execute sequentially. Each step receives a `StepContext` containing resolv
 
 ### Nested Steps (Control Flow)
 
-Steps like `if`, `switch`, `while`, and `do-while` return `next_steps` — inline step definitions that the engine executes recursively via `_execute_steps()`. Nested steps share the same `StepContext` and `RunState`, so their outputs are visible to later top-level steps.
+Steps like `if`, `switch`, `while`, and `do-while` return `next_steps` - inline step definitions that the engine executes recursively via `_execute_steps()`. Nested steps share the same `StepContext` and `RunState`, so their outputs are visible to later top-level steps.
 
 ### State Persistence and Resume
 
@@ -101,7 +101,7 @@ All step types register into `STEP_REGISTRY` via `_register_builtin_steps()` in 
 STEP_REGISTRY: dict[str, StepBase]  # e.g., {"command": CommandStep(), "gate": GateStep(), ...}
 ```
 
-Registration is explicit — each step class is imported and instantiated. New step types follow the same pattern: subclass `StepBase`, set `type_key`, implement `execute()` and optionally `validate()`.
+Registration is explicit - each step class is imported and instantiated. New step types follow the same pattern: subclass `StepBase`, set `type_key`, implement `execute()` and optionally `validate()`.
 
 ## Expression Engine
 

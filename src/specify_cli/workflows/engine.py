@@ -1,4 +1,4 @@
-"""Workflow engine — loads, validates, and executes workflow YAML definitions.
+"""Workflow engine - loads, validates, and executes workflow YAML definitions.
 
 The engine is the orchestrator that:
 - Parses workflow YAML definitions
@@ -54,7 +54,7 @@ class WorkflowDefinition:
 
         # Advisory pre-conditions (spec-kit version / integrations a workflow
         # expects). Validated by ``validate_workflow`` (recognized keys only;
-        # see ``_RECOGNIZED_REQUIRES_KEYS``) but NOT enforced at run time — they
+        # see ``_RECOGNIZED_REQUIRES_KEYS``) but NOT enforced at run time - they
         # are not a security boundary. In particular there is no
         # ``requires.permissions`` capability gate: shell steps always run with
         # the user's privileges.
@@ -98,10 +98,10 @@ _ID_PATTERN = re.compile(r"^[a-z0-9][a-z0-9-]*[a-z0-9]$|^[a-z0-9]$")
 
 # Keys accepted under a workflow's ``requires`` block: the advisory
 # pre-conditions documented for workflows (``speckit_version`` and
-# ``integrations``). This is the *workflow* schema only — the bundle manifest's
+# ``integrations``). This is the *workflow* schema only - the bundle manifest's
 # ``requires`` (see ``bundler/models/manifest.py``) is a separate schema that
 # also carries ``tools``/``mcp``; those are not workflow ``requires`` keys.
-# Any other key — notably ``permissions`` — is rejected by ``validate_workflow``
+# Any other key - notably ``permissions`` - is rejected by ``validate_workflow``
 # so it is never mistaken for an enforced runtime control.
 _RECOGNIZED_REQUIRES_KEYS = frozenset({"speckit_version", "integrations"})
 
@@ -171,7 +171,7 @@ def validate_workflow(definition: WorkflowDefinition) -> list[str]:
             # a number input) surface at install/validation time instead of
             # at workflow-execution time. ``"auto"`` for the integration
             # input is a runtime-resolved sentinel, so only the
-            # enum-membership check is exempted for that exact case — the
+            # enum-membership check is exempted for that exact case - the
             # declared type is still enforced (e.g. ``type: number`` paired
             # with ``default: "auto"`` is still rejected).
             if "default" in input_def:
@@ -201,12 +201,12 @@ def validate_workflow(definition: WorkflowDefinition) -> list[str]:
     # reject anything else so authoring typos surface here instead of being
     # silently ignored at runtime. In particular ``requires.permissions`` is
     # rejected explicitly: it reads like a runtime capability gate, but no such
-    # gate exists — a ``shell`` step always runs with the user's privileges, so
+    # gate exists - a ``shell`` step always runs with the user's privileges, so
     # declaring it would give a false sense of sandboxing.
     #
     # Mirror ``inputs`` validation: an omitted block defaults to ``{}`` and is
-    # valid, but any present-but-non-mapping value — ``requires:`` (YAML null),
-    # ``requires: []`` or ``requires: ''`` — is an authoring error and must
+    # valid, but any present-but-non-mapping value - ``requires:`` (YAML null),
+    # ``requires: []`` or ``requires: ''`` - is an authoring error and must
     # surface here rather than be silently ignored at runtime.
     if not isinstance(definition.requires, dict):
         errors.append("'requires' must be a mapping (or omitted).")
@@ -215,7 +215,7 @@ def validate_workflow(definition: WorkflowDefinition) -> list[str]:
             if key == "permissions":
                 errors.append(
                     "'requires.permissions' is not a recognized or "
-                    "enforced capability gate — shell steps always run "
+                    "enforced capability gate - shell steps always run "
                     "with the user's privileges. Remove it and gate "
                     "sensitive steps with a 'gate' step instead."
                 )
@@ -284,7 +284,7 @@ def _validate_steps(
         # this on any step that returns StepStatus.FAILED so the pipeline can route
         # around the failure via a downstream `if` or `switch` (or a
         # `gate` that surfaces the failure to the operator via message
-        # interpolation). The field must be a literal boolean —
+        # interpolation). The field must be a literal boolean -
         # coercion from truthy strings is deliberately not supported so
         # authoring mistakes surface at validation time rather than
         # silently changing run semantics.
@@ -314,7 +314,7 @@ def _validate_steps(
         if isinstance(default, list):
             _validate_steps(default, seen_ids, errors)
 
-        # Validate fan-out nested step (template — not added to seen_ids
+        # Validate fan-out nested step (template - not added to seen_ids
         # since the engine generates parentId:templateId:index at runtime)
         fan_step = step_config.get("step")
         if isinstance(fan_step, dict):
@@ -332,7 +332,7 @@ class RunState:
     # ``run_id`` is interpolated into a filesystem path (``runs/<run_id>``)
     # by both ``save()`` and ``load()``. Constrain it to a charset that
     # cannot contain path separators (``/`` ``\``), parent-directory
-    # segments (``..``), or NULs — anything that could escape the
+    # segments (``..``), or NULs - anything that could escape the
     # ``.specify/workflows/runs/`` directory or be mis-interpreted by the
     # filesystem. The first-character anchor blocks IDs that start with
     # ``-`` (which would be mistaken for a CLI flag in error messages
@@ -364,7 +364,7 @@ class RunState:
     ) -> None:
         # ``run_id is None`` (omitted) → auto-generate. An explicit empty
         # string is *not* the same as "omitted" and must be validated like
-        # any other caller-provided value — otherwise ``__init__("")``
+        # any other caller-provided value - otherwise ``__init__("")``
         # would silently substitute a UUID while ``load("")`` rejects, and
         # the two entry points would diverge on the empty-string vector.
         if run_id is None:
@@ -422,7 +422,7 @@ class RunState:
         paths and ``json.load`` read attacker-planted JSON from outside
         the project's ``runs/`` directory. ``__init__`` already runs this
         check on the stored ``state_data["run_id"]``, but that fires
-        *after* the file lookup — too late to prevent the disclosure.
+        *after* the file lookup - too late to prevent the disclosure.
         Mirrors the precedent in ``agents._ensure_within_directory``.
         """
         cls._validate_run_id(run_id)
@@ -619,7 +619,7 @@ class WorkflowEngine:
             msg = f"Cannot resume run {run_id!r} with status {state.status.value!r}."
             raise ValueError(msg)
 
-        # Load the workflow definition — try the persisted copy in the
+        # Load the workflow definition - try the persisted copy in the
         # run directory first so resume works even if the original
         # source (e.g. a local YAML path) is no longer available.
         run_dir = self.project_root / ".specify" / "workflows" / "runs" / run_id
@@ -651,7 +651,7 @@ class WorkflowEngine:
         state.status = RunStatus.RUNNING
         state.save()
 
-        # Resume from the current step — re-execute it so gates
+        # Resume from the current step - re-execute it so gates
         # can prompt interactively again.
         remaining_steps = definition.steps[state.current_step_index :]
         step_offset = state.current_step_index
@@ -701,7 +701,7 @@ class WorkflowEngine:
                 {"event": "step_started", "step_id": step_id, "type": step_type}
             )
 
-            # Log progress — use the engine's on_step_start callback if set,
+            # Log progress - use the engine's on_step_start callback if set,
             # otherwise stay silent (library-safe default).
             label = step_config.get("command", "") or step_type
             if self.on_step_start is not None:
@@ -722,7 +722,7 @@ class WorkflowEngine:
 
             result: StepResult = step_impl.execute(step_config, context)
 
-            # Record step results — prefer resolved values from step output
+            # Record step results - prefer resolved values from step output
             step_data = {
                 "type": step_type,
                 "integration": result.output.get("integration")
@@ -759,7 +759,7 @@ class WorkflowEngine:
             if result.status == StepStatus.FAILED:
                 # Gate abort (output.aborted) maps to ABORTED status.
                 # Aborts are deliberate operator decisions, so
-                # `continue_on_error` does NOT override them — that flag
+                # `continue_on_error` does NOT override them - that flag
                 # is for transient/expected step failures only.
                 if result.output.get("aborted"):
                     state.status = RunStatus.ABORTED
@@ -778,7 +778,7 @@ class WorkflowEngine:
                 # still recorded so a downstream `if` or `switch`
                 # can branch on it (or a `gate` can surface it to the
                 # operator via message interpolation). Log a single,
-                # unambiguous event per failure resolution — either
+                # unambiguous event per failure resolution - either
                 # the run continued past it, or it halted.
                 #
                 # Use identity comparison (`is True`) rather than
@@ -907,7 +907,7 @@ class WorkflowEngine:
                     ):
                         return
                 else:
-                    # Empty items or no template — normalize output
+                    # Empty items or no template - normalize output
                     result.output["results"] = []
                     context.steps[step_id]["output"] = result.output
                     state.step_results[step_id]["output"] = result.output
@@ -980,8 +980,8 @@ class WorkflowEngine:
         """Read the default integration key from ``.specify/integration.json``.
 
         Delegates parsing and schema validation to
-        :func:`try_read_integration_json` — the same low-level helper used by
-        the CLI — so the engine cannot drift from CLI behavior on the parse
+        :func:`try_read_integration_json` - the same low-level helper used by
+        the CLI - so the engine cannot drift from CLI behavior on the parse
         path. Returns ``None`` when the file is missing, malformed, or
         written by a newer CLI; callers fall back to the literal default.
         """
@@ -1027,7 +1027,7 @@ class WorkflowEngine:
                 raise ValueError(msg)
         elif input_type == "string":
             # Without this, ``type: string`` accepts any Python value
-            # (numbers, lists, dicts) because nothing else rejects it —
+            # (numbers, lists, dicts) because nothing else rejects it -
             # YAML ``default: 5`` would slip through. Require an actual
             # string so authoring mistakes fail at resolve time.
             if not isinstance(value, str):

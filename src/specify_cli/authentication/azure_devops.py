@@ -22,10 +22,10 @@ class AzureDevOpsAuth(AuthProvider):
 
     Supports four auth schemes:
 
-    * ``basic-pat`` — PAT with empty username, Base64-encoded as ``:<PAT>``
-    * ``bearer`` — pre-acquired OAuth / Azure AD token
-    * ``azure-cli`` — acquires a token via ``az account get-access-token``
-    * ``azure-ad`` — acquires a token via OAuth2 client credentials flow
+    * ``basic-pat`` - PAT with empty username, Base64-encoded as ``:<PAT>``
+    * ``bearer`` - pre-acquired OAuth / Azure AD token
+    * ``azure-cli`` - acquires a token via ``az account get-access-token``
+    * ``azure-ad`` - acquires a token via OAuth2 client credentials flow
     """
 
     key = "azure-devops"

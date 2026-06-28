@@ -14,13 +14,13 @@ class AuthProvider(ABC):
 
     Subclasses must set:
 
-    * ``key`` — unique provider identifier (e.g. ``"github"``, ``"azure-devops"``)
-    * ``supported_auth_schemes`` — tuple of auth scheme strings this provider handles
+    * ``key`` - unique provider identifier (e.g. ``"github"``, ``"azure-devops"``)
+    * ``supported_auth_schemes`` - tuple of auth scheme strings this provider handles
 
     And implement:
 
-    * ``auth_headers(token, auth_scheme)`` — build headers from a resolved token
-    * ``resolve_token(entry)`` — obtain the token for a config entry
+    * ``auth_headers(token, auth_scheme)`` - build headers from a resolved token
+    * ``resolve_token(entry)`` - obtain the token for a config entry
     """
 
     key: str = ""

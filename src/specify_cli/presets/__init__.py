@@ -65,13 +65,13 @@ def _substitute_core_template(
 
     resolver = PresetResolver(project_root)
     # Resolution order for the core template:
-    # 1. resolve_core(cmd_name) — covers tier-1 project overrides and tier-3/4
+    # 1. resolve_core(cmd_name) - covers tier-1 project overrides and tier-3/4
     #    name-based lookup (file named <cmd_name>.md).  Checked first so that a
     #    local override always wins, even for extension commands.
-    # 2. resolve_extension_command_via_manifest(cmd_name) — manifest-based tier-3
+    # 2. resolve_extension_command_via_manifest(cmd_name) - manifest-based tier-3
     #    fallback for extension commands whose file is named differently from the
     #    command name (e.g. speckit.selftest.extension → commands/selftest.md).
-    # 3. resolve_core(short_name) — core template fallback using the unprefixed
+    # 3. resolve_core(short_name) - core template fallback using the unprefixed
     #    name (e.g. specify → templates/commands/specify.md).
     # resolve_core() skips installed presets (tier 2) to prevent accidental nesting
     # where another preset's wrap output is mistaken for the real core.
@@ -619,7 +619,7 @@ class PresetManager:
 
         # Filter out extension command overrides if the extension isn't installed.
         # Command names follow the pattern: speckit.<ext-id>.<cmd-name>
-        # Core commands (e.g. speckit.specify) have only one dot — always register.
+        # Core commands (e.g. speckit.specify) have only one dot - always register.
         extensions_dir = self.project_root / ".specify" / "extensions"
         filtered = []
         for cmd in command_templates:
@@ -642,7 +642,7 @@ class PresetManager:
             if strategy != "replace":
                 # Only pre-compose if this preset is the top composing layer.
                 # If a higher-priority replace already wins, skip composition
-                # here — reconciliation will write the correct content.
+                # here - reconciliation will write the correct content.
                 layers = resolver.collect_all_layers(cmd["name"], "command")
                 top_layer_is_ours = (
                     layers and layers[0]["path"].is_relative_to(preset_dir)
@@ -668,7 +668,7 @@ class PresetManager:
                             f"composition strategies."
                         )
                 else:
-                    # Not the top layer — register raw file; reconciliation
+                    # Not the top layer - register raw file; reconciliation
                     # will overwrite with the correct composed/winning content.
                     # Note: CommandRegistrar may process frontmatter strategy: wrap
                     # from the raw file (legacy compat), but reconciliation runs
@@ -733,14 +733,14 @@ class PresetManager:
             if not layers:
                 continue
 
-            # If the top layer is replace, it wins entirely — lower layers
+            # If the top layer is replace, it wins entirely - lower layers
             # are irrelevant regardless of their strategies.
             top_is_replace = layers[0]["strategy"] == "replace"
             has_composition = not top_is_replace and any(
                 layer["strategy"] != "replace" for layer in layers
             )
             if not has_composition:
-                # Pure replace — the top layer wins.
+                # Pure replace - the top layer wins.
                 top_layer = layers[0]
                 top_path = top_layer["path"]
                 # Try to find which preset owns this layer
@@ -794,7 +794,7 @@ class PresetManager:
                             source_id=source_id,
                         )
             else:
-                # Composed command — resolve from full stack
+                # Composed command - resolve from full stack
                 composed = resolver.resolve_content(cmd_name, "command")
                 if composed is None:
                     # Composition no longer possible (e.g. base layer removed).
@@ -849,7 +849,7 @@ class PresetManager:
                         continue
                     break
                 if not registered:
-                    # No preset owns this composed command — write to a
+                    # No preset owns this composed command - write to a
                     # shared .composed dir and register from the top layer.
                     shared_composed = self.presets_dir / ".composed"
                     shared_composed.mkdir(parents=True, exist_ok=True)
@@ -1150,8 +1150,8 @@ class PresetManager:
 
         Looks up the agent's invoke separator and rewrites each
         ``__SPECKIT_COMMAND_<NAME>__`` placeholder into the matching
-        slash-command invocation — ``/speckit-<cmd>`` for a ``-`` separator,
-        ``/speckit.<cmd>`` for ``.`` — the same rendering the command layer
+        slash-command invocation - ``/speckit-<cmd>`` for a ``-`` separator,
+        ``/speckit.<cmd>`` for ``.`` - the same rendering the command layer
         applies via ``CommandRegistrar.register_commands()``.
         """
         separator = registrar.AGENT_CONFIGS.get(selected_ai, {}).get(
@@ -1498,7 +1498,7 @@ class PresetManager:
                     )
                 skill_file.write_text(skill_content, encoding="utf-8")
             else:
-                # No core or extension template — remove the skill entirely
+                # No core or extension template - remove the skill entirely
                 shutil.rmtree(skill_subdir)
 
     def install_from_directory(
@@ -1711,7 +1711,7 @@ class PresetManager:
                             if isinstance(alias, str):
                                 removed_cmd_names.add(alias)
             except PresetValidationError:
-                # Invalid manifest — skip alias extraction; primary command
+                # Invalid manifest - skip alias extraction; primary command
                 # names from registered_commands are still unregistered.
                 pass
 
@@ -1927,7 +1927,7 @@ class PresetCatalog:
 
         Args:
             catalog_data: Parsed JSON payload from the catalog source.
-            url: Source URL — used in the error message so the user can
+            url: Source URL - used in the error message so the user can
                 tell which catalog in a multi-catalog stack is malformed.
 
         Raises:
@@ -2030,7 +2030,7 @@ class PresetCatalog:
         """Get the ordered list of active preset catalogs.
 
         Resolution order:
-        1. SPECKIT_PRESET_CATALOG_URL env var — single catalog replacing all defaults
+        1. SPECKIT_PRESET_CATALOG_URL env var - single catalog replacing all defaults
         2. Project-level .specify/preset-catalogs.yml
         3. User-level ~/.specify/preset-catalogs.yml
         4. Built-in default stack (default + community)
@@ -2153,7 +2153,7 @@ class PresetCatalog:
         cache_file, metadata_file = self._get_cache_paths(entry.url)
 
         # Use cache if valid. A previously-cached payload must clear the
-        # same shape checks as a freshly-fetched one — otherwise a once-
+        # same shape checks as a freshly-fetched one - otherwise a once-
         # poisoned cache would re-crash on every invocation despite the
         # cache being "valid" by age. If validation fails on the cached
         # read, fall through to the network fetch path so the cache gets
@@ -2229,7 +2229,7 @@ class PresetCatalog:
                     # Per-entry guard: ``_fetch_single_catalog`` already
                     # validates that ``data["presets"]`` is a mapping, but it
                     # does not (and should not) validate every entry shape
-                    # there — one malformed entry shouldn't poison an
+                    # there - one malformed entry shouldn't poison an
                     # otherwise valid catalog. Skip non-mapping entries here
                     # so a payload like ``{"presets": {"foo": [], "bar":
                     # {...}}}`` still merges the valid entries without
@@ -2333,7 +2333,7 @@ class PresetCatalog:
 
             # Save to cache. Explicit UTF-8 on both writes mirrors the
             # ``read_text(encoding="utf-8")`` on the read side and the
-            # ``integrations/catalog.py`` precedent — otherwise platforms
+            # ``integrations/catalog.py`` precedent - otherwise platforms
             # whose default encoding isn't UTF-8 would write
             # locale-encoded bytes the read path can't decode, forcing an
             # unnecessary refetch on every invocation. Like the read
@@ -2671,7 +2671,7 @@ class PresetResolver:
         if override.exists():
             return override
 
-        # Priority 2: Installed presets (sorted by priority — lower number wins)
+        # Priority 2: Installed presets (sorted by priority - lower number wins)
         if not skip_presets and self.presets_dir.exists():
             registry = PresetRegistry(self.presets_dir)
             for pack_id, _metadata in registry.list_by_priority():
@@ -2684,7 +2684,7 @@ class PresetResolver:
                     if candidate.exists():
                         return candidate
 
-        # Priority 3: Extension-provided templates (sorted by priority — lower number wins)
+        # Priority 3: Extension-provided templates (sorted by priority - lower number wins)
         for _priority, ext_id, _metadata in self._get_all_extensions_by_priority():
             ext_dir = self.extensions_dir / ext_id
             if not ext_dir.is_dir():
@@ -2936,7 +2936,7 @@ class PresetResolver:
                 "strategy": "replace",
             })
 
-        # Priority 2: Installed presets (sorted by priority — lower number = higher precedence)
+        # Priority 2: Installed presets (sorted by priority - lower number = higher precedence)
         if self.presets_dir.exists():
             registry = PresetRegistry(self.presets_dir)
             for pack_id, metadata in registry.list_by_priority():
@@ -2957,7 +2957,7 @@ class PresetResolver:
                             manifest_found_entry = True
                             break
                 # Use manifest file path if specified, otherwise convention-based
-                # lookup — but only when the manifest doesn't exist or doesn't
+                # lookup - but only when the manifest doesn't exist or doesn't
                 # list this template, so preset.yml stays authoritative.
                 candidate = None
                 if manifest_file_path:
@@ -2967,7 +2967,7 @@ class PresetResolver:
                     # Explicit file path that doesn't exist: skip convention
                     # fallback to avoid masking typos or picking up unintended files.
                 elif not manifest_found_entry:
-                    # Manifest doesn't list this template — check convention paths
+                    # Manifest doesn't list this template - check convention paths
                     candidate = _find_in_subdirs(pack_dir)
                 if candidate:
                     # Legacy fallback: if manifest doesn't explicitly declare a
@@ -3025,7 +3025,7 @@ class PresetResolver:
                                         candidate = c
                                 break
                     except (ExtValidationError, yaml.YAMLError):
-                        # Invalid extension manifest — fall back to
+                        # Invalid extension manifest - fall back to
                         # convention-based lookup (already attempted above).
                         pass
             if candidate:
@@ -3144,7 +3144,7 @@ class PresetResolver:
         - wrap: content contains {CORE_TEMPLATE} placeholder replaced
                 with lower-priority content (or $CORE_SCRIPT for scripts)
 
-        Composition is recursive — multiple composing presets chain.
+        Composition is recursive - multiple composing presets chain.
 
         Args:
             template_name: Template name (e.g., "spec-template")
@@ -3157,7 +3157,7 @@ class PresetResolver:
         if not layers:
             return None
 
-        # If the top (highest-priority) layer is replace, it wins entirely —
+        # If the top (highest-priority) layer is replace, it wins entirely -
         # lower layers are irrelevant regardless of their strategies.
         if layers[0]["strategy"] == "replace":
             return layers[0]["path"].read_text(encoding="utf-8")
@@ -3288,7 +3288,7 @@ class PresetResolver:
                     if key not in top_fm and key in base_fm:
                         top_fm[key] = base_fm[key]
 
-            # Strip strategy key — it's an internal composition directive,
+            # Strip strategy key - it's an internal composition directive,
             # not meant for rendered agent command files
             top_fm.pop("strategy", None)
 
@@ -3299,7 +3299,7 @@ class PresetResolver:
                     + "\n---"
                 )
             else:
-                # Empty frontmatter — omit rather than emitting {}
+                # Empty frontmatter - omit rather than emitting {}
                 top_frontmatter_text = None
 
             if top_frontmatter_text:

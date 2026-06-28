@@ -1911,7 +1911,7 @@ class TestIntegrationSwitch:
         assert copilot_git_feature.exists(), "Git extension skill should exist for Copilot skills mode"
         assert not copilot_agent_file.exists(), "Copilot skills mode should not create extension .agent.md files"
 
-        # Verify Copilot skill frontmatter does NOT contain mode: — VS Code Copilot does not support it
+        # Verify Copilot skill frontmatter does NOT contain mode: - VS Code Copilot does not support it
         skill_content = copilot_git_feature.read_text(encoding="utf-8")
         assert "mode:" not in skill_content, (
             "Copilot skill frontmatter must not contain unsupported 'mode' field"
@@ -2123,7 +2123,7 @@ class TestIntegrationSwitch:
         finally:
             os.chdir(old_cwd)
         assert result.exit_code == 0
-        # Recovered file must NOT be overwritten — team content preserved.
+        # Recovered file must NOT be overwritten - team content preserved.
         assert shared_script.read_bytes() == custom_bytes
 
     def test_switch_skips_symlinked_parent_directory(self, tmp_path):
@@ -2429,7 +2429,7 @@ class TestIntegrationUpgrade:
         assert len(new_commands) > 0, "Commands should exist in .opencode/commands/"
 
         # Stale files removed from legacy dir (extension-installed commands
-        # like agent-context.update may still appear — only check the original
+        # like agent-context.update may still appear - only check the original
         # core command stems that should have been migrated).
         core_remaining = [
             f for f in legacy.glob("speckit.*.md")
@@ -2546,7 +2546,7 @@ class TestIntegrationUpgrade:
         Regression for the #2886 wiring: extension skill rendering is
         active-agent-scoped, so routing upgrade of a *secondary* agent through
         ``register_enabled_extensions_for_agent`` used to re-render the
-        *active* skills-mode agent's extension skills as a side effect —
+        *active* skills-mode agent's extension skills as a side effect -
         resurrecting skill files the user had deliberately deleted. The skills
         pass is now gated on the target being the active agent. (Skills parity
         for non-active agents is tracked separately in #2948.)
@@ -2724,7 +2724,7 @@ class TestSwitchClearsMetadataAfterTeardown:
         old_cwd = os.getcwd()
         try:
             os.chdir(project)
-            # Switch to copilot — should succeed and update metadata
+            # Switch to copilot - should succeed and update metadata
             result = runner.invoke(app, [
                 "integration", "switch", "copilot",
                 "--script", "sh",

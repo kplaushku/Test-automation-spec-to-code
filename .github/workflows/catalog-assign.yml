@@ -54,6 +54,6 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: context.issue.number,
-                body: marker + '\ncc @github/spec-kit-maintainers — new catalog submission for review.',
+                body: marker + '\ncc @github/spec-kit-maintainers - new catalog submission for review.',
               });
             }

@@ -30,7 +30,7 @@ framework-neutral except for declaring which frameworks are allowed.
      here.
    - **Naming conventions.** Suite, file, and test-case naming.
    - **Structure rule (non-negotiable).** Test logic, test data, and locators
-     are always separated — never inline literals (URLs, payloads, selectors,
+     are always separated - never inline literals (URLs, payloads, selectors,
      credentials) inside a test case. Data lives in a data file; structural
      locators live in a locator file.
    - **Coverage thresholds.** Requirement coverage target (share of `REQ-*`

@@ -167,7 +167,7 @@ def register(app: typer.Typer) -> None:
             specify init my-project --integration generic --integration-options="--commands-dir .myagent/commands/"  # Bring your own agent; requires --commands-dir
             specify init my-project --integration claude --preset healthcare-compliance  # With preset
         """
-        # Lazy imports to avoid circular dependency — __init__.py imports this module
+        # Lazy imports to avoid circular dependency - __init__.py imports this module
         from .. import (
             _install_shared_infra_or_exit,
             _print_cli_warning,
@@ -528,7 +528,7 @@ def register(app: typer.Typer) -> None:
 
                         tracker.error(
                             "agent-context",
-                            f"bundled extension not found — installation may be "
+                            f"bundled extension not found - installation may be "
                             f"incomplete. Run: {_ac_reinstall}",
                         )
                 except Exception as ac_err:

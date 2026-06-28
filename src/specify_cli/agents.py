@@ -51,7 +51,7 @@ class CommandRegistrar:
     and companion files (e.g. Copilot .prompt.md).
     """
 
-    # Derived from INTEGRATION_REGISTRY — single source of truth.
+    # Derived from INTEGRATION_REGISTRY - single source of truth.
     # Populated lazily via _ensure_configs() on first use.
     AGENT_CONFIGS: dict[str, dict[str, Any]] = {}
     _configs_loaded: bool = False
@@ -241,7 +241,7 @@ class CommandRegistrar:
         # string. A multiline *basic* string ("""...""") processes backslash escape
         # sequences, so a body containing a backslash (e.g. a Windows path
         # ``C:\\Users\\...`` whose ``\\U`` reads as an invalid unicode escape) would
-        # produce unparseable TOML — route those to the *literal* form ('''...'''),
+        # produce unparseable TOML - route those to the *literal* form ('''...'''),
         # which does not process escapes, or to the escaped basic string.
         if '"""' not in body and "\\" not in body:
             toml_lines.append('prompt = """')
@@ -375,8 +375,8 @@ class CommandRegistrar:
         Copies ``argument-hint`` from the parsed source command frontmatter into
         *skill_frontmatter* (mutated in place) before serialization, so that a
         folded multi-line ``description`` cannot be split into invalid YAML. Only
-        integrations that support the field — those exposing
-        ``inject_argument_hint`` (currently Claude) — receive the key, leaving
+        integrations that support the field - those exposing
+        ``inject_argument_hint`` (currently Claude) - receive the key, leaving
         :meth:`build_skill_frontmatter`'s shared shape unchanged for every other
         agent. Built-in templates carry no ``argument-hint``, so this is a no-op
         for the core path.
@@ -570,7 +570,7 @@ class CommandRegistrar:
             project_root: Path to project root
             context_note: Custom context comment for markdown output
             _resolved_dir: Pre-resolved command directory (internal use
-                only — avoids a second ``_resolve_agent_dir`` call and
+                only - avoids a second ``_resolve_agent_dir`` call and
                 duplicate deprecation warnings when invoked from
                 ``register_commands_for_all_agents``).
             link_outputs: If True, write rendered output to a source-local
@@ -866,7 +866,7 @@ class CommandRegistrar:
 
         Supports project-relative paths (e.g. ``.claude/skills/``),
         home-relative paths (e.g. ``~/.hermes/skills``), and absolute
-        paths — the ``agent_config["dir"]`` value is resolved verbatim
+        paths - the ``agent_config["dir"]`` value is resolved verbatim
         when absolute or starting with ``~/``, or joined with
         ``project_root`` when relative.
 
@@ -875,7 +875,7 @@ class CommandRegistrar:
         emits a deprecation warning advising the user to upgrade.
 
         Integrations that do not declare ``legacy_dir`` get the canonical
-        path unconditionally — no fallback, no warning.
+        path unconditionally - no fallback, no warning.
         """
         dir_str = agent_config["dir"]
         if dir_str.startswith("~"):

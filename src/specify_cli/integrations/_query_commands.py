@@ -333,7 +333,7 @@ def integration_search(
             else:
                 console.print(
                     f"  [dim]Catalog:[/dim] {cat_name} "
-                    "[yellow](discovery only — not installable)[/yellow]"
+                    "[yellow](discovery only - not installable)[/yellow]"
                 )
 
         if iid == installed_key:
@@ -490,9 +490,9 @@ def integration_catalog_list():
         if not display_name:
             display_name = f"catalog-{i + 1}"
         if env_override or project_configs is None:
-            console.print(f"  - [bold]{display_name}[/bold] — {install_status}")
+            console.print(f"  - [bold]{display_name}[/bold] - {install_status}")
         else:
-            console.print(f"  [{i}] [bold]{display_name}[/bold] — {install_status}")
+            console.print(f"  [{i}] [bold]{display_name}[/bold] - {install_status}")
         console.print(f"      {cfg.get('url', '')}")
         if cfg.get("description"):
             console.print(f"      [dim]{cfg['description']}[/dim]")

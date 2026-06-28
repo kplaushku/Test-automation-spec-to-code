@@ -123,7 +123,7 @@ class TestAliasTraversal:
 
 
 class TestCopilotPromptTraversal:
-    """`write_copilot_prompt` is a public static method — guard it directly."""
+    """`write_copilot_prompt` is a public static method - guard it directly."""
 
     @pytest.mark.parametrize("bad_name", TRAVERSAL_PAYLOADS)
     def test_rejects_traversal_names(self, tmp_path, bad_name):
@@ -151,7 +151,7 @@ def _resolve_payload(bad_file: str, outside_file: Path) -> str:
     """Map the absolute-path sentinel to the real, existing outside file.
 
     Using the temp file's own absolute path (instead of ``/etc/passwd``)
-    guarantees the file exists on every platform — so the test fails if the
+    guarantees the file exists on every platform - so the test fails if the
     absolute-path guard regresses, rather than passing because the target
     happens not to exist (e.g. on Windows runners).
     """
@@ -236,8 +236,8 @@ class TestCommandFileTraversal:
     def test_dotdot_rejected_even_when_target_is_in_bounds(self, tmp_path):
         """An in-bounds ``..`` payload is rejected by the ``..`` check itself.
 
-        ``commands/../cmd.md`` resolves to ``ext_dir/cmd.md`` — inside
-        source_dir — so the resolve()/relative_to() containment backstop would
+        ``commands/../cmd.md`` resolves to ``ext_dir/cmd.md`` - inside
+        source_dir - so the resolve()/relative_to() containment backstop would
         allow it. Creating that target file ensures the command is skipped
         because of the ``..`` rejection, not merely because the file is absent.
         """

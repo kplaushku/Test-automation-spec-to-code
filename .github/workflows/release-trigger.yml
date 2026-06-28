@@ -100,7 +100,7 @@ jobs:
               COMMITS="- Initial release"
             fi
 
-            # Create new changelog entry — insert after the marker comment
+            # Create new changelog entry - insert after the marker comment
             NEW_ENTRY=$(printf '%s\n' \
               "" \
               "## [${{ steps.version.outputs.version }}] - $DATE" \

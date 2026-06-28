@@ -712,7 +712,7 @@ class TestSpeckitManifestRecordsSkippedFiles:
     So when ``install_shared_infra`` ran with a fresh (or lost) manifest
     against an already-populated ``.specify/`` tree, every file went down the
     skip path, ``planned_copies`` and ``planned_templates`` stayed empty, and
-    ``manifest.save()`` wrote an empty ``files`` field — leaving the
+    ``manifest.save()`` wrote an empty ``files`` field - leaving the
     integration believing nothing was installed.
 
     Reproduction (without the fix) using ``install_shared_infra`` directly:
@@ -731,7 +731,7 @@ class TestSpeckitManifestRecordsSkippedFiles:
             f"speckit.manifest.json not written at {manifest_path}"
         )
         data = json.loads(manifest_path.read_text(encoding="utf-8"))
-        # ``IntegrationManifest.save`` serialises a ``files`` dict — assert
+        # ``IntegrationManifest.save`` serialises a ``files`` dict - assert
         # the schema explicitly so a regression to a different key (e.g.
         # the internal ``_files`` attribute name) fails loudly instead of
         # being masked by a silent fallback.
@@ -749,7 +749,7 @@ class TestSpeckitManifestRecordsSkippedFiles:
 
     def test_install_shared_infra_records_skipped_files(self, tmp_path):
         """With ``force=False`` and ``.specify/`` already populated, the
-        manifest must still record every file — the skip branches are not
+        manifest must still record every file - the skip branches are not
         allowed to drop files from the manifest."""
         from rich.console import Console
         from specify_cli.shared_infra import install_shared_infra
@@ -760,7 +760,7 @@ class TestSpeckitManifestRecordsSkippedFiles:
         repo_root = Path(__file__).resolve().parents[2]
         console = Console(quiet=True)
 
-        # First run — fresh project, manifest gets populated normally.
+        # First run - fresh project, manifest gets populated normally.
         install_shared_infra(
             tmp_path,
             "sh",
@@ -781,7 +781,7 @@ class TestSpeckitManifestRecordsSkippedFiles:
         )
         manifest_path.unlink()
 
-        # Second run — every file already exists, so every iteration takes
+        # Second run - every file already exists, so every iteration takes
         # the skip branch. With the fix, those files are still recorded.
         install_shared_infra(
             tmp_path,
@@ -795,7 +795,7 @@ class TestSpeckitManifestRecordsSkippedFiles:
         second_files = self._read_manifest_files(tmp_path)
         assert second_files, (
             "speckit.manifest.json files dict is empty after install with "
-            "skipped files (issue #2107) — every file went down the skip "
+            "skipped files (issue #2107) - every file went down the skip "
             "branch but none were recorded"
         )
 
@@ -810,7 +810,7 @@ class TestSpeckitManifestRecordsSkippedFiles:
         self, tmp_path
     ):
         """A non-file (directory) at a script's destination must NOT crash
-        ``install_shared_infra`` and must NOT be recorded in the manifest —
+        ``install_shared_infra`` and must NOT be recorded in the manifest -
         the path still appears in the user-visible skipped-paths warning.
         """
         from io import StringIO

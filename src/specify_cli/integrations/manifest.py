@@ -2,7 +2,7 @@
 
 Each installed integration records the files it created together with
 their SHA-256 hashes.  On uninstall only files whose hash still matches
-the recorded value are removed — modified files are left in place and
+the recorded value are removed - modified files are left in place and
 reported to the caller.
 """
 
@@ -178,12 +178,12 @@ class IntegrationManifest:
         Raises:
             ValueError: if *rel_path* resolves outside the project root, is
                 a symlink, or is not a regular file. A directory or other
-                non-file path cannot be silently recorded — its hash would
+                non-file path cannot be silently recorded - its hash would
                 be meaningless and ``check_modified``/``uninstall`` would
                 treat the entry as permanently broken.
             OSError: if the underlying filesystem call (``is_symlink``,
                 ``is_file``, or the file-read used to compute the hash)
-                fails — for example a ``PermissionError`` on the path.
+                fails - for example a ``PermissionError`` on the path.
                 Callers should be prepared to handle ``OSError`` (and its
                 subclasses such as ``PermissionError``) in addition to
                 ``ValueError``.
@@ -242,7 +242,7 @@ class IntegrationManifest:
 
         Input is normalized through the same lexical pipeline as
         ``record_existing`` / ``is_recovered``: absolute paths and paths
-        containing ``..`` segments are rejected (return ``False``) — such paths
+        containing ``..`` segments are rejected (return ``False``) - such paths
         can never be canonical manifest keys, so there is nothing to remove.
         """
         rel = Path(rel_path)
@@ -269,7 +269,7 @@ class IntegrationManifest:
 
         These entries had their hashes observed (not produced) during install
         because the file already existed on disk and the install skipped it.
-        Their on-disk bytes may be user customizations — callers that would
+        Their on-disk bytes may be user customizations - callers that would
         overwrite based on hash equality (e.g. ``refresh_managed``) MUST check
         ``is_recovered`` first.
         """
@@ -281,7 +281,7 @@ class IntegrationManifest:
         Input is normalized through the same pipeline as ``record_existing``:
         absolute paths, paths escaping the project root, AND paths containing
         ``'..'`` segments are rejected (returned as ``False``). This mirrors
-        ``record_existing``'s canonicalization guard — such paths can never
+        ``record_existing``'s canonicalization guard - such paths can never
         appear as stored keys, so the answer is always ``False``.
         """
         rel = Path(rel_path)
@@ -328,7 +328,7 @@ class IntegrationManifest:
             force:        If ``True``, remove files even if modified.
 
         Returns:
-            ``(removed, skipped)`` — absolute paths.
+            ``(removed, skipped)`` - absolute paths.
         """
         root = (project_root or self.project_root).resolve()
         removed: list[Path] = []
@@ -347,7 +347,7 @@ class IntegrationManifest:
                 continue
             if not path.exists() and not path.is_symlink():
                 continue
-            # Skip directories — manifest only tracks files
+            # Skip directories - manifest only tracks files
             if not path.is_file() and not path.is_symlink():
                 skipped.append(path)
                 continue
@@ -472,7 +472,7 @@ class IntegrationManifest:
             )
         inst._recovered_files = set(recovered)
         # Drop any recovered_files entries that don't correspond to tracked
-        # files — defensive against externally-edited or partially-corrupted
+        # files - defensive against externally-edited or partially-corrupted
         # manifests. Inconsistent state self-corrects on next save().
         inst._recovered_files &= set(inst._files.keys())
 

@@ -1,4 +1,4 @@
-"""Fan-out step — dispatch a step template over a collection."""
+"""Fan-out step - dispatch a step template over a collection."""
 
 from __future__ import annotations
 

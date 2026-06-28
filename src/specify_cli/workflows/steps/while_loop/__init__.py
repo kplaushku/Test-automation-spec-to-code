@@ -1,4 +1,4 @@
-"""While loop step — repeat while condition is truthy."""
+"""While loop step - repeat while condition is truthy."""
 
 from __future__ import annotations
 

@@ -1,4 +1,4 @@
-"""Init step — bootstrap a Spec Kit project from within a workflow.
+"""Init step - bootstrap a Spec Kit project from within a workflow.
 
 Runs the same scaffolding as ``specify init`` so a workflow can create
 (or merge into) a project before driving the rest of the spec-driven
@@ -137,7 +137,7 @@ class InitStep(StepBase):
                         ):
                             has_engine_dirs = True
                         else:
-                            # Non-engine content found — fail fast.
+                            # Non-engine content found - fail fast.
                             has_non_engine_content = True
                             break
                     else:
@@ -188,9 +188,9 @@ class InitStep(StepBase):
                     error=error_message,
                 )
             else:
-                # Only engine-owned dirs exist — implicitly force so specify
+                # Only engine-owned dirs exist - implicitly force so specify
                 # init doesn't prompt about the non-empty directory.
-                # (Skip if the directory is completely empty — no force needed.)
+                # (Skip if the directory is completely empty - no force needed.)
                 if has_engine_dirs:
                     force = True
 

@@ -1,6 +1,6 @@
 # Extensions
 
-Extensions add new capabilities to Specto — domain-specific commands, external tool integrations, quality gates, and more. They introduce new commands and templates that go beyond the built-in Spec-Driven Development workflow.
+Extensions add new capabilities to Specto - domain-specific commands, external tool integrations, quality gates, and more. They introduce new commands and templates that go beyond the built-in Spec-Driven Development workflow.
 
 ## Search Available Extensions
 
@@ -131,10 +131,10 @@ Removes a catalog from the project configuration.
 
 Catalogs are resolved in this order (first match wins):
 
-1. **Environment variable** — `SPECKIT_CATALOG_URL` overrides all catalogs
-2. **Project config** — `.specify/extension-catalogs.yml`
-3. **User config** — `~/.specify/extension-catalogs.yml`
-4. **Built-in defaults** — official catalog + community catalog
+1. **Environment variable** - `SPECKIT_CATALOG_URL` overrides all catalogs
+2. **Project config** - `.specify/extension-catalogs.yml`
+3. **User config** - `~/.specify/extension-catalogs.yml`
+4. **Built-in defaults** - official catalog + community catalog
 
 Example `.specify/extension-catalogs.yml`:
 
@@ -180,7 +180,7 @@ Check the spelling of the extension name. The extension may not be published yet
 
 ### Why doesn't the extension command appear in my AI coding agent?
 
-Verify the extension is installed and enabled with `specify extension list`. If it shows as installed, restart your AI coding agent — it may need to reload for it to take effect.
+Verify the extension is installed and enabled with `specify extension list`. If it shows as installed, restart your AI coding agent - it may need to reload for it to take effect.
 
 ### How do I set up extension configuration?
 

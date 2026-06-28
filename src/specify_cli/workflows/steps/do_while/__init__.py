@@ -1,4 +1,4 @@
-"""Do-While loop step — execute at least once, then repeat while condition is truthy."""
+"""Do-While loop step - execute at least once, then repeat while condition is truthy."""
 
 from __future__ import annotations
 

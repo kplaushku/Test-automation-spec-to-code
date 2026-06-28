@@ -1,4 +1,4 @@
-"""Installed-bundle records — provenance for precise list/remove/update.
+"""Installed-bundle records - provenance for precise list/remove/update.
 
 Records are stored as JSON at ``.specify/bundle-records.json``. Each record
 captures exactly which components a bundle contributed so removal touches only
@@ -97,7 +97,7 @@ def _check_schema_version(value: Any, *, path: Path, required: bool) -> None:
     if value is None:
         if required:
             raise BundlerError(
-                f"Corrupt records file: {path} — missing 'schema_version'. "
+                f"Corrupt records file: {path} - missing 'schema_version'. "
                 f"Expected version {RECORDS_SCHEMA_VERSION}."
             )
         return
@@ -124,7 +124,7 @@ def load_records(project_root: Path) -> list[InstalledBundleRecord]:
     bundles = data.get("bundles") or []
     if not isinstance(bundles, list):
         raise BundlerError(
-            f"Corrupt records file: {path} — 'bundles' must be a list."
+            f"Corrupt records file: {path} - 'bundles' must be a list."
         )
     return [InstalledBundleRecord.from_dict(item) for item in bundles]
 

@@ -16,7 +16,7 @@ from unittest.mock import MagicMock, patch
 
 
 # ---------------------------------------------------------------------------
-# _console.py — Live in the select_with_arrows helper
+# _console.py - Live in the select_with_arrows helper
 # ---------------------------------------------------------------------------
 
 
@@ -61,7 +61,7 @@ class TestSelectWithArrowsLiveTransient:
 
 
 # ---------------------------------------------------------------------------
-# init.py — verify source contains the platform guard (regression check)
+# init.py - verify source contains the platform guard (regression check)
 # ---------------------------------------------------------------------------
 
 

@@ -1,6 +1,6 @@
 # Preset System Architecture
 
-This document describes the internal architecture of the preset system — how template resolution, command registration, and catalog management work under the hood.
+This document describes the internal architecture of the preset system - how template resolution, command registration, and catalog management work under the hood.
 
 For usage instructions, see [README.md](README.md).
 
@@ -48,11 +48,11 @@ Templates, commands, and scripts support a `strategy` field that controls how a 
 | Strategy | Description | Templates | Commands | Scripts |
 |----------|-------------|-----------|----------|---------|
 | `replace` (default) | Fully replaces lower-priority content | ✓ | ✓ | ✓ |
-| `prepend` | Places content before lower-priority content (separated by a blank line) | ✓ | ✓ | — |
-| `append` | Places content after lower-priority content (separated by a blank line) | ✓ | ✓ | — |
+| `prepend` | Places content before lower-priority content (separated by a blank line) | ✓ | ✓ | - |
+| `append` | Places content after lower-priority content (separated by a blank line) | ✓ | ✓ | - |
 | `wrap` | Content contains `{CORE_TEMPLATE}` (templates/commands) or `$CORE_SCRIPT` (scripts) placeholder replaced with lower-priority content | ✓ | ✓ | ✓ |
 
-Composition is recursive — multiple composing presets chain. The `PresetResolver.resolve_content()` method walks the full priority stack bottom-up and applies each layer's strategy.
+Composition is recursive - multiple composing presets chain. The `PresetResolver.resolve_content()` method walks the full priority stack bottom-up and applies each layer's strategy.
 
 Content resolution functions for composition:
 - **Python**: `PresetResolver.resolve_content()` in `src/specify_cli/presets.py` (templates, commands, and scripts)
@@ -89,7 +89,7 @@ flowchart TD
 
 ### Extension safety check
 
-Command names follow the pattern `speckit.<ext-id>.<cmd-name>`. When a command has 3+ dot segments, the system extracts the extension ID and checks if `.specify/extensions/<ext-id>/` exists. If the extension isn't installed, the command is skipped — preventing orphan files referencing non-existent extensions.
+Command names follow the pattern `speckit.<ext-id>.<cmd-name>`. When a command has 3+ dot segments, the system extracts the extension ID and checks if `.specify/extensions/<ext-id>/` exists. If the extension isn't installed, the command is skipped - preventing orphan files referencing non-existent extensions.
 
 Core commands (e.g. `speckit.specify`, with only 2 segments) are always registered.
 
@@ -166,7 +166,7 @@ presets/
 
 ```
 src/specify_cli/
-├── agents.py       # CommandRegistrar — shared infrastructure for writing
+├── agents.py       # CommandRegistrar - shared infrastructure for writing
 │                    #   command files to agent directories
 ├── presets.py       # PresetManifest, PresetRegistry, PresetManager,
 │                    #   PresetCatalog, PresetCatalogEntry, PresetResolver

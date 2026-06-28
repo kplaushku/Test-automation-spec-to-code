@@ -6,7 +6,7 @@ Commands are deprecated; ``--skills`` defaults to ``True``.
 The IDE/skills flow is the primary path and works without the
 ``cursor-agent`` CLI being installed (``requires_cli=False``).  Workflow
 dispatch via ``cursor-agent -p --trust --approve-mcps --force <prompt>``
-is offered as an opt-in capability — the presence of ``build_exec_args()``
+is offered as an opt-in capability - the presence of ``build_exec_args()``
 is what indicates dispatch support, mirroring ``CopilotIntegration``.
 """
 
@@ -57,13 +57,13 @@ class CursorAgentIntegration(SkillsIntegration):
 
         Mandatory headless flags:
 
-        * ``-p`` — print/headless mode (access to all tools)
-        * ``--trust`` — bypass Workspace Trust prompt (CLI exits non-zero
+        * ``-p`` - print/headless mode (access to all tools)
+        * ``--trust`` - bypass Workspace Trust prompt (CLI exits non-zero
           otherwise)
-        * ``--approve-mcps`` — auto-approve MCP server loading (otherwise
+        * ``--approve-mcps`` - auto-approve MCP server loading (otherwise
           MCP servers stay ``not loaded (needs approval)`` and tool calls
           to them are silently dropped)
-        * ``--force`` — auto-approve tool invocations (shell/write/MCP),
+        * ``--force`` - auto-approve tool invocations (shell/write/MCP),
           matching the implicit "trusted environment" semantics that other
           integrations (``claude -p``, ``codex --exec``) get by default
 

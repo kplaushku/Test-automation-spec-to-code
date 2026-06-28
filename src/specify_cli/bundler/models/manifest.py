@@ -1,4 +1,4 @@
-"""Bundle manifest model (``bundle.yml``) — parsing and structural normalization.
+"""Bundle manifest model (``bundle.yml``) - parsing and structural normalization.
 
 Mirrors ``contracts/bundle-manifest.schema.md``. Structural validation (shape,
 required fields, enum/semver checks) lives here; *reference* resolution against a

@@ -1,4 +1,4 @@
-# Adapter: Robot Framework — API layer
+# Adapter: Robot Framework - API layer
 
 Rendering rules that turn a neutral test case (from `tasks.md`) into Robot
 Framework tests for the **API / contract** level, using `RequestsLibrary`.
@@ -21,9 +21,9 @@ tests/
     keywords.robot       # shared keywords (test logic helpers)
     <group>_keywords.robot
   data/
-    <group>.yaml         # named test data sets — no inline literals
+    <group>.yaml         # named test data sets - no inline literals
   config/
-    environment.yaml     # base URL, headers, auth — no inline literals
+    environment.yaml     # base URL, headers, auth - no inline literals
 ```
 
 ## Requirement marker (neutral id → native)
@@ -46,7 +46,7 @@ This is what the traceability command greps for. One test may carry several
 
 ## Rendering a neutral case
 
-For a task `T001 [REQ-001] orders — create order returns 201`:
+For a task `T001 [REQ-001] orders - create order returns 201`:
 
 ```robotframework
 *** Settings ***
@@ -86,4 +86,4 @@ robot tests/
 `pyyaml` is required because data/config are loaded from `*.yaml` variable
 files. If the target uses self-signed or otherwise unverified TLS, pass
 `verify=${False}` (or a CA bundle path) to `Create Session` explicitly rather
-than silencing the warning — `RequestsLibrary` does not verify by default.
+than silencing the warning - `RequestsLibrary` does not verify by default.

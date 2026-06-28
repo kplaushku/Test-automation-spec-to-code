@@ -1,4 +1,4 @@
-"""Command step — dispatches a Spec Kit command to an integration CLI."""
+"""Command step - dispatches a Spec Kit command to an integration CLI."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ from specify_cli.workflows.expressions import evaluate_expression
 
 
 class CommandStep(StepBase):
-    """Default step type — invokes a Spec Kit command via the integration CLI.
+    """Default step type - invokes a Spec Kit command via the integration CLI.
 
     The command files (skills, markdown, TOML) are already installed in
     the integration's directory on disk.  This step tells the CLI to

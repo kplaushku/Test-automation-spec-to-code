@@ -9,9 +9,9 @@
 | What to Upgrade | Command | When to Use |
 |----------------|---------|-------------|
 | **CLI Tool (recommended)** | `specify self upgrade` | Latest stable release, in place. Auto-detects whether you installed via `uv tool` or `pipx`. |
-| **CLI Tool — pin a version** | `specify self upgrade --tag vX.Y.Z[suffix]` | Upgrade to a specific release tag instead of the latest stable. Suffixes are limited to dev, alpha/beta/rc, and/or build metadata forms. |
-| **CLI Tool — manual fallback** | `uv tool install specify-cli --force --from git+https://github.com/github/spec-kit.git@vX.Y.Z` | When `specify self upgrade` isn't available (older installs) or when you want explicit control. |
-| **CLI Tool — manual fallback (pipx)** | `pipx install --force git+https://github.com/github/spec-kit.git@vX.Y.Z` | Same as above, for pipx installs. |
+| **CLI Tool - pin a version** | `specify self upgrade --tag vX.Y.Z[suffix]` | Upgrade to a specific release tag instead of the latest stable. Suffixes are limited to dev, alpha/beta/rc, and/or build metadata forms. |
+| **CLI Tool - manual fallback** | `uv tool install specify-cli --force --from git+https://github.com/github/spec-kit.git@vX.Y.Z` | When `specify self upgrade` isn't available (older installs) or when you want explicit control. |
+| **CLI Tool - manual fallback (pipx)** | `pipx install --force git+https://github.com/github/spec-kit.git@vX.Y.Z` | Same as above, for pipx installs. |
 | **Project Files** | `specify init --here --force --integration <your-agent>` | Update slash commands, templates, and scripts in your project |
 | **Both** | Run CLI upgrade, then project update | Recommended for major version updates |
 
@@ -26,7 +26,7 @@ The CLI tool (`specify`) is separate from your project files. Upgrade it to get 
 The CLI ships with two self-management commands that handle the common case automatically:
 
 ```bash
-# Check whether a newer release is available (read-only — does not modify anything)
+# Check whether a newer release is available (read-only - does not modify anything)
 specify self check
 
 # Preview what would run, without actually upgrading
@@ -43,7 +43,7 @@ Bare `specify self upgrade` executes immediately, matching the no-prompt behavio
 
 Pinned tags must start with `vMAJOR.MINOR.PATCH`. Optional suffixes are limited to dev, alpha/beta/rc, and/or build metadata forms such as `v1.0.0-rc1`, `v0.8.0.dev0`, `v0.8.0+build.42`, or the combination `v1.0.0-rc1+build.42`; branch names, hash refs, `latest`, and bare versions without `v` are rejected.
 
-Set `SPECIFY_UPGRADE_TIMEOUT_SECS` to cap how long the installer subprocess may run (default: no timeout — interrupt with `Ctrl+C` if needed). If that internal timeout fires, `specify self upgrade` exits 124 and reports that it timed out while waiting for the installer subprocess, including the configured timeout and manual retry command. A real installer exit code 124 is propagated with `Upgrade failed. Installer exit code: 124.`, so scripts should treat exit 124 as ambiguous and inspect the message when they need to distinguish the two cases.
+Set `SPECIFY_UPGRADE_TIMEOUT_SECS` to cap how long the installer subprocess may run (default: no timeout - interrupt with `Ctrl+C` if needed). If that internal timeout fires, `specify self upgrade` exits 124 and reports that it timed out while waiting for the installer subprocess, including the configured timeout and manual retry command. A real installer exit code 124 is propagated with `Upgrade failed. Installer exit code: 124.`, so scripts should treat exit 124 as ambiguous and inspect the message when they need to distinguish the two cases.
 
 If your installed CLI is older than the release that introduced `specify self upgrade`, use the manual equivalents below. These commands are also useful when you want explicit control over the installer command.
 
@@ -96,13 +96,13 @@ When Specto releases new features (like new slash commands or updated templates)
 Running `specify init --here --force` will update:
 
 - ✅ **Slash command files** (`.claude/commands/`, `.github/prompts/`, etc.)
-- ✅ **Script files** (`.specify/scripts/`) — **only with `--force`**; without it, only missing files are added
-- ✅ **Template files** (`.specify/templates/`) — **only with `--force`**; without it, only missing files are added
+- ✅ **Script files** (`.specify/scripts/`) - **only with `--force`**; without it, only missing files are added
+- ✅ **Template files** (`.specify/templates/`) - **only with `--force`**; without it, only missing files are added
 - ✅ **Shared memory files** (`.specify/memory/`) - **⚠️ See warnings below**
 
 ### What stays safe?
 
-These files are **never touched** by the upgrade—the template packages don't even contain them:
+These files are **never touched** by the upgrade-the template packages don't even contain them:
 
 - ✅ **Your specifications** (`specs/001-my-feature/spec.md`, etc.) - **CONFIRMED SAFE**
 - ✅ **Your implementation plans** (`specs/001-my-feature/plan.md`, `tasks.md`, etc.) - **CONFIRMED SAFE**
@@ -139,7 +139,7 @@ Proceed? [y/N]
 
 With `--force`, it skips the confirmation and proceeds immediately. It also **overwrites shared infrastructure files** (`.specify/scripts/` and `.specify/templates/`) with the latest versions from the installed Specto release.
 
-Without `--force`, shared infrastructure files that already exist are skipped — the CLI will print a warning listing the skipped files so you know which ones were not updated.
+Without `--force`, shared infrastructure files that already exist are skipped - the CLI will print a warning listing the skipped files so you know which ones were not updated.
 
 **Important: Your `specs/` directory is always safe.** The `--force` flag only affects template files (commands, scripts, templates, memory). Your feature specifications, plans, and tasks in `specs/` are never included in upgrade packages and cannot be overwritten.
 
@@ -185,7 +185,7 @@ cp -r .specify/scripts .specify/scripts-backup
 
 ### 3. Duplicate slash commands (IDE-based agents)
 
-Some IDE-based agents (like Kilo Code, Windsurf) may show **duplicate slash commands** after upgrading—both old and new versions appear.
+Some IDE-based agents (like Kilo Code, Windsurf) may show **duplicate slash commands** after upgrading-both old and new versions appear.
 
 **Solution:** Manually delete the old command files from your agent's folder.
 
@@ -386,7 +386,7 @@ Only Specto infrastructure files:
 If a command behaves like an older Specto version, first ask the CLI itself:
 
 ```bash
-# Read-only — prints "Up to date: X.Y.Z" or "Update available: X.Y.Z → vY.Z.W"
+# Read-only - prints "Up to date: X.Y.Z" or "Update available: X.Y.Z → vY.Z.W"
 specify self check
 
 # Preview the install method, current version, and target tag the upgrade would use
@@ -428,7 +428,7 @@ The `specify` CLI tool is used for:
 - **Upgrades:** `specify init --here --force` to update templates and commands
 - **Diagnostics:** `specify check` to verify tool installation
 
-Once you've run `specify init`, the slash commands (like `/speckit.specify`, `/speckit.plan`, etc.) are **permanently installed** in your project's agent folder (`.claude/`, `.github/prompts/`, `.pi/prompts/`, `.omp/commands/`, etc.). Your AI coding agent reads these command files directly—no need to run `specify` again.
+Once you've run `specify init`, the slash commands (like `/speckit.specify`, `/speckit.plan`, etc.) are **permanently installed** in your project's agent folder (`.claude/`, `.github/prompts/`, `.pi/prompts/`, `.omp/commands/`, etc.). Your AI coding agent reads these command files directly-no need to run `specify` again.
 
 **If your agent isn't recognizing slash commands:**
 

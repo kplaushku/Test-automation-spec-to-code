@@ -337,8 +337,8 @@ class TestExpressions:
 
     def test_filter_from_json_rejects_malformed_forms(self):
         # `from_json` is strict: no arguments and no trailing tokens. Every
-        # mis-wired form — parenthesized, accidental arg, or trailing
-        # garbage — must raise rather than silently fall through to the
+        # mis-wired form - parenthesized, accidental arg, or trailing
+        # garbage - must raise rather than silently fall through to the
         # unknown-filter path and return the unparsed value.
         import pytest
         from specify_cli.workflows.expressions import evaluate_expression
@@ -491,7 +491,7 @@ class TestExpressions:
     def test_context_run_id_defaults_to_empty_when_unset(self):
         """``{{ context.run_id }}`` resolves to ``""`` when no run is
         active (dry-run, validation, ad-hoc evaluator usage) rather
-        than raising — workflows referencing the variable never error
+        than raising - workflows referencing the variable never error
         outside a run context.
         """
         from specify_cli.workflows.expressions import evaluate_expression
@@ -502,7 +502,7 @@ class TestExpressions:
         assert evaluate_expression("{{ context.run_id }}", ctx) == ""
 
     def test_context_run_id_string_interpolation(self):
-        """Run id interpolates inside a larger template string — the
+        """Run id interpolates inside a larger template string - the
         common pattern for stamping shell commands and artifact paths
         with the run id.
         """
@@ -1524,7 +1524,7 @@ class TestGateStep:
 
         # The displayed path header (and the read-error notice it produces)
         # must not carry escapes even when the path string itself contains
-        # control characters — ESC, LF, and C1 CSI (\x9b); the file is still
+        # control characters - ESC, LF, and C1 CSI (\x9b); the file is still
         # opened with the raw value.
         out = GateStep._compose_prompt("Review.", "ev\x1bil\x9b[2J\npath.md")
         assert "\x1b" not in out and "\x9b" not in out
@@ -2188,7 +2188,7 @@ steps:
 
     def test_requires_permissions_is_rejected_as_not_enforced(self):
         """A `requires.permissions` block looks like a runtime capability gate
-        but no such gate exists — shell steps always run with the user's
+        but no such gate exists - shell steps always run with the user's
         privileges. Reject it explicitly so authors are not misled into
         believing the declaration sandboxes execution.
         """
@@ -2257,7 +2257,7 @@ steps:
 
     def test_requires_omitted_is_valid(self):
         """A workflow with no ``requires`` block at all defaults to ``{}`` and
-        must validate cleanly — only a present-but-non-mapping value is an
+        must validate cleanly - only a present-but-non-mapping value is an
         error (guards against over-correcting YAML-null rejection into also
         flagging the omitted case).
         """
@@ -2525,7 +2525,7 @@ inputs:
 
     def test_integration_explicit_auto_resolves_like_default(self, project_dir):
         """Passing ``integration=auto`` explicitly must resolve the sentinel,
-        not pass it through as a literal — the workflow prompt advertises
+        not pass it through as a literal - the workflow prompt advertises
         ``auto`` as a valid value, so the dispatch path must never see it.
         """
         from specify_cli.workflows.engine import WorkflowEngine, WorkflowDefinition
@@ -2553,7 +2553,7 @@ inputs:
         assert resolved["integration"] == "opencode"
 
     def test_integration_auto_ignores_malformed_integration_json(self, project_dir):
-        """A malformed integration.json must not crash — fall back to the literal default."""
+        """A malformed integration.json must not crash - fall back to the literal default."""
         from specify_cli.workflows.engine import WorkflowEngine, WorkflowDefinition
 
         specify_dir = project_dir / ".specify"
@@ -2576,7 +2576,7 @@ inputs:
         assert resolved["integration"] == "auto"
 
     def test_integration_auto_ignores_non_utf8_integration_json(self, project_dir):
-        """A non-UTF8 integration.json must not crash — fall back to the literal default."""
+        """A non-UTF8 integration.json must not crash - fall back to the literal default."""
         from specify_cli.workflows.engine import WorkflowEngine, WorkflowDefinition
 
         specify_dir = project_dir / ".specify"
@@ -2785,7 +2785,7 @@ steps:
         assert any("invalid default" in e for e in errors), errors
 
     def test_validate_workflow_rejects_bool_default_for_number_type(self):
-        """``type: number`` paired with a bool default must fail — bool is a
+        """``type: number`` paired with a bool default must fail - bool is a
         subclass of int so ``float(True)`` would otherwise silently coerce
         ``true`` to ``1``.
         """
@@ -2811,7 +2811,7 @@ steps:
         assert any("invalid default" in e for e in errors), errors
 
     def test_validate_workflow_rejects_non_string_default_for_string_type(self):
-        """``type: string`` must require an actual string — a numeric YAML
+        """``type: string`` must require an actual string - a numeric YAML
         default like ``5`` would otherwise slip through unvalidated.
         """
         from specify_cli.workflows.engine import WorkflowDefinition, validate_workflow
@@ -2845,7 +2845,7 @@ steps:
         from specify_cli.workflows.base import RunStatus
 
         # Shell step echoes a counter via a file.
-        # Condition: exit_code != 0 means "keep looping" — but a non-zero
+        # Condition: exit_code != 0 means "keep looping" - but a non-zero
         # exit code would mark the step FAILED and abort the run, so we
         # use stdout-based comparison instead.
         #
@@ -2941,7 +2941,7 @@ steps:
 
     def test_while_loop_runs_to_max_when_condition_stays_true(self, project_dir):
         """While loop must still run to max_iterations when the condition
-        never becomes false — copy-back must not break this path.
+        never becomes false - copy-back must not break this path.
 
         See https://github.com/github/spec-kit/issues/2592
         """
@@ -3062,7 +3062,7 @@ steps:
 
         # Step B uses {{ steps.step-a.output.stdout }} expression
         # substitution in its run command so the engine resolves the
-        # aliased unprefixed key — this is the real inter-step test.
+        # aliased unprefixed key - this is the real inter-step test.
         yaml_str = f"""
 schema_version: "1.0"
 workflow:
@@ -3102,8 +3102,8 @@ steps:
 #
 # End-to-end coverage for the `{{ context.run_id }}` template
 # variable introduced in issue #2590. Locks resolution inside the
-# three step types the acceptance criteria called out — shell `run:`,
-# command `input.args:`, and switch `expression:` — plus the
+# three step types the acceptance criteria called out - shell `run:`,
+# command `input.args:`, and switch `expression:` - plus the
 # "workflow doesn't reference it" backward-compat path.
 
 
@@ -3208,7 +3208,7 @@ steps:
         assert state.step_results["route"]["output"]["matched_case"] == "target-run"
         assert "matched-branch" in state.step_results
         assert "default-branch" not in state.step_results
-        # The nested branch sees the same run id — propagation through
+        # The nested branch sees the same run id - propagation through
         # recursive `_execute_steps` is intact.
         nested_stdout = state.step_results["matched-branch"]["output"]["stdout"]
         assert nested_stdout.strip() == "nested-run-id=target-run"
@@ -3291,7 +3291,7 @@ steps:
 # and continues to the next sibling step instead of halting the run.
 # Gate aborts (`output.aborted`) still halt regardless of the flag.
 # Unhandled exceptions raised out of `step_impl.execute()` are out of
-# scope for this flag — they propagate to `WorkflowEngine.execute()`
+# scope for this flag - they propagate to `WorkflowEngine.execute()`
 # and abort the run.
 
 
@@ -3302,7 +3302,7 @@ class TestContinueOnError:
         """Default behaviour (no `continue_on_error`): a failing step
         halts the workflow run with `status == StepStatus.FAILED`.
 
-        Locks the byte-equivalent default — workflows that do not
+        Locks the byte-equivalent default - workflows that do not
         declare the flag must behave exactly as before this feature.
         """
         from specify_cli.workflows.engine import WorkflowDefinition, WorkflowEngine
@@ -3367,7 +3367,7 @@ steps:
 
     def test_declared_but_step_succeeded_is_noop(self, project_dir):
         """`continue_on_error: true` on a step that succeeds is a
-        no-op — the flag only changes behaviour on StepStatus.FAILED status.
+        no-op - the flag only changes behaviour on StepStatus.FAILED status.
         """
         from specify_cli.workflows.engine import WorkflowDefinition, WorkflowEngine
         from specify_cli.workflows.base import RunStatus
@@ -3536,7 +3536,7 @@ steps:
         """Defense-in-depth: even if a caller bypasses
         `validate_workflow()` and feeds the engine a definition with
         `continue_on_error: "true"` (a string), the engine must NOT
-        honour the flag — only a literal boolean enables the
+        honour the flag - only a literal boolean enables the
         behaviour. `WorkflowEngine.execute()` does not auto-validate
         (the `WorkflowEngine.load_workflow` docstring explicitly
         notes the definition is "not yet validated; call
@@ -3547,7 +3547,7 @@ steps:
         from specify_cli.workflows.engine import WorkflowDefinition, WorkflowEngine
         from specify_cli.workflows.base import RunStatus
 
-        # Bypass `validate_workflow()` — execute() is what would
+        # Bypass `validate_workflow()` - execute() is what would
         # be called by a caller that skipped validation.
         definition = WorkflowDefinition.from_string("""
 schema_version: "1.0"
@@ -3613,11 +3613,11 @@ class TestRunState:
     @pytest.mark.parametrize(
         "malicious_run_id",
         [
-            # Parent-directory traversal — the classic path-escape vector.
+            # Parent-directory traversal - the classic path-escape vector.
             "../escape",
             "..",
             "../../etc/passwd",
-            # Embedded path separators — both POSIX and Windows.
+            # Embedded path separators - both POSIX and Windows.
             "foo/bar",
             "foo\\bar",
             # Leading non-alphanumeric characters that the existing
@@ -3625,10 +3625,10 @@ class TestRunState:
             # or hidden files in shell completions / error messages).
             ".hidden",
             "-flag",
-            # NUL byte — some filesystems treat the prefix as a valid
+            # NUL byte - some filesystems treat the prefix as a valid
             # path and silently truncate at the NUL.
             "foo\x00bar",
-            # Empty string — degenerate case, matches no file but the
+            # Empty string - degenerate case, matches no file but the
             # validator should reject it before any I/O.
             "",
         ],
@@ -3643,7 +3643,7 @@ class TestRunState:
         probe arbitrary paths the process can read (a file-existence
         oracle) and ``json.load`` would happily parse attacker-planted
         JSON from outside ``.specify/workflows/runs/``. The check must
-        fire *before* the path is built — ``__init__``'s identical
+        fire *before* the path is built - ``__init__``'s identical
         regex on ``state_data["run_id"]`` fires too late.
         """
         from specify_cli.workflows.engine import RunState
@@ -3675,7 +3675,7 @@ class TestRunState:
         "bad_run_id",
         [
             # One vector per category from ``test_load_rejects_path_traversal``
-            # — enough to prove both entry points agree without re-running
+            # - enough to prove both entry points agree without re-running
             # the full attack matrix here.
             "../escape",    # parent-directory traversal
             "foo/bar",      # embedded path separator
@@ -3686,12 +3686,12 @@ class TestRunState:
     def test_init_and_load_share_validation(self, project_dir, bad_run_id):
         """``__init__`` *and* ``load`` reject the same malformed IDs.
 
-        The two entry points must stay in sync — drift would let an ID
+        The two entry points must stay in sync - drift would let an ID
         slip in via one path that the other would reject, producing
         confusing crashes mid-workflow. The previous version of this
         test only exercised ``__init__`` and ``_validate_run_id`` (the
-        shared helper), so a regression in ``load`` — e.g. someone
-        deleting the ``cls._validate_run_id(run_id)`` call there — could
+        shared helper), so a regression in ``load`` - e.g. someone
+        deleting the ``cls._validate_run_id(run_id)`` call there - could
         slip through despite ``__init__`` and the helper staying
         aligned. We now hit ``load`` directly with the same vector so
         any drift between the two call sites is caught by this test.
@@ -5901,7 +5901,7 @@ steps:
             current_step_id="review",
             step_results={
                 "review": {
-                    # no "type" key — pre-dates the field being persisted
+                    # no "type" key - pre-dates the field being persisted
                     "output": {
                         "message": "Approve?",
                         "options": ["approve", "reject"],

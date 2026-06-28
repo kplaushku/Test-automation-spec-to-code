@@ -454,7 +454,7 @@ The token is attached automatically to requests targeting GitHub domains. Non-Gi
 
 ## Extension Catalogs
 
-Specto uses a **catalog stack** — an ordered list of catalogs searched simultaneously. By default, two catalogs are active:
+Specto uses a **catalog stack** - an ordered list of catalogs searched simultaneously. By default, two catalogs are active:
 
 | Priority | Catalog | Install Allowed | Purpose |
 |----------|---------|-----------------|---------|

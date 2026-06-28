@@ -1,4 +1,4 @@
-"""Workflow catalog — discovery, install, and management of workflows and step types.
+"""Workflow catalog - discovery, install, and management of workflows and step types.
 
 Mirrors the existing extension/preset catalog pattern with:
 - Multi-catalog stack (env var → project → user → built-in)
@@ -78,7 +78,7 @@ class WorkflowRegistry:
                 with open(self.registry_path, encoding="utf-8") as f:
                     return json.load(f)
             except (json.JSONDecodeError, ValueError):
-                # Corrupted registry file — reset to default
+                # Corrupted registry file - reset to default
                 return {"schema_version": self.SCHEMA_VERSION, "workflows": {}}
         return {"schema_version": self.SCHEMA_VERSION, "workflows": {}}
 
@@ -191,7 +191,7 @@ class WorkflowCatalog:
         catalogs_data = data.get("catalogs", [])
         if not catalogs_data:
             # Empty catalogs list (e.g. after removing last entry)
-            # is valid — fall back to built-in defaults.
+            # is valid - fall back to built-in defaults.
             return None
         if not isinstance(catalogs_data, list):
             raise WorkflowValidationError(
@@ -327,7 +327,7 @@ class WorkflowCatalog:
                 # Ignore invalid/unreadable cache and fall back to fetching from source.
                 pass
 
-        # Fetch from URL — validate scheme before opening and after redirects
+        # Fetch from URL - validate scheme before opening and after redirects
         from urllib.parse import urlparse
         from specify_cli.authentication.http import open_url as _open_url
 

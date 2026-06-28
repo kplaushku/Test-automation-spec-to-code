@@ -1,7 +1,7 @@
 """Unit tests for the primitive-dispatch bridge (T044).
 
 Covers routing, offline gating, and the network-aware ``DefaultPrimitiveInstaller``
-seam — without touching real catalogs or the network (Constitution Principle II,
+seam - without touching real catalogs or the network (Constitution Principle II,
 offline-first).
 """
 from __future__ import annotations

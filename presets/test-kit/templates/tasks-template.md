@@ -6,11 +6,11 @@
 
 ## Tasks
 
-- [ ] T001 [REQ-001] [group-name] — [neutral test case name]
+- [ ] T001 [REQ-001] [group-name] - [neutral test case name]
       Precondition: ... · Action: ... · Expected: ...
-- [ ] T002 [REQ-001] [group-name] [P] — [error/edge case name]
+- [ ] T002 [REQ-001] [group-name] [P] - [error/edge case name]
       Precondition: ... · Action: ... · Expected: ...
-- [ ] T003 [REQ-002] [group-name] — [neutral test case name]
+- [ ] T003 [REQ-002] [group-name] - [neutral test case name]
       Precondition: ... · Action: ... · Expected: ... · needs T001
 
 ## Coverage Check

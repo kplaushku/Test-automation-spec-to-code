@@ -172,14 +172,14 @@ class TestPresetManifest:
         (e.g. cp1252/GBK), which raises UnicodeDecodeError on UTF-8 bytes
         outside the ASCII range. The loader must open with encoding='utf-8'.
         """
-        valid_pack_data["preset"]["description"] = "中文测试 — émojis 🚀"
+        valid_pack_data["preset"]["description"] = "中文测试 - émojis 🚀"
         manifest_path = temp_dir / "preset.yml"
         manifest_path.write_bytes(
             yaml.safe_dump(valid_pack_data, allow_unicode=True).encode("utf-8")
         )
 
         manifest = PresetManifest(manifest_path)
-        assert manifest.description == "中文测试 — émojis 🚀"
+        assert manifest.description == "中文测试 - émojis 🚀"
 
     def test_invalid_utf8_bytes_raises_validation_error(self, temp_dir):
         """Negative case: file containing invalid UTF-8 bytes raises PresetValidationError, not raw UnicodeDecodeError."""
@@ -821,7 +821,7 @@ class TestPresetResolver:
         """Test that a pack with lower priority number wins over higher number."""
         manager = PresetManager(project_dir)
 
-        # Create pack A (priority 10 — lower precedence)
+        # Create pack A (priority 10 - lower precedence)
         pack_a_dir = temp_dir / "pack-a"
         pack_a_dir.mkdir()
         data_a = {**valid_pack_data}
@@ -831,7 +831,7 @@ class TestPresetResolver:
         (pack_a_dir / "templates").mkdir()
         (pack_a_dir / "templates" / "spec-template.md").write_text("# From Pack A\n")
 
-        # Create pack B (priority 1 — higher precedence)
+        # Create pack B (priority 1 - higher precedence)
         pack_b_dir = temp_dir / "pack-b"
         pack_b_dir.mkdir()
         data_b = {**valid_pack_data}
@@ -1073,7 +1073,7 @@ class TestResolveCore:
 
         resolver = PresetResolver(project_dir)
         result = resolver.resolve_core("specify", "command")
-        # The preset file must never be returned — but the bundled core may be.
+        # The preset file must never be returned - but the bundled core may be.
         if result is not None:
             assert "presets" not in result.parts
 
@@ -1083,7 +1083,7 @@ class TestResolveCore:
         core_cmd_dir.mkdir(parents=True, exist_ok=True)
         (core_cmd_dir / "specify.md").write_text("---\ndescription: core\n---\n\ncore body\n")
 
-        # Also place a preset file — resolve_core must still return the core
+        # Also place a preset file - resolve_core must still return the core
         preset_cmd_dir = project_dir / ".specify" / "presets" / "my-preset" / "commands"
         preset_cmd_dir.mkdir(parents=True)
         (preset_cmd_dir / "specify.md").write_text("---\ndescription: preset wrap\n---\n\nwrap body\n")
@@ -1605,7 +1605,7 @@ class TestPresetCatalog:
         self, project_dir, cached_payload
     ):
         """A poisoned cache silently falls back to the network instead of
-        crashing — cached payloads pass through the same shape validation
+        crashing - cached payloads pass through the same shape validation
         as freshly-fetched ones.
 
         Without this, a cache poisoned by an older spec-kit version (or a
@@ -1613,7 +1613,7 @@ class TestPresetCatalog:
         before the network guards landed) would re-crash every invocation
         of ``_get_merged_packs`` despite the cache being "valid" by age.
         The recovery contract is: if the cached payload fails validation,
-        drop it and refetch — never propagate ``AttributeError`` to the
+        drop it and refetch - never propagate ``AttributeError`` to the
         caller.
         """
         from unittest.mock import patch, MagicMock
@@ -1677,7 +1677,7 @@ class TestPresetCatalog:
     def test_fetch_catalog_rejects_malformed_payload(self, project_dir, payload):
         """Legacy ``fetch_catalog`` reuses the same shape-validation helper.
 
-        Before this change ``fetch_catalog`` only checked key presence —
+        Before this change ``fetch_catalog`` only checked key presence -
         so a payload like ``42`` would crash with
         ``TypeError: argument of type 'int' is not iterable`` during the
         ``"schema_version" in catalog_data`` check, and an entry mapping
@@ -1757,7 +1757,7 @@ class TestPresetCatalog:
         catalog = PresetCatalog(project_dir)
         catalog.cache_dir.mkdir(parents=True, exist_ok=True)
         catalog.cache_file.write_text("{}", encoding="utf-8")
-        # Bytes that are not valid UTF-8 — ``read_text(encoding="utf-8")``
+        # Bytes that are not valid UTF-8 - ``read_text(encoding="utf-8")``
         # will raise ``UnicodeDecodeError`` (subclass of ``UnicodeError``).
         catalog.cache_metadata_file.write_bytes(b"\xff\xfe\x00bad")
 
@@ -1796,7 +1796,7 @@ class TestPresetCatalog:
         The cache-validity check calls ``metadata.get("cached_at", "")``
         immediately after ``json.loads``. If the metadata file is valid
         JSON but parses to a non-mapping (``[]``, ``"oops"``, ``42``,
-        ``true``, ``null``), ``.get`` raises ``AttributeError`` — which
+        ``true``, ``null``), ``.get`` raises ``AttributeError`` - which
         previously slipped past the except tuple and crashed the
         caller. The contract documented on ``is_cache_valid`` says any
         decode/shape failure should return ``False`` so ``fetch_catalog``
@@ -1810,7 +1810,7 @@ class TestPresetCatalog:
             non_mapping_metadata, encoding="utf-8"
         )
 
-        # Must not raise — the contract is "any decode/shape failure → False".
+        # Must not raise - the contract is "any decode/shape failure → False".
         assert catalog.is_cache_valid() is False
 
     def test_fetch_catalog_writes_cache_as_utf8(self, project_dir, monkeypatch):
@@ -1821,7 +1821,7 @@ class TestPresetCatalog:
         through ``json.dumps`` and ``read_text(encoding="utf-8")``.
         Because ``json.dumps`` defaults to ``ensure_ascii=True``, "café"
         was serialized as the all-ASCII escape ``caf\\u00e9`` before it
-        ever reached ``write_text`` — the bytes on disk were identical
+        ever reached ``write_text`` - the bytes on disk were identical
         regardless of the encoding kwarg. The drift Copilot's review
         flagged wasn't actually being caught.
 
@@ -1875,7 +1875,7 @@ class TestPresetCatalog:
         Cache writes are best-effort, mirroring the read side and the
         ``integrations/catalog.py`` precedent: if ``mkdir``/``write_text``
         raises ``OSError`` (read-only checkout, permissions), the
-        already-fetched-and-validated payload must still be returned —
+        already-fetched-and-validated payload must still be returned -
         not swallowed into the broad except and re-raised as a
         ``PresetError``.
         """
@@ -1922,7 +1922,7 @@ class TestPresetCatalog:
         """Per-entry guard: one malformed entry shouldn't poison the merge.
 
         ``_fetch_single_catalog`` validates that ``presets`` is a mapping,
-        but it doesn't (and shouldn't) validate every entry inside it — a
+        but it doesn't (and shouldn't) validate every entry inside it - a
         single bad entry in an otherwise-valid catalog should be skipped,
         not crash the whole resolve path. Mirrors the per-entry skip in
         ``integrations/catalog.py``: a malformed entry returns no error,
@@ -2084,7 +2084,7 @@ class TestPresetCatalog:
     def test_download_pack_without_sha256_skips_verification(self, project_dir):
         """A catalog entry with no ``sha256`` keeps working: verification is
         opt-in, so the backwards-compatible path (``pack_info.get("sha256")``
-        is ``None``) must download without aborting — mirrors the extensions
+        is ``None``) must download without aborting - mirrors the extensions
         coverage so the helper never silently becomes mandatory for presets.
         """
         from unittest.mock import patch
@@ -2164,7 +2164,7 @@ class TestIntegration:
         manifest = manager.install_from_directory(pack_dir, "0.1.5")
         assert manifest.id == "test-pack"
 
-        # Resolve — pack template should win over core
+        # Resolve - pack template should win over core
         resolver = PresetResolver(project_dir)
         result = resolver.resolve("spec-template")
         assert result is not None
@@ -2173,7 +2173,7 @@ class TestIntegration:
         # Remove
         manager.remove("test-pack")
 
-        # Resolve — should fall back to core
+        # Resolve - should fall back to core
         result = resolver.resolve("spec-template")
         assert result is not None
         assert "Core Spec Template" in result.read_text()
@@ -2200,14 +2200,14 @@ class TestIntegration:
         result = resolver.resolve_with_source("spec-template")
         assert result["source"] == "extension:my-ext v1.0.0"
 
-        # Install pack — should win over extension
+        # Install pack - should win over extension
         manager = PresetManager(project_dir)
         manager.install_from_directory(pack_dir, "0.1.5")
 
         result = resolver.resolve_with_source("spec-template")
         assert "test-pack" in result["source"]
 
-        # Add override — should win over pack
+        # Add override - should win over pack
         overrides_dir = project_dir / ".specify" / "templates" / "overrides"
         overrides_dir.mkdir(parents=True)
         (overrides_dir / "spec-template.md").write_text("# Override\n")
@@ -2575,7 +2575,7 @@ class TestSelfTestPreset:
     surfaces a UserWarning in that case. Tests install via
     ``install_self_test_preset`` (defined above), which scopes a narrow
     ``warnings.filterwarnings`` block to that specific message and
-    ``UserWarning`` category — so the expected warning stays quiet without
+    ``UserWarning`` category - so the expected warning stays quiet without
     masking unrelated warnings or real reconciliation failures.
     """
 
@@ -2785,7 +2785,7 @@ class TestSelfTestPreset:
         manager = PresetManager(project_dir)
         manager.install_from_directory(preset_dir, "0.1.5")
 
-        # Extension not installed — command should NOT be registered
+        # Extension not installed - command should NOT be registered
         cmd_file = claude_dir / "speckit.fakeext.cmd.md"
         assert not cmd_file.exists(), "Command registered for missing extension"
         metadata = manager.registry.get("ext-override")
@@ -2924,7 +2924,7 @@ class TestInitOptions:
 
         Note: this test only meaningfully exercises the encoding pin
         because ``save_init_options`` now writes JSON with
-        ``ensure_ascii=False`` — otherwise ``json.dumps`` would output
+        ``ensure_ascii=False`` - otherwise ``json.dumps`` would output
         ASCII-only ``\\uXXXX`` escapes and the encoding pin would be a
         no-op for any value here. ``test_save_writes_real_utf8_bytes``
         below asserts that contract directly.
@@ -2975,7 +2975,7 @@ class TestInitOptions:
         Simulates a file produced by an old client (or by a peer machine
         with a different default locale) that contains bytes invalid as
         UTF-8. ``load_init_options`` should fall back to ``{}`` per the
-        existing contract — never propagate a raw ``UnicodeDecodeError``
+        existing contract - never propagate a raw ``UnicodeDecodeError``
         to the CLI surface.
         """
         from specify_cli import load_init_options
@@ -3248,7 +3248,7 @@ class TestPresetSkills:
 
         When a preset that overrode a command is removed and a project override
         becomes the winning layer, ``_reconcile_skills`` rewrites the skill from
-        the override body — which must also render ``__SPECKIT_COMMAND_*__`` tokens.
+        the override body - which must also render ``__SPECKIT_COMMAND_*__`` tokens.
         """
         self._write_init_options(project_dir, ai="claude")
         skills_dir = project_dir / ".claude" / "skills"
@@ -3569,7 +3569,7 @@ class TestPresetSkills:
     def test_no_skills_registered_when_no_skill_dir_exists(self, project_dir, temp_dir):
         """Skills should not be created when no existing skill dir is found."""
         self._write_init_options(project_dir, ai="claude")
-        # Don't create skills dir — simulate skills mode never created them
+        # Don't create skills dir - simulate skills mode never created them
 
         manager = PresetManager(project_dir)
         install_self_test_preset(manager)
@@ -3768,7 +3768,7 @@ class TestPresetSkills:
         """Preset overrides should still target legacy dotted-named skill dirs.
 
         This exercises legacy *naming* (``speckit.specify``) under the current
-        ``.kimi-code/`` base — distinct from the legacy ``.kimi/`` *location*.
+        ``.kimi-code/`` base - distinct from the legacy ``.kimi/`` *location*.
         """
         self._write_init_options(project_dir, ai="kimi")
         skills_dir = project_dir / ".kimi-code" / "skills"
@@ -5842,7 +5842,7 @@ class TestResolveContent:
 
     def test_resolve_content_replace_over_wrap(self, project_dir, temp_dir, valid_pack_data):
         """Top-priority replace layer should win even if a lower layer uses wrap."""
-        # Install a low-priority wrap preset (with no placeholder — would fail if evaluated)
+        # Install a low-priority wrap preset (with no placeholder - would fail if evaluated)
         wrap_data = {**valid_pack_data}
         wrap_data["preset"] = {**valid_pack_data["preset"], "id": "wrap-lo", "name": "WrapLo"}
         wrap_data["provides"] = {
@@ -5858,7 +5858,7 @@ class TestResolveContent:
         with open(wrap_dir / "preset.yml", "w") as f:
             yaml.dump(wrap_data, f)
         (wrap_dir / "templates").mkdir()
-        # Intentionally missing {CORE_TEMPLATE} — would error if composition ran
+        # Intentionally missing {CORE_TEMPLATE} - would error if composition ran
         (wrap_dir / "templates" / "spec-template.md").write_text("wrapper without placeholder")
 
         manager = PresetManager(project_dir)

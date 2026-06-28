@@ -1,7 +1,7 @@
-"""Generic integration — bring your own agent.
+"""Generic integration - bring your own agent.
 
 Requires ``--commands-dir`` to specify the output directory for command
-files.  No longer special-cased in the core CLI — just another
+files.  No longer special-cased in the core CLI - just another
 integration with its own required option.
 """
 
@@ -74,7 +74,7 @@ class GenericIntegration(MarkdownIntegration):
         )
 
     def commands_dest(self, project_root: Path) -> Path:
-        """Not supported for GenericIntegration — use setup() directly.
+        """Not supported for GenericIntegration - use setup() directly.
 
         GenericIntegration is stateless; the output directory comes from
         ``parsed_options`` or ``raw_options`` at call time, not from

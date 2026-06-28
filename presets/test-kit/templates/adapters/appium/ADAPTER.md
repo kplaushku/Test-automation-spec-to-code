@@ -1,4 +1,4 @@
-# Adapter: Appium — PLANNED (not active)
+# Adapter: Appium - PLANNED (not active)
 
 Mobile-native adapter (iOS, Android) over the WebDriver protocol. Not part of the
 current API-first increment. To activate: implement the rendering rules below and
@@ -9,7 +9,7 @@ add `appium` to the constitution's allowed frameworks.
 - **Requirement marker (neutral id → native):** a structured comment/marker on
   each test (e.g. `# REQ: REQ-001`) or a runner marker (pytest/JUnit).
 - **Separation:** logic in test methods; data in a data file; element locators in
-  a screen-object / locators module — never inline.
+  a screen-object / locators module - never inline.
 - **App-access note:** requires access to the app's element tree (accessibility
   ids / source) before generating tests, otherwise locators are guessed.
 - **Relation:** Appium is the mobile extension of the same WebDriver model as

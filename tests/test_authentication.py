@@ -3,11 +3,11 @@
 Covers:
 - Config loading (auth.json parsing, validation, permission warning)
 - Registry mechanics (_register, get_provider, duplicate/empty-key guards)
-- GitHubAuth — bearer headers
-- AzureDevOpsAuth — basic-pat, bearer, azure-cli, azure-ad headers
+- GitHubAuth - bearer headers
+- AzureDevOpsAuth - basic-pat, bearer, azure-cli, azure-ad headers
 - Host matching (find_entries_for_url)
-- open_url — config-driven auth with fallthrough and redirect stripping
-- build_request — single-shot request construction
+- open_url - config-driven auth with fallthrough and redirect stripping
+- build_request - single-shot request construction
 - _fetch_latest_release_tag() delegation
 """
 
@@ -527,7 +527,7 @@ class TestAzureDevOpsAuth:
 
 
 # ---------------------------------------------------------------------------
-# open_url / build_request — positive tests
+# open_url / build_request - positive tests
 # ---------------------------------------------------------------------------
 
 
@@ -638,7 +638,7 @@ class TestAuthenticatedHttp:
 
 
 # ---------------------------------------------------------------------------
-# open_url — negative tests
+# open_url - negative tests
 # ---------------------------------------------------------------------------
 
 
@@ -757,7 +757,7 @@ class TestLoadConfigCaching:
 
         user_warnings = [x for x in w if issubclass(x.category, UserWarning)]
         assert len(user_warnings) == 1, "Expected exactly one warning"
-        # Loader called only once — subsequent calls used cache
+        # Loader called only once - subsequent calls used cache
         assert call_count == 1
         # All calls returned the cached empty list
         assert result1 == result2 == result3 == []
@@ -908,7 +908,7 @@ class TestFetchLatestReleaseTagDelegation:
 
 
 class TestGithubProviderHosts:
-    """Tests for github_provider_hosts() — the GHES host allowlist source."""
+    """Tests for github_provider_hosts() - the GHES host allowlist source."""
 
     def _set_config(self, monkeypatch, entries):
         from specify_cli.authentication import http as _auth_http

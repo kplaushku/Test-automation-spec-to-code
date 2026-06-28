@@ -26,7 +26,7 @@ it. No framework names, no syntax, no selectors, no code.
 
 4. Resolve the `spec-template` and write `<feature_directory>/spec.md`. For each
    thing to test, frame it as **precondition → input → object under test →
-   expected output → error cases** — NOT centered on the end user. Each becomes
+   expected output → error cases** - NOT centered on the end user. Each becomes
    one requirement with a stable id (`REQ-NNN`):
 
    - **Requirement id**: `REQ-NNN`, stable, never reused.
@@ -38,7 +38,7 @@ it. No framework names, no syntax, no selectors, no code.
    - **Acceptance** in Given / When / Then form, framework-neutral.
 
 5. Every requirement must be **testable and unambiguous**. Mark anything vague
-   with `[NEEDS CLARIFICATION: ...]` rather than guessing — `clarify` resolves
+   with `[NEEDS CLARIFICATION: ...]` rather than guessing - `clarify` resolves
    these before any test is generated.
 
 6. Do not choose a framework here. Do not write selectors or test data values

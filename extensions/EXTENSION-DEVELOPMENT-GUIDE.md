@@ -386,12 +386,12 @@ CONTRIBUTING.md
 
 | Pattern | Matches | Does NOT match |
 |---------|---------|----------------|
-| `*.pyc` | Any `.pyc` file in any directory | — |
+| `*.pyc` | Any `.pyc` file in any directory | - |
 | `tests/` | The `tests` directory (and all its contents) | A file named `tests` |
 | `docs/*.draft.md` | `docs/api.draft.md` (directly inside `docs/`) | `docs/sub/api.draft.md` (nested) |
-| `.env` | The `.env` file at any level | — |
-| `!README.md` | Re-includes `README.md` even if matched by an earlier pattern | — |
-| `docs/**/*.draft.md` | `docs/api.draft.md`, `docs/sub/api.draft.md` | — |
+| `.env` | The `.env` file at any level | - |
+| `!README.md` | Re-includes `README.md` even if matched by an earlier pattern | - |
+| `docs/**/*.draft.md` | `docs/api.draft.md`, `docs/sub/api.draft.md` | - |
 
 ### Unsupported Features
 
@@ -399,7 +399,7 @@ The following `.gitignore` features are **not applicable** in this context:
 
 - **Multiple `.extensionignore` files**: Only a single file at the extension root is supported (`.gitignore` supports files in subdirectories)
 - **`$GIT_DIR/info/exclude` and `core.excludesFile`**: These are Git-specific and have no equivalent here
-- **Negation inside excluded directories**: Because file copying uses `shutil.copytree`, excluding a directory prevents recursion into it entirely. A negation pattern cannot re-include a file inside a directory that was itself excluded. For example, the combination `tests/` followed by `!tests/important.py` will **not** preserve `tests/important.py` — the `tests/` directory is skipped at the root level and its contents are never evaluated. To work around this, exclude the directory's contents individually instead of the directory itself (e.g., `tests/*.pyc` and `tests/.cache/` rather than `tests/`).
+- **Negation inside excluded directories**: Because file copying uses `shutil.copytree`, excluding a directory prevents recursion into it entirely. A negation pattern cannot re-include a file inside a directory that was itself excluded. For example, the combination `tests/` followed by `!tests/important.py` will **not** preserve `tests/important.py` - the `tests/` directory is skipped at the root level and its contents are never evaluated. To work around this, exclude the directory's contents individually instead of the directory itself (e.g., `tests/*.pyc` and `tests/.cache/` rather than `tests/`).
 
 ---
 
@@ -687,7 +687,7 @@ hooks:
 
 **Error**: `Extension requires spec-kit >=0.2.0`
 
-- **Fix**: Update spec-kit with `uv tool install specify-cli --force --from git+https://github.com/github/spec-kit.git`. The bare `specify-cli` package on PyPI is a different, unrelated project — installing it without `--from git+...` will give you a stub CLI that does not include `extension`, `preset`, or other spec-kit commands.
+- **Fix**: Update spec-kit with `uv tool install specify-cli --force --from git+https://github.com/github/spec-kit.git`. The bare `specify-cli` package on PyPI is a different, unrelated project - installing it without `--from git+...` will give you a stub CLI that does not include `extension`, `preset`, or other spec-kit commands.
 
 **Error**: `Command file not found`
 

@@ -554,7 +554,7 @@ class TestUpsertWithCustomMarkers:
 
     def test_remove_with_default_markers_unchanged_when_custom_in_file(self, tmp_path):
         # Extension config absent → default markers used. File contains only
-        # custom markers — nothing should be removed.
+        # custom markers - nothing should be removed.
         i = _CtxIntegration()
         ctx = tmp_path / "CLAUDE.md"
         original = "x\n<!-- BEGIN -->\nbody\n<!-- END -->\n"

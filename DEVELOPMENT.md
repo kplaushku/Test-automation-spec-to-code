@@ -1,6 +1,6 @@
 # Development Notes
 
-Specto is a toolkit for spec-driven **test automation**, derived from github/spec-kit (MIT). At its core, it is a coordinated set of prompts, templates, scripts, and CLI/integration assets that define and deliver a spec-driven workflow for AI coding agents — here repurposed to generate executable tests. This document is a starting point for people modifying Specto itself, with a compact orientation to the key project documents and repository organization.
+Specto is a toolkit for spec-driven **test automation**, derived from github/spec-kit (MIT). At its core, it is a coordinated set of prompts, templates, scripts, and CLI/integration assets that define and deliver a spec-driven workflow for AI coding agents - here repurposed to generate executable tests. This document is a starting point for people modifying Specto itself, with a compact orientation to the key project documents and repository organization.
 
 **Essential project documents:**
 

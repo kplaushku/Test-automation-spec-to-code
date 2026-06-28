@@ -1,4 +1,4 @@
-"""Tests for IntegrationManifest — record, hash, save, load, uninstall, modified detection."""
+"""Tests for IntegrationManifest - record, hash, save, load, uninstall, modified detection."""
 
 import hashlib
 import json
@@ -37,7 +37,7 @@ class TestManifestRecordFile:
 class TestManifestRecordExistingErrors:
     """Error-case coverage for ``record_existing`` symlink + non-file guards.
 
-    Added in #2483 — Copilot review flagged these as un-tested regressions
+    Added in #2483 - Copilot review flagged these as un-tested regressions
     after the ``is_symlink``/``is_file`` guards were introduced.
     """
 
@@ -68,7 +68,7 @@ class TestManifestRecordExistingErrors:
     def test_rejects_missing_path(self, tmp_path):
         # ``is_file()`` is False for non-existent paths too; the same error
         # surface keeps callers from having to distinguish "missing" from
-        # "wrong kind" — both mean "cannot hash this".
+        # "wrong kind" - both mean "cannot hash this".
         m = IntegrationManifest("test", tmp_path)
         with pytest.raises(ValueError, match="not a regular file"):
             m.record_existing("never-existed.txt")
@@ -77,7 +77,7 @@ class TestManifestRecordExistingErrors:
         # ``record_existing`` must reject absolute paths via the lexical
         # pre-check, NOT via the filesystem-touching ``is_symlink()`` call.
         # Verified by passing an absolute path that points to a directory
-        # outside the project root — the canonical "Absolute paths" error
+        # outside the project root - the canonical "Absolute paths" error
         # must surface before any stat on the absolute path.
         m = IntegrationManifest("test", tmp_path)
         abs_path = "C:\\tmp\\escape.txt" if sys.platform == "win32" else "/tmp/escape.txt"
@@ -405,7 +405,7 @@ class TestManifestRecoveredFiles:
         # False because the stored keys are relative POSIX strings. Round-7
         # made this explicit: ``is_recovered`` now rejects absolute paths
         # up front via a lexical ``rel.is_absolute()`` guard and returns
-        # False without calling ``_validate_rel_path`` at all — matching
+        # False without calling ``_validate_rel_path`` at all - matching
         # ``record_existing``'s canonical-key guard so the two methods
         # agree on which inputs can ever be stored keys.
         (tmp_path / "f.txt").write_text("x", encoding="utf-8")
@@ -425,7 +425,7 @@ class TestManifestRecoveredFiles:
         # but still resolve outside the project root via a symlinked
         # ancestor.
         m = IntegrationManifest("test", tmp_path)
-        # Don't record anything — the path is impossible to record anyway.
+        # Don't record anything - the path is impossible to record anyway.
         assert m.is_recovered("../escape.txt") is False
 
     def test_record_existing_clears_recovered_when_false(self, tmp_path):
@@ -456,7 +456,7 @@ class TestManifestRecoveredFiles:
         (tmp_path / "z.txt").write_text("v1", encoding="utf-8")
         m = IntegrationManifest("test", tmp_path)
         m.record_existing("z.txt", recovered=True)
-        # Same file via dotdot-normalizing path — must be False, not raise.
+        # Same file via dotdot-normalizing path - must be False, not raise.
         assert m.is_recovered("subdir/../z.txt") is False
 
 

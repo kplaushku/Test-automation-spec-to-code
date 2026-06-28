@@ -1,4 +1,4 @@
-"""If/Then/Else step — conditional branching."""
+"""If/Then/Else step - conditional branching."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ from specify_cli.workflows.expressions import evaluate_condition
 class IfThenStep(StepBase):
     """Branch based on a boolean condition expression.
 
-    Both ``then:`` and ``else:`` contain inline step arrays — full step
+    Both ``then:`` and ``else:`` contain inline step arrays - full step
     definitions, not ID references.
     """
 

@@ -883,14 +883,14 @@ Specto uses two catalog files with different purposes:
 - **Verification**: Community extensions may have `verified: false` initially
 - **Status**: Active - open for community contributions
 - **Submission**: Via Pull Request following the Extension Publishing Guide
-- **Usage**: Secondary catalog (priority 2, `install_allowed: false`) in the default stack — discovery only
+- **Usage**: Secondary catalog (priority 2, `install_allowed: false`) in the default stack - discovery only
 
 **How It Works (default stack):**
 
-1. **Discover**: `specify extension search` searches both catalogs — community extensions appear automatically
+1. **Discover**: `specify extension search` searches both catalogs - community extensions appear automatically
 2. **Review**: Evaluate community extensions for security, quality, and organizational fit
 3. **Curate**: Copy approved entries from community catalog to your `catalog.json`, or add to `.specify/extension-catalogs.yml` with `install_allowed: true`
-4. **Install**: Use `specify extension add <name>` — only allowed from `install_allowed: true` catalogs
+4. **Install**: Use `specify extension add <name>` - only allowed from `install_allowed: true` catalogs
 
 This approach gives organizations full control over which extensions can be installed while still providing community discoverability out of the box.
 
@@ -965,16 +965,16 @@ specify extension info jira
 
 ### Custom Catalogs
 
-Specto supports a **catalog stack** — an ordered list of catalogs that the CLI merges and searches across. This allows organizations to maintain their own org-approved extensions alongside an internal catalog and community discovery, all at once.
+Specto supports a **catalog stack** - an ordered list of catalogs that the CLI merges and searches across. This allows organizations to maintain their own org-approved extensions alongside an internal catalog and community discovery, all at once.
 
 #### Catalog Stack Resolution
 
 The active catalog stack is resolved in this order (first match wins):
 
-1. **`SPECKIT_CATALOG_URL` environment variable** — single catalog replacing all defaults (backward compat)
-2. **Project-level `.specify/extension-catalogs.yml`** — full control for the project
-3. **User-level `~/.specify/extension-catalogs.yml`** — personal defaults
-4. **Built-in default stack** — `catalog.json` (install_allowed: true) + `catalog.community.json` (install_allowed: false)
+1. **`SPECKIT_CATALOG_URL` environment variable** - single catalog replacing all defaults (backward compat)
+2. **Project-level `.specify/extension-catalogs.yml`** - full control for the project
+3. **User-level `~/.specify/extension-catalogs.yml`** - personal defaults
+4. **Built-in default stack** - `catalog.json` (install_allowed: true) + `catalog.community.json` (install_allowed: false)
 
 #### Default Built-in Stack
 
@@ -983,7 +983,7 @@ When no config file exists, the CLI uses:
 | Priority | Catalog | install_allowed | Purpose |
 |----------|---------|-----------------|---------|
 | 1 | `catalog.json` (default) | `true` | Curated extensions available for installation |
-| 2 | `catalog.community.json` (community) | `false` | Discovery only — browse but not install |
+| 2 | `catalog.community.json` (community) | `false` | Discovery only - browse but not install |
 
 This means `specify extension search` surfaces community extensions out of the box, while `specify extension add` is still restricted to entries from catalogs with `install_allowed: true`.
 
@@ -993,7 +993,7 @@ This means `specify extension search` surfaces community extensions out of the b
 catalogs:
   - name: "default"
     url: "https://raw.githubusercontent.com/github/spec-kit/main/extensions/catalog.json"
-    priority: 1          # Highest — only approved entries can be installed
+    priority: 1          # Highest - only approved entries can be installed
     install_allowed: true
     description: "Built-in catalog of installable extensions"
 
@@ -1005,7 +1005,7 @@ catalogs:
 
   - name: "community"
     url: "https://raw.githubusercontent.com/github/spec-kit/main/extensions/catalog.community.json"
-    priority: 3          # Lowest — discovery only, not installable
+    priority: 3          # Lowest - discovery only, not installable
     install_allowed: false
     description: "Community-contributed extensions (discovery only)"
 ```
@@ -1050,7 +1050,7 @@ To enable installation, add 'linear' to an approved catalog (install_allowed: tr
 
 #### `SPECKIT_CATALOG_URL` (Backward Compatibility)
 
-The `SPECKIT_CATALOG_URL` environment variable still works — it is treated as a single `install_allowed: true` catalog, **replacing both defaults** for full backward compatibility:
+The `SPECKIT_CATALOG_URL` environment variable still works - it is treated as a single `install_allowed: true` catalog, **replacing both defaults** for full backward compatibility:
 
 ```bash
 # Point to your organization's catalog

@@ -1,9 +1,9 @@
 """Base classes for workflow step types.
 
 Provides:
-- ``StepBase`` — abstract base every step type must implement.
-- ``StepContext`` — execution context passed to each step.
-- ``StepResult`` — return value from step execution.
+- ``StepBase`` - abstract base every step type must implement.
+- ``StepContext`` - execution context passed to each step.
+- ``StepResult`` - return value from step execution.
 """
 
 from __future__ import annotations
@@ -95,7 +95,7 @@ class StepResult:
 class StepBase(ABC):
     """Abstract base class for workflow step types.
 
-    Every step type — built-in or extension-provided — implements this
+    Every step type - built-in or extension-provided - implements this
     interface and registers in ``STEP_REGISTRY``.
     """
 

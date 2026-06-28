@@ -15,7 +15,7 @@ def _has_working_bash() -> bool:
     """Check whether a functional native bash is available.
 
     On Windows, ``subprocess.run(["bash", ...])`` uses CreateProcess,
-    which searches System32 *before* PATH — so it may find the WSL
+    which searches System32 *before* PATH - so it may find the WSL
     launcher even when Git-for-Windows bash appears first in PATH via
     ``shutil.which``.  We therefore probe with bare ``"bash"`` (the
     same way test helpers invoke it) to get an accurate result.
@@ -31,7 +31,7 @@ def _has_working_bash() -> bool:
         return True
     if shutil.which("bash") is None:
         return False
-    # Probe with bare "bash" — same as the test helpers — so that
+    # Probe with bare "bash" - same as the test helpers - so that
     # Windows CreateProcess resolution order is respected.
     try:
         r = subprocess.run(
@@ -69,7 +69,7 @@ def strip_ansi(text: str) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Auth config isolation — prevents tests from reading ~/.specify/auth.json
+# Auth config isolation - prevents tests from reading ~/.specify/auth.json
 # ---------------------------------------------------------------------------
 
 

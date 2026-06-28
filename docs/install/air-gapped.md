@@ -31,7 +31,7 @@ pip install --no-index --find-links=./dist specify-cli
 
 ## Step 4: Initialize a project
 
-No network access is required — bundled assets are used by default:
+No network access is required - bundled assets are used by default:
 
 ```bash
 specify init my-project --integration copilot

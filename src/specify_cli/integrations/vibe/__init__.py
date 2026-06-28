@@ -1,5 +1,5 @@
 """
-Mistral Vibe CLI integration — skills-based agent.
+Mistral Vibe CLI integration - skills-based agent.
 
 Vibe uses ``.vibe/skills/speckit-<name>/SKILL.md`` layout (enforced since v2.0.0).
 """

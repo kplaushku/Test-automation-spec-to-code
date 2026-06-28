@@ -14,7 +14,7 @@ API / contract.
 
 ## Requirements
 
-### REQ-001 — fetch existing post
+### REQ-001 - fetch existing post
 
 - **Precondition:** the API is reachable; post id 1 exists.
 - **Input:** GET `/posts/1`.
@@ -25,7 +25,7 @@ API / contract.
 - **Acceptance:** Given the API is up, when GET `/posts/1`, then 200 with the
   expected post fields.
 
-### REQ-002 — create post
+### REQ-002 - create post
 
 - **Precondition:** the API is reachable.
 - **Input:** POST `/posts` with a valid post payload.
@@ -35,7 +35,7 @@ API / contract.
 - **Acceptance:** Given the API is up, when POST `/posts` with a valid body,
   then 201 with a new id.
 
-### REQ-003 — fetch missing post returns not found
+### REQ-003 - fetch missing post returns not found
 
 - **Precondition:** the API is reachable; post id 9999 does not exist.
 - **Input:** GET `/posts/9999`.

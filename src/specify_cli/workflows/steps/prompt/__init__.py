@@ -1,4 +1,4 @@
-"""Prompt step — sends an arbitrary prompt to an integration CLI."""
+"""Prompt step - sends an arbitrary prompt to an integration CLI."""
 
 from __future__ import annotations
 

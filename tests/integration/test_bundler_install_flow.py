@@ -180,7 +180,7 @@ def test_update_preserves_original_installed_at(tmp_path: Path):
 
 def test_refresh_does_not_touch_independently_installed_component(tmp_path: Path):
     # bundle update (refresh) must not re-apply a component installed
-    # independently and tracked by no bundle — refreshing it would be a
+    # independently and tracked by no bundle - refreshing it would be a
     # collateral change to something the bundle does not own (FR-022).
     make_project(tmp_path)
     manifest = BundleManifest.from_dict(valid_manifest_dict())
@@ -208,7 +208,7 @@ def test_pre_existing_component_is_not_attributed_or_removed(tmp_path: Path):
     make_project(tmp_path)
     manifest = BundleManifest.from_dict(valid_manifest_dict())
     installer = FakeInstaller()
-    # Pre-install ext-a independently — no bundle record references it yet.
+    # Pre-install ext-a independently - no bundle record references it yet.
     installer.installed.add(("extensions", "ext-a"))
 
     install_bundle(tmp_path, _plan(manifest), installer, manifest=manifest)

@@ -122,7 +122,7 @@ class TestCursorAgentCliDispatch:
 
         ``specify init --integration cursor-agent`` (without ``--ignore-agent-tools``)
         treats ``requires_cli=True`` as a hard precheck and fails when the
-        ``cursor-agent`` CLI isn't on PATH — even though the Cursor IDE
+        ``cursor-agent`` CLI isn't on PATH - even though the Cursor IDE
         / skills flow can run without it.  Workflow dispatch support is
         signalled by overriding ``build_exec_args()`` instead, mirroring
         ``CopilotIntegration``.
@@ -195,7 +195,7 @@ class TestCursorAgentCliDispatch:
         precheck (so ``specify init`` doesn't fail when the CLI isn't on
         PATH) but still supports workflow dispatch.  The presence of a
         non-``None`` argv from ``build_exec_args()`` is what the engine
-        keys off — pin that invariant.
+        keys off - pin that invariant.
         """
         i = get_integration("cursor-agent")
         assert i.config.get("requires_cli") is False

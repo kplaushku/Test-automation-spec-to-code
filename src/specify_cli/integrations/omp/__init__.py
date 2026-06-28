@@ -31,7 +31,7 @@ class OmpIntegration(MarkdownIntegration):
     ) -> list[str] | None:
         # Diverges from MarkdownIntegration.build_exec_args because OMP's
         # CLI parser treats `-p`/`--print` as a boolean (one-shot mode) and
-        # consumes the prompt as a positional argument — see args.ts in
+        # consumes the prompt as a positional argument - see args.ts in
         # can1357/oh-my-pi. JSON output is selected via `--mode json`.
         if not self.config or not self.config.get("requires_cli"):
             return None

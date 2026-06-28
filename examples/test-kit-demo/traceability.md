@@ -17,7 +17,7 @@
 
 ## Summary
 
-- **Requirement coverage:** 3/3 (100%) — meets a 100% threshold.
+- **Requirement coverage:** 3/3 (100%) - meets a 100% threshold.
 - Coverage here is **requirement coverage**, not code coverage.
 
 ## Execution evidence

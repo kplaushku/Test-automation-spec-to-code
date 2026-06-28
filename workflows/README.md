@@ -1,6 +1,6 @@
 # Workflows
 
-Workflows are multi-step, resumable automation pipelines defined in YAML. They orchestrate Specto commands across integrations, evaluate control flow, and pause at human review gates — enabling end-to-end Spec-Driven Development cycles without manual step-by-step invocation.
+Workflows are multi-step, resumable automation pipelines defined in YAML. They orchestrate Specto commands across integrations, evaluate control flow, and pause at human review gates - enabling end-to-end Spec-Driven Development cycles without manual step-by-step invocation.
 
 ## How It Works
 
@@ -116,7 +116,7 @@ Run a shell command and capture output:
 
 ### Init Steps
 
-Bootstrap a project the same way `specify init` does — scaffolding
+Bootstrap a project the same way `specify init` does - scaffolding
 templates, scripts, shared infrastructure, and the selected coding agent
 integration. Runs non-interactively (defaults to `--ignore-agent-tools`)
 and resolves the integration from the step config or the workflow default:
@@ -240,7 +240,7 @@ Aggregate results from fan-out steps:
 ## Error Handling
 
 By default, any step that returns `StepResult(status=StepStatus.FAILED, ...)`
-at runtime halts the entire run — most commonly a `shell` or
+at runtime halts the entire run - most commonly a `shell` or
 `command` step exiting non-zero. Set `continue_on_error: true` on
 a step to record its result and continue to the next sibling step
 instead. When the failure was a non-zero exit, the exit code
@@ -278,12 +278,12 @@ A few things worth knowing about that example:
 
 - Both gate options (`approve`, `reject`) return `StepStatus.COMPLETED`;
   `on_reject: skip` controls only whether the engine aborts on reject
-  (it doesn't, with `skip`) — it does **not** auto-skip subsequent
+  (it doesn't, with `skip`) - it does **not** auto-skip subsequent
   sibling steps in the `then:` list. Downstream branching is the
   workflow author's responsibility: read
   `{{ steps.<gate-id>.output.choice }}` in a follow-up `if`, `switch`,
   or expression, as the `recover` step above does.
-- `on_reject` has three values: `abort` (default — reject → `StepStatus.FAILED`
+- `on_reject` has three values: `abort` (default - reject → `StepStatus.FAILED`
   with `output.aborted = True`, halts the run), `skip` (reject →
   `StepStatus.COMPLETED`, author handles branching as shown), and `retry`
   (reject → `StepStatus.PAUSED` so the next `specify workflow resume` re-runs
@@ -305,7 +305,7 @@ A few things worth knowing about that example:
   return `StepResult(status=StepStatus.FAILED, ...)` with the failure encoded in
   `output` (e.g. `exit_code`, `stderr`, or a custom field).
 - Gate aborts (`on_reject: abort` chosen by the operator) always halt
-  the run — `continue_on_error` does not override them. The flag is
+  the run - `continue_on_error` does not override them. The flag is
   for transient/expected step failures, not for overriding deliberate
   operator decisions.
 - Structural validation runs up-front: `specify workflow run` rejects

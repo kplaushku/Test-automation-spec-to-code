@@ -312,7 +312,7 @@ results = catalog.search(
     tag: Optional[str] = None,
     author: Optional[str] = None,
     verified_only: bool = False
-)  # Returns: List[Dict]  — each dict includes _catalog_name, _install_allowed
+)  # Returns: List[Dict]  - each dict includes _catalog_name, _install_allowed
 
 # Get extension info (searches all active catalogs)
 # Returns None if not found; includes _catalog_name and _install_allowed

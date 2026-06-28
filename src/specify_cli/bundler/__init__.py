@@ -1,4 +1,4 @@
-"""Spec Kit bundler — importable, Typer-free logic for the ``specify bundle`` group.
+"""Spec Kit bundler - importable, Typer-free logic for the ``specify bundle`` group.
 
 This package holds the models, services, and helpers behind the ``specify bundle``
 subcommand. It is intentionally free of any Typer/CLI imports so the orchestration
@@ -15,5 +15,5 @@ class BundlerError(Exception):
 
     Carrying a clean message lets the CLI layer print a single, user-facing line
     on stderr and exit non-zero without leaking a traceback (Constitution
-    Principle V — explicit, actionable errors).
+    Principle V - explicit, actionable errors).
     """

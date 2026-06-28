@@ -370,7 +370,7 @@ def install_shared_infra(
     version. Files whose hash diverges are treated as user customizations and
     preserved with a warning. ``force=True`` overwrites every regular file
     (symlinks and symlinked-parent destinations are always preserved with a
-    warning — the safe-destination check refuses to follow them so writes
+    warning - the safe-destination check refuses to follow them so writes
     cannot escape the project root). ``refresh_hint`` is shown after the
     customization warning to tell the user which flag would overwrite their
     customizations.
@@ -421,7 +421,7 @@ def install_shared_infra(
 
         Returns True when the destination is safe to consider (write or skip).
         Returns False (and records *rel* under ``symlinked_files``) when the
-        destination or any of its ancestors is a symlink — those paths can't
+        destination or any of its ancestors is a symlink - those paths can't
         be written to safely, but they shouldn't abort the whole switch
         either. They're surfaced as a separate "symlinked" warning bucket.
 
@@ -464,7 +464,7 @@ def install_shared_infra(
                             continue
                         # Mark scanned only once a real source file is seen. An
                         # empty (or symlink-skipped) variant keeps this False, so
-                        # stale-cleanup is skipped — otherwise it would treat every
+                        # stale-cleanup is skipped - otherwise it would treat every
                         # tracked script as obsolete and delete it. (The safety
                         # hinge is this flag, not ``seen_rels``, which also holds
                         # template paths populated later.)
@@ -585,7 +585,7 @@ def install_shared_infra(
     if symlinked_files:
         console.print(
             f"[yellow]⚠[/yellow]  Skipped {len(symlinked_files)} symlinked shared "
-            "infrastructure path(s) — symlinks are never overwritten because they "
+            "infrastructure path(s) - symlinks are never overwritten because they "
             "may resolve outside the project root:"
         )
         for path in symlinked_files:
@@ -606,12 +606,12 @@ def install_shared_infra(
             console.print(refresh_hint)
 
     # Remove stale managed scripts: paths a previous install recorded that the
-    # current core no longer ships — e.g. the legacy
+    # current core no longer ships - e.g. the legacy
     # ``scripts/<variant>/update-agent-context.sh`` superseded by the bundled
     # agent-context extension. Left behind, such an orphan can crash when it
     # sources a refreshed ``common.sh`` (#3076). Only run when the script source
     # was actually scanned (so a missing/empty source never triggers mass
-    # deletion), scoped to the active variant, and only for *managed* copies —
+    # deletion), scoped to the active variant, and only for *managed* copies -
     # a user-customized file (hash diverges), a symlink, or a recovered entry is
     # preserved by ``_is_managed``.
     if scripts_scanned:

@@ -54,7 +54,7 @@ def _get_installed_version() -> str:
     """Return the installed specify-cli distribution version or 'unknown'.
 
     Uses importlib.metadata so the value reflects what was actually installed
-    by pip/uv/pipx — not a value read from pyproject.toml. This is
+    by pip/uv/pipx - not a value read from pyproject.toml. This is
     intentional for `specify self check`, which should reason about the
     installed distribution rather than a source-tree fallback. Callers must
     treat the sentinel string 'unknown' as an indeterminate value (see FR-020).
@@ -108,7 +108,7 @@ def _fetch_latest_release_tag() -> tuple[str | None, str | None]:
 
     On success: (tag_name, None).
     On a documented network/HTTP failure (added in T029/T030): (None, category).
-    On anything else — including a malformed response body — the exception
+    On anything else - including a malformed response body - the exception
     propagates; there is no catch-all (research D-006).
     """
     from .authentication.http import open_url
@@ -266,10 +266,10 @@ def _is_github_credential_env_key(key: str) -> bool:
       ``GITHUB_REPOSITORY``) the installer subprocess does not consume.
     - Otherwise the key is scrubbed only when it contains an underscore-delimited
       ``_GITHUB_`` segment *and* ends with a credential suffix
-      (``_TOKEN``/``_SECRET``/``_KEY``/``_PAT``/``_PASSWORD``/``_CREDENTIALS``) —
+      (``_TOKEN``/``_SECRET``/``_KEY``/``_PAT``/``_PASSWORD``/``_CREDENTIALS``) -
       e.g. ``HOMEBREW_GITHUB_API_TOKEN``. Un-delimited variants such as a
       hypothetical ``GITHUBTOKEN`` are not matched by this branch; no real tool
-      sets such a name. Only these recognized shapes are scrubbed — this is not
+      sets such a name. Only these recognized shapes are scrubbed - this is not
       blanket coverage of every conceivable secret name.
     """
     upper = key.upper()
@@ -290,7 +290,7 @@ def _scrubbed_env() -> dict[str, str]:
 
 # vMAJOR.MINOR.PATCH, then an optional dev/prerelease segment, then an
 # optional build-metadata segment. The two trailing segments are independent
-# so they can compose (e.g. v1.0.0-rc1+build.42) — matching PEP 440 /semver,
+# so they can compose (e.g. v1.0.0-rc1+build.42) - matching PEP 440 /semver,
 # which the Version() check below then enforces canonically.
 _TAG_REGEX = re.compile(
     r"^v[0-9]+\.[0-9]+\.[0-9]+"
@@ -720,7 +720,7 @@ def _build_upgrade_plan(
         )
     else:
         command_preview = (
-            _render_argv(argv) if argv is not None else "(none — non-upgradable path)"
+            _render_argv(argv) if argv is not None else "(none - non-upgradable path)"
         )
 
     preview = (
@@ -767,7 +767,7 @@ def _run_installer(plan: _UpgradePlan) -> _InstallerResult:
     progress in real time. The child environment has GitHub credential-shaped
     variables removed.
 
-    Timeout: by default the subprocess runs with no timeout — installer
+    Timeout: by default the subprocess runs with no timeout - installer
     operations (dependency resolution, large wheel downloads) can legitimately
     take many minutes. Set the env var SPECIFY_UPGRADE_TIMEOUT_SECS to an
     integer/float to enforce a hard cap. On timeout, the orchestrator maps
@@ -865,7 +865,7 @@ def _verify_upgrade(plan: _UpgradePlan) -> str | None:
     and raises verification-mismatch if they differ.
 
     Uses a child process (not in-process importlib.metadata) because Python
-    cannot hot-swap the running module after the installer has replaced it —
+    cannot hot-swap the running module after the installer has replaced it -
     only a fresh process picks up the new binary.
     """
     argv0 = _resolved_argv0_path()
@@ -934,7 +934,7 @@ def _emit_guidance(method: _InstallMethod, target_tag: str | None) -> None:
     if method == _InstallMethod.UVX_EPHEMERAL:
         console.print(
             "Running via uvx (ephemeral); the next uvx invocation already "
-            "resolves to latest — no upgrade action needed.",
+            "resolves to latest - no upgrade action needed.",
             soft_wrap=True,
         )
         return
@@ -1154,7 +1154,7 @@ def self_check() -> None:
 
     if tag is None:
         # Graceful-failure path (FR-008). `failure_reason` is one of the
-        # enumerated strings produced by _fetch_latest_release_tag() — it
+        # enumerated strings produced by _fetch_latest_release_tag() - it
         # never contains a URL, headers, response body, or traceback.
         assert failure_reason is not None
         console.print(f"Installed: {installed}")
@@ -1205,8 +1205,8 @@ def self_check() -> None:
         console.print(f"  pipx install --force {_manual_source_spec(manual_tag)}")
         return
 
-    # Reached only when manual_tag parsed cleanly — the unparseable-latest case
-    # already returned at the `manual_tag is None` branch above — and installed
+    # Reached only when manual_tag parsed cleanly - the unparseable-latest case
+    # already returned at the `manual_tag is None` branch above - and installed
     # is parseable AND >= latest → "up to date" (FR-006). Do not reintroduce an
     # InvalidVersion-fallback assumption here.
     console.print(f"[green]Up to date:[/green] {installed}")
@@ -1257,7 +1257,7 @@ def self_upgrade(
     Environment variables:
       SPECIFY_UPGRADE_TIMEOUT_SECS  Optional integer/float seconds. Caps how
         long the installer subprocess may run. Unset (default) means no
-        timeout — interrupt with Ctrl+C if the installer hangs.
+        timeout - interrupt with Ctrl+C if the installer hangs.
     """
     if tag is not None:
         try:
@@ -1285,7 +1285,7 @@ def self_upgrade(
         raise typer.Exit(1)
 
     # --dry-run preview path. Non-upgradable methods still emit guidance
-    # rather than a fake preview block — there is nothing to preview when
+    # rather than a fake preview block - there is nothing to preview when
     # there is nothing the CLI would launch.
     if dry_run:
         if plan.method in (
@@ -1295,7 +1295,7 @@ def self_upgrade(
         ):
             _emit_guidance(plan.method, plan.target_tag)
             raise typer.Exit(0)
-        console.print("Dry run — no changes will be made.")
+        console.print("Dry run - no changes will be made.")
         for line in plan.preview_summary.splitlines():
             console.print(line)
         raise typer.Exit(0)
@@ -1342,7 +1342,7 @@ def self_upgrade(
             else:
                 console.print(f"Already on latest release or newer: {plan.current_version}")
             raise typer.Exit(0)
-        # Pinned upgrades are no-ops only on an exact parseable match — the same
+        # Pinned upgrades are no-ops only on an exact parseable match - the same
         # Version equality used by the unpinned branch above; an unparseable
         # current version deliberately proceeds to installation.
         if (
@@ -1355,7 +1355,7 @@ def self_upgrade(
 
     # One-line pre-execution notice so the user sees exactly what will run
     # before the installer's own output starts streaming. A pinned target older
-    # than the installed version is a downgrade — say so explicitly so
+    # than the installed version is a downgrade - say so explicitly so
     # `--tag <older>` does not masquerade as a forward upgrade.
     installed_version = _parse_version_text(plan.current_version)
     verb = (

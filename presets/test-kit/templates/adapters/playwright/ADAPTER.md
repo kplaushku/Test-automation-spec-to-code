@@ -1,4 +1,4 @@
-# Adapter: Playwright — API layer
+# Adapter: Playwright - API layer
 
 Rendering rules that turn a neutral test case (from `tasks.md`) into Playwright
 tests for the **API / contract** level, using the `request` fixture. Default
@@ -18,9 +18,9 @@ tests/
   test_<group>.py        # one module per group
   conftest.py            # fixtures: base URL, headers, api context
   data/
-    <group>.json         # named test data sets — no inline literals
+    <group>.json         # named test data sets - no inline literals
   config/
-    environment.json     # base URL, headers, auth — no inline literals
+    environment.json     # base URL, headers, auth - no inline literals
 ```
 
 ## Requirement marker (neutral id → native)
@@ -54,7 +54,7 @@ markers =
 
 ## Rendering a neutral case
 
-For a task `T001 [REQ-001] orders — create order returns 201`:
+For a task `T001 [REQ-001] orders - create order returns 201`:
 
 ```python
 # conftest.py

@@ -1,4 +1,4 @@
-"""Tests for ZcodeIntegration — skills-based integration (Z.AI)."""
+"""Tests for ZcodeIntegration - skills-based integration (Z.AI)."""
 
 from .test_integration_base_skills import SkillsIntegrationTests
 

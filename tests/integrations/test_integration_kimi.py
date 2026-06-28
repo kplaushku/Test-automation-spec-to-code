@@ -1,4 +1,4 @@
-"""Tests for KimiIntegration — skills integration with legacy migration."""
+"""Tests for KimiIntegration - skills integration with legacy migration."""
 
 from pathlib import Path
 
@@ -436,7 +436,7 @@ class TestKimiLegacySymlinkSafety:
 
     def test_migrate_skips_symlinked_legacy_parent_dir(self, tmp_path):
         # `.kimi` is itself a symlink to the project root, so `.kimi/skills`
-        # resolves to `./skills` — an unrelated in-tree directory. Even though
+        # resolves to `./skills` - an unrelated in-tree directory. Even though
         # the resolved path stays inside the project, migration must not
         # operate on it because a path component is a symlink.
         project = tmp_path / "project"
@@ -476,7 +476,7 @@ class TestKimiLegacySymlinkSafety:
 
     def test_setup_rejects_symlinked_destination_before_writing(self, tmp_path):
         # `.kimi-code` is a symlink to the project root, so the skills
-        # destination `.kimi-code/skills` resolves to `./skills` — an
+        # destination `.kimi-code/skills` resolves to `./skills` - an
         # unintended in-tree location. base setup() only rejects a
         # destination that escapes the project root, so without the
         # pre-check it would write SKILL.md files into `./skills`. setup()

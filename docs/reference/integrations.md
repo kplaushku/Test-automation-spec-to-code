@@ -1,6 +1,6 @@
 # Supported AI Coding Agent Integrations
 
-The Specify CLI supports a wide range of AI coding agents. When you run `specify init`, the CLI sets up the appropriate command files, context rules, and directory structures for your chosen AI coding agent — so you can start using Spec-Driven Development immediately, regardless of which tool you prefer.
+The Specify CLI supports a wide range of AI coding agents. When you run `specify init`, the CLI sets up the appropriate command files, context rules, and directory structures for your chosen AI coding agent - so you can start using Spec-Driven Development immediately, regardless of which tool you prefer.
 
 ## Supported AI Coding Agents
 
@@ -42,7 +42,7 @@ The Specify CLI supports a wide range of AI coding agents. When you run `specify
 | [Windsurf](https://windsurf.com/)                                                    | `windsurf`       |                                                                                                                                           |
 | [ZCode](https://zcode.z.ai/)                                                         | `zcode`          | Skills-based integration; installs skills into `.zcode/skills/` and invokes them as `$speckit-<command>`                                  |
 | [Zed](https://zed.dev/)                                                              | `zed`            | Skills-based integration; installs skills into `.agents/skills` and invokes them as `/speckit-<command>`                                  |
-| Generic                                                                              | `generic`        | Bring your own agent — use `--integration generic --integration-options="--commands-dir <path>"` for AI coding agents not listed above     |
+| Generic                                                                              | `generic`        | Bring your own agent - use `--integration generic --integration-options="--commands-dir <path>"` for AI coding agents not listed above     |
 
 ## List Available Integrations
 

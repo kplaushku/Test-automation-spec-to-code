@@ -43,12 +43,12 @@ def _is_valid_host_pattern(pattern: str) -> bool:
     ``github.com.evil.com``) or multi-wildcard forms.  Only these two
     forms are accepted:
 
-    * ``example.com``           — exact hostname
-    * ``*.example.com``         — leading ``*.`` wildcard; matches subdomains
+    * ``example.com``           - exact hostname
+    * ``*.example.com``         - leading ``*.`` wildcard; matches subdomains
       such as ``myorg.example.com`` but not ``example.com`` itself
     """
     if "*" not in pattern:
-        return True  # exact hostname — already validated as non-empty
+        return True  # exact hostname - already validated as non-empty
     # Only *.suffix is allowed; no other wildcard positions
     return pattern.startswith("*.") and "*" not in pattern[2:]
 
@@ -58,7 +58,7 @@ def load_auth_config(
 ) -> list[AuthConfigEntry]:
     """Load and validate ``auth.json``, returning configured entries.
 
-    Returns an empty list when the file does not exist — this means
+    Returns an empty list when the file does not exist - this means
     all HTTP requests will be unauthenticated (opt-in model).
 
     Raises ``ValueError`` on schema violations.  Callers that want
@@ -86,7 +86,7 @@ def load_auth_config(
                     stacklevel=2,
                 )
         except OSError:
-            pass  # stat failed — skip permission check
+            pass  # stat failed - skip permission check
 
     raw = json.loads(config_path.read_text(encoding="utf-8"))
 

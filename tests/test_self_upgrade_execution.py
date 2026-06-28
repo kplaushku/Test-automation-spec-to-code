@@ -15,7 +15,7 @@ from tests.self_upgrade_helpers import (
 )
 
 # ===========================================================================
-# Phase 6 — User Story 4: failure recovery (P2)
+# Phase 6 - User Story 4: failure recovery (P2)
 # ===========================================================================
 
 

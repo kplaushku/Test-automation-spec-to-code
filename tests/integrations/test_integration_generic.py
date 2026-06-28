@@ -10,7 +10,7 @@ from specify_cli.integrations.manifest import IntegrationManifest
 
 
 class TestGenericIntegration:
-    """Tests for GenericIntegration — requires --commands-dir option."""
+    """Tests for GenericIntegration - requires --commands-dir option."""
 
     # -- Registration -----------------------------------------------------
 

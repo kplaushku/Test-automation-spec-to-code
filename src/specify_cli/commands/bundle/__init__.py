@@ -1,4 +1,4 @@
-"""``specify bundle`` command group — discover, install, author Spec Kit bundles.
+"""``specify bundle`` command group - discover, install, author Spec Kit bundles.
 
 This module is the CLI/UX layer only (Principle I: thin commands over services).
 Each command resolves a project, builds a catalog stack, delegates to a bundler
@@ -182,7 +182,7 @@ def bundle_search(
             else ""
         )
         console.print(
-            f"  [bold]{r.entry.id}[/bold] v{r.entry.version} — {r.entry.name} "
+            f"  [bold]{r.entry.id}[/bold] v{r.entry.version} - {r.entry.name} "
             f"[dim]({r.entry.role})[/dim] {_trust_badge(r.entry.verified)} {policy}"
         )
         console.print(f"    {r.entry.description}")
@@ -202,7 +202,7 @@ def bundle_info(
         resolved = stack.resolve(bundle_id)
         # `info` must show the fully expanded component set that `install` would
         # apply (contracts/cli-commands.md). Expansion happens regardless of
-        # install policy — discovery-only bundles stay inspectable; only
+        # install policy - discovery-only bundles stay inspectable; only
         # `install` is refused. But if the manifest itself can't be resolved
         # (e.g. --offline against an https:// download_url, or a download
         # failure), fail loudly and exit non-zero rather than silently
@@ -239,7 +239,7 @@ def bundle_info(
         print(_json.dumps(payload, indent=2))
         return
 
-    console.print(f"\n[bold cyan]{entry.id}[/bold cyan] v{entry.version} — {entry.name}")
+    console.print(f"\n[bold cyan]{entry.id}[/bold cyan] v{entry.version} - {entry.name}")
     console.print(f"  Role: {entry.role}")
     console.print(f"  {entry.description}")
     console.print(f"  Author: {entry.author}   License: {entry.license}")
@@ -359,7 +359,7 @@ def bundle_install(
             console.print(f"[yellow]![/yellow] {overlap}")
 
         # For an already-initialized project, the project's recorded active
-        # integration is authoritative — an explicit --integration must not be
+        # integration is authoritative - an explicit --integration must not be
         # able to bypass the FR-019 integration-clash guard. The override only
         # selects the integration at init time (handled above) or confirms the
         # target when the active integration cannot be determined.

@@ -1,10 +1,10 @@
-"""Integration catalog — discovery, validation, and upgrade support.
+"""Integration catalog - discovery, validation, and upgrade support.
 
 Provides:
-- ``IntegrationCatalogEntry`` — single catalog source metadata.
-- ``IntegrationCatalog``      — fetches, caches, and searches integration
+- ``IntegrationCatalogEntry`` - single catalog source metadata.
+- ``IntegrationCatalog``      - fetches, caches, and searches integration
   catalogs (built-in + community).
-- ``IntegrationDescriptor``   — loads and validates ``integration.yml``.
+- ``IntegrationDescriptor``   - loads and validates ``integration.yml``.
 """
 
 from __future__ import annotations

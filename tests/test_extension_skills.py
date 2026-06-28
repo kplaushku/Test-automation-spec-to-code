@@ -253,7 +253,7 @@ class TestExtensionManagerGetSkillsDir:
     def test_creates_skills_dir_on_demand(self, project_dir):
         """Should create skills dir when ai_skills is enabled but dir is missing."""
         _create_init_options(project_dir, ai="claude", ai_skills=True)
-        # Don't create the skills directory — _get_skills_dir should do it
+        # Don't create the skills directory - _get_skills_dir should do it
         manager = ExtensionManager(project_dir)
         result = manager._get_skills_dir()
         assert result is not None
@@ -419,7 +419,7 @@ class TestExtensionSkillRegistration:
         assert parsed["description"] == long_description
 
     def test_argument_hint_not_added_for_non_claude_agent(self, project_dir, temp_dir):
-        """argument-hint must stay Claude-only — other skills agents are untouched.
+        """argument-hint must stay Claude-only - other skills agents are untouched.
 
         The hint is carried only for integrations that support it (currently
         Claude, the sole integration defining inject_argument_hint). A non-Claude

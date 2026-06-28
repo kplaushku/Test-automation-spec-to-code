@@ -431,7 +431,7 @@ class TestCopilotSkillsMode:
     # -- Copilot-specific post-processing ---------------------------------
 
     def test_post_process_skill_content_does_not_inject_mode(self):
-        """post_process_skill_content() must NOT inject mode: — VS Code Copilot does not support it."""
+        """post_process_skill_content() must NOT inject mode: - VS Code Copilot does not support it."""
         copilot = self._make_copilot()
         content = (
             "---\n"
@@ -472,7 +472,7 @@ class TestCopilotSkillsMode:
         assert first == second
 
     def test_skills_do_not_have_mode_in_frontmatter(self, tmp_path):
-        """Generated SKILL.md files must NOT contain mode: — VS Code Copilot does not support it."""
+        """Generated SKILL.md files must NOT contain mode: - VS Code Copilot does not support it."""
         copilot = self._make_copilot()
         created, _ = self._setup_skills(copilot, tmp_path)
         skill_files = [f for f in created if f.name == "SKILL.md"]
@@ -731,7 +731,7 @@ class TestCopilotSkillsMode:
         unrelated.mkdir(parents=True)
         (unrelated / "README.md").write_text("# GitHub Skills training\n")
 
-        # Should NOT detect skills mode — cli_args should contain --agent
+        # Should NOT detect skills mode - cli_args should contain --agent
         import unittest.mock as mock
         with mock.patch("subprocess.run") as mock_run:
             mock_run.return_value = mock.Mock(returncode=0, stdout="", stderr="")

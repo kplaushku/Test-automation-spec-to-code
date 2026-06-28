@@ -2,7 +2,7 @@
 
 # Specto
 
-**Define what to test before writing tests — generate executable, multi-framework test suites with any AI coding agent.**
+**Define what to test before writing tests - generate executable, multi-framework test suites with any AI coding agent.**
 
 Specto is a toolkit for spec-driven **test automation**, derived from [github/spec-kit](https://github.com/github/spec-kit) (MIT). It puts neutral test specifications at the center: you describe _what_ to test, refine it through structured phases, and let your AI coding agent generate runnable tests in the framework chosen at planning time (Robot Framework, Playwright, Cypress, Selenium, or Appium).
 
@@ -21,7 +21,7 @@ Specto is a toolkit for spec-driven **test automation**, derived from [github/sp
 
 The core SDD process ships ready to use: **Spec → Plan → Tasks → Implement**.
 
-Define what to build before building it. Rich templates, quality checklists, and cross-artifact analysis come out of the box. Each phase produces a Markdown artifact that feeds the next — giving your AI coding agent structured context instead of ad-hoc prompts.
+Define what to build before building it. Rich templates, quality checklists, and cross-artifact analysis come out of the box. Each phase produces a Markdown artifact that feeds the next - giving your AI coding agent structured context instead of ad-hoc prompts.
 
 <a href="quickstart.md" class="pillar-link">Walk through the workflow →</a>
 
@@ -31,7 +31,7 @@ Define what to build before building it. Rich templates, quality checklists, and
 
 ### Use any coding agent
 
-<span class="pillar-stat">30+ integrations</span> — Copilot, Gemini, Codex, Windsurf, Zed, Claude, Forge, Kiro, and more. Switch freely between agents with a single command. No lock-in.
+<span class="pillar-stat">30+ integrations</span> - Copilot, Gemini, Codex, Windsurf, Zed, Claude, Forge, Kiro, and more. Switch freely between agents with a single command. No lock-in.
 
 Run `specify init` with your agent of choice and Specto sets up the right command files, context rules, and directory structures automatically. If your agent isn't listed, the `generic` integration is an escape hatch for any tool.
 
@@ -47,11 +47,11 @@ Run `specify init` with your agent of choice and Specto sets up the right comman
 
 Including entirely different SDD processes:
 
-- **AIDE** — 7-step AI-driven engineering lifecycle
-- **Canon** — baseline-driven workflows (spec-first, code-first, spec-drift)
-- **Product Forge** — product-management-oriented SDD
-- **FX→.NET** — end-to-end .NET Framework migration across 7 phases
-- **MAQA** — multi-agent orchestration with quality assurance gates
+- **AIDE** - 7-step AI-driven engineering lifecycle
+- **Canon** - baseline-driven workflows (spec-first, code-first, spec-drift)
+- **Product Forge** - product-management-oriented SDD
+- **FX→.NET** - end-to-end .NET Framework migration across 7 phases
+- **MAQA** - multi-agent orchestration with quality assurance gates
 
 <a href="community/presets.md" class="pillar-link">Browse community presets →</a>
 
@@ -78,7 +78,7 @@ Community extensions like CI Guard and Architecture Guard add compliance gates a
 
 ## Built by the community
 
-**200+ contributors** power the Specto ecosystem — from core integrations to entirely new development processes. Anyone can create and publish an extension, preset, or workflow.
+**200+ contributors** power the Specto ecosystem - from core integrations to entirely new development processes. Anyone can create and publish an extension, preset, or workflow.
 
 <div class="stats-grid">
   <div class="stat-item">

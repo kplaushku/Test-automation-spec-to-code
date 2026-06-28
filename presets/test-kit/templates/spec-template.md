@@ -9,13 +9,13 @@
 
 ## Test Levels
 
-[API/contract | unit/integration | UI web | mobile native — per the constitution]
+[API/contract | unit/integration | UI web | mobile native - per the constitution]
 
 ## Requirements
 
 > One block per requirement. Ids are stable (`REQ-NNN`) and never reused.
 
-### REQ-001 — [short name]
+### REQ-001 - [short name]
 
 - **Precondition:** [state / fixtures assumed before the action]
 - **Input:** [request, payload, parameters]
@@ -28,7 +28,7 @@
 - **Acceptance (Given/When/Then):**
   - Given [precondition], when [input], then [expected output].
 
-### REQ-002 — [short name]
+### REQ-002 - [short name]
 
 - **Precondition:**
 - **Input:**

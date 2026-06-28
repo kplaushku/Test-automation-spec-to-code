@@ -7,7 +7,7 @@
 <p align="center">
     <strong>A spec-driven test automation toolkit. You write requirements in natural
     language; Specto turns them into runnable tests in the framework you
-    pick at planning time — Robot Framework, Playwright, Cypress, Selenium, or
+    pick at planning time - Robot Framework, Playwright, Cypress, Selenium, or
     Appium.</strong>
 </p>
 
@@ -37,9 +37,9 @@ framework-specific.
 
 ## Architecture
 
-- **Neutral layers** — `constitution`, `specify`, `clarify`, `plan`, `tasks` —
+- **Neutral layers** - `constitution`, `specify`, `clarify`, `plan`, `tasks` -
   never mention a specific framework.
-- **Framework layer** — `implement` only. It routes to an **adapter** per
+- **Framework layer** - `implement` only. It routes to an **adapter** per
   framework under
   [`presets/test-kit/templates/adapters/`](presets/test-kit/templates/adapters/).
 - Adding a framework = adding an adapter. The neutral layers are untouched.

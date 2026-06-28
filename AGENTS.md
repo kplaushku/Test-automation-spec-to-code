@@ -19,7 +19,7 @@ The toolkit supports multiple AI coding assistants, allowing teams to use their
 preferred tools while maintaining a consistent project structure. The
 test-generation behavior lives in the `test-kit` preset and the `traceability`
 extension; the neutral layers (`specify`, `clarify`, `plan`, `tasks`) never
-hard-wire a framework — the choice lives in the plan and is realized by a
+hard-wire a framework - the choice lives in the plan and is realized by a
 per-framework adapter in `implement`.
 
 ---
@@ -60,13 +60,13 @@ The registry is the **single source of truth for Python integration metadata**. 
 | Skill directories (`speckit-<name>/SKILL.md`) | `SkillsIntegration` |
 | Fully custom output (companion files, settings merge, etc.) | `IntegrationBase` directly |
 
-Most agents only need `MarkdownIntegration` — a minimal subclass with zero method overrides.
+Most agents only need `MarkdownIntegration` - a minimal subclass with zero method overrides.
 
 ### 2. Create the subpackage
 
 Create `src/specify_cli/integrations/<package_dir>/__init__.py`, where `<package_dir>` is the Python-safe directory name derived from `<key>`: use the key as-is when it contains no hyphens (e.g., key `"gemini"` → `gemini/`), or replace hyphens with underscores when it does (e.g., key `"kiro-cli"` → `kiro_cli/`). The `IntegrationBase.key` class attribute always retains the original hyphenated value, since that is what the CLI and registry use. For CLI-based integrations (`requires_cli: True`), the `key` should match the actual CLI tool name (the executable users install and run) so CLI checks can resolve it correctly. For IDE-based integrations (`requires_cli: False`), use the canonical integration identifier instead.
 
-**Minimal example — Markdown agent (Windsurf):**
+**Minimal example - Markdown agent (Windsurf):**
 
 ```python
 """Windsurf IDE integration."""
@@ -121,7 +121,7 @@ class GeminiIntegration(TomlIntegration):
 **Skills agent (Codex):**
 
 ```python
-"""Codex CLI integration — skills-based agent."""
+"""Codex CLI integration - skills-based agent."""
 
 from __future__ import annotations
 
@@ -204,11 +204,11 @@ context_markers:
 ```
 
 - `context_file` is written automatically from the integration's class attribute when `specify init` or `specify integration use` is run.
-- `context_markers.{start,end}` defaults to `IntegrationBase.CONTEXT_MARKER_START` / `CONTEXT_MARKER_END`. Users who want custom markers edit `agent-context-config.yml` directly — both the Python layer (`upsert_context_section()` / `remove_context_section()`) and the bundled scripts (`extensions/agent-context/scripts/bash/update-agent-context.sh` and `.ps1`) read from this single source of truth.
+- `context_markers.{start,end}` defaults to `IntegrationBase.CONTEXT_MARKER_START` / `CONTEXT_MARKER_END`. Users who want custom markers edit `agent-context-config.yml` directly - both the Python layer (`upsert_context_section()` / `remove_context_section()`) and the bundled scripts (`extensions/agent-context/scripts/bash/update-agent-context.sh` and `.ps1`) read from this single source of truth.
 
 Users can opt out entirely with `specify extension disable agent-context`; while disabled, Specto skips context-file creation, updates, and removal (the gates are inside `upsert_context_section()` and `remove_context_section()`).
 
-Only add custom setup logic when the agent needs non-standard behavior. Integrations no longer require per-agent thin wrapper scripts or shared context-update dispatcher scripts — the `agent-context` extension is fully generic.
+Only add custom setup logic when the agent needs non-standard behavior. Integrations no longer require per-agent thin wrapper scripts or shared context-update dispatcher scripts - the `agent-context` extension is fully generic.
 
 ### 5. Test it
 
@@ -241,7 +241,7 @@ The base classes handle most work automatically. Override only when the agent de
 | `setup()` | Custom install logic (companion files, settings merge) | Copilot → `.agent.md` + `.prompt.md` + `.vscode/settings.json` (default) or `speckit-<name>/SKILL.md` (skills mode) |
 | `teardown()` | Custom uninstall logic | Rarely needed; base handles manifest-tracked files |
 
-**Example — Copilot (fully custom `setup`):**
+**Example - Copilot (fully custom `setup`):**
 
 Copilot extends `IntegrationBase` directly because it creates `.agent.md` commands, companion `.prompt.md` files, and merges `.vscode/settings.json`. It also supports a `--skills` mode that scaffolds `speckit-<name>/SKILL.md` under `.github/skills/` using composition with an internal `_CopilotSkillsHelper`. See `src/specify_cli/integrations/copilot/__init__.py` for the full implementation.
 
@@ -338,7 +338,7 @@ prompt: |
 
 ## Argument Patterns
 
-Different agents use different argument placeholders. The placeholder used in command files is always taken from `registrar_config["args"]` for each integration — check there first when in doubt:
+Different agents use different argument placeholders. The placeholder used in command files is always taken from `registrar_config["args"]` for each integration - check there first when in doubt:
 
 - **Markdown/prompt-based**: `$ARGUMENTS` (default for most markdown agents)
 - **TOML-based**: `{{args}}` (e.g., Gemini)
@@ -375,7 +375,7 @@ via `--integration-options="--skills"`. When enabled:
 - `post_process_skill_content()` injects a `mode: speckit.<stem>` frontmatter field
 - `build_command_invocation()` returns `/speckit-<stem>` instead of bare args
 
-The two modes are mutually exclusive — a project uses one or the other:
+The two modes are mutually exclusive - a project uses one or the other:
 
 ```bash
 # Default mode: .agent.md agents + .prompt.md companions + settings merge
@@ -426,7 +426,7 @@ Branches follow one of two patterns depending on whether an issue exists:
 <type>/<short-slug>            # when no issue exists (PR-only changes)
 ```
 
-When an issue exists, include its number immediately after the prefix — this is what makes branches traceable. For small or self-contained changes that go straight to a PR without a tracking issue, omit the number.
+When an issue exists, include its number immediately after the prefix - this is what makes branches traceable. For small or self-contained changes that go straight to a PR without a tracking issue, omit the number.
 
 | Prefix | When to use | Example |
 |---|---|---|
@@ -438,16 +438,16 @@ When an issue exists, include its number immediately after the prefix — this i
 
 **Rules:**
 
-1. Include the issue number when one exists — this is what makes branches traceable
+1. Include the issue number when one exists - this is what makes branches traceable
 2. Use kebab-case for the slug
-3. Keep the slug short — enough to identify the work without looking up the issue
+3. Keep the slug short - enough to identify the work without looking up the issue
 
 ---
 
 ## Common Pitfalls
 
-1. **Using shorthand keys for CLI-based integrations**: For CLI-based integrations (`requires_cli: True`), the `key` must match the executable name (e.g., `"cursor-agent"` not `"cursor"`). `shutil.which(key)` is used for CLI tool checks — mismatches require special-case mappings. IDE-based integrations (`requires_cli: False`) are not subject to this constraint.
-2. **Forgetting context configuration**: The bundled `agent-context` extension reads from `.specify/extensions/agent-context/agent-context-config.yml`. New integrations only need to set `context_file` on the class — markers and dispatcher scripts are managed centrally.
+1. **Using shorthand keys for CLI-based integrations**: For CLI-based integrations (`requires_cli: True`), the `key` must match the executable name (e.g., `"cursor-agent"` not `"cursor"`). `shutil.which(key)` is used for CLI tool checks - mismatches require special-case mappings. IDE-based integrations (`requires_cli: False`) are not subject to this constraint.
+2. **Forgetting context configuration**: The bundled `agent-context` extension reads from `.specify/extensions/agent-context/agent-context-config.yml`. New integrations only need to set `context_file` on the class - markers and dispatcher scripts are managed centrally.
 3. **Incorrect `requires_cli` value**: Set to `True` only for agents that have a CLI tool; set to `False` for IDE-based agents.
 4. **Wrong argument format**: Use `$ARGUMENTS` for Markdown agents, `{{args}}` for TOML agents.
 5. **Skipping registration**: The import and `_register()` call in `_register_builtins()` must both be added.

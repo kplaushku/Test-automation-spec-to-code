@@ -17,7 +17,7 @@ class TestZedIntegration(SkillsIntegrationTests):
     CONTEXT_FILE = "AGENTS.md"
 
     def test_options_include_skills_flag(self):
-        """Not applicable to Zed — Zed is always skills-based with no --skills flag."""
+        """Not applicable to Zed - Zed is always skills-based with no --skills flag."""
         pytest.skip("Zed is always skills-based and does not expose a --skills option")
 
     def test_options_do_not_include_skills_flag(self):
@@ -139,14 +139,14 @@ class TestSlashSkillsSets:
     @pytest.mark.parametrize(
         ("ai", "ai_skills", "expected"),
         [
-            # ALWAYS_SLASH_AGENTS — unconditional on ai_skills
+            # ALWAYS_SLASH_AGENTS - unconditional on ai_skills
             ("devin", True, "/speckit-plan"),
             ("devin", False, "/speckit-plan"),
             ("trae", True, "/speckit-plan"),
             ("trae", False, "/speckit-plan"),
             ("zed", True, "/speckit-plan"),
             ("zed", False, "/speckit-plan"),
-            # CONDITIONAL_SLASH_AGENTS — only when ai_skills is enabled
+            # CONDITIONAL_SLASH_AGENTS - only when ai_skills is enabled
             ("agy", True, "/speckit-plan"),
             ("agy", False, "/speckit.plan"),
             ("claude", True, "/speckit-plan"),

@@ -1,7 +1,7 @@
 """Sandboxed expression evaluator for workflow templates.
 
 Provides a safe Jinja2 subset for evaluating expressions in workflow YAML.
-Templates cannot perform file I/O, import modules, or run arbitrary code —
+Templates cannot perform file I/O, import modules, or run arbitrary code -
 the evaluator only walks the namespace and applies a fixed set of filters.
 """
 
@@ -75,7 +75,7 @@ def _filter_contains(value: Any, substring: str) -> bool:
 def _filter_from_json(value: Any) -> Any:
     """Parse a JSON string into a typed value (list/dict/scalar).
 
-    Raises ``ValueError`` on non-string input or invalid JSON — a parse
+    Raises ``ValueError`` on non-string input or invalid JSON - a parse
     failure here means the pipeline wiring is wrong, and silently
     passing the unparsed value through would hide it.
     """
@@ -138,7 +138,7 @@ def _build_namespace(context: Any) -> dict[str, Any]:
     # run) so templates referencing it never error: `run_id` falls back
     # to an empty string when no run is active (dry-run, validation,
     # ad-hoc evaluator usage). The value is the same one Spec Kit
-    # prints as `Run ID:` at the end of `workflow run` — auto-generated
+    # prints as `Run ID:` at the end of `workflow run` - auto-generated
     # runs use an 8-character uuid4 hex; operator-supplied ids may be
     # any alphanumeric string with hyphens or underscores.
     run_id = getattr(context, "run_id", None) or ""
@@ -193,7 +193,7 @@ def _evaluate_simple_expression(expr: str, namespace: dict[str, Any]) -> Any:
     """
     expr = expr.strip()
 
-    # String literal — check before pipes and operators so quoted strings
+    # String literal - check before pipes and operators so quoted strings
     # containing | or operator keywords are not mis-parsed.
     if (expr.startswith("'") and expr.endswith("'")) or (
         expr.startswith('"') and expr.endswith('"')
@@ -261,7 +261,7 @@ def _evaluate_simple_expression(expr: str, namespace: dict[str, Any]) -> Any:
             f"unknown filter '{name}': {expected} (got '| {filter_expr}')"
         )
 
-    # Boolean operators — parse 'or' first (lower precedence) so that
+    # Boolean operators - parse 'or' first (lower precedence) so that
     # 'a or b and c' is evaluated as 'a or (b and c)'.
     if " or " in expr:
         parts = expr.split(" or ", 1)
@@ -279,7 +279,7 @@ def _evaluate_simple_expression(expr: str, namespace: dict[str, Any]) -> Any:
         inner = _evaluate_simple_expression(expr[4:].strip(), namespace)
         return not bool(inner)
 
-    # Comparison operators (order matters — check multi-char ops first)
+    # Comparison operators (order matters - check multi-char ops first)
     for op in ("!=", "==", ">=", "<=", ">", "<", " not in ", " in "):
         if op in expr:
             parts = expr.split(op, 1)

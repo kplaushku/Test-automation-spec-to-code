@@ -579,11 +579,11 @@ class TestAllowExistingBranchPowerShell:
 
         raw = spec_file.read_bytes()
         assert not raw.startswith(b"\xef\xbb\xbf"), (
-            f"spec.md must not start with a UTF-8 BOM — got first 3 bytes: {raw[:3]!r}"
+            f"spec.md must not start with a UTF-8 BOM - got first 3 bytes: {raw[:3]!r}"
         )
         # Verify template content was copied (not just an empty New-Item fallback)
         assert "Feature Spec" in raw.decode("utf-8"), (
-            "spec.md does not contain template content — WriteAllText path was not exercised"
+            "spec.md does not contain template content - WriteAllText path was not exercised"
         )
 
 
@@ -910,7 +910,7 @@ def _branch_from_output(stdout: str) -> str | None:
 
 
 SHORT_WORD_CASES = [
-    # description, expected branch — "go" (lowercase short word) is dropped,
+    # description, expected branch - "go" (lowercase short word) is dropped,
     # "AI" (uppercase short word / acronym) is kept, "now" (>=3 chars) is kept.
     ("go AI now", "001-ai-now"),
     # A short word that is lowercase everywhere is dropped entirely.
@@ -934,7 +934,7 @@ class TestShortWordRetentionPowerShell:
     """PowerShell must match bash: a short word is kept only when uppercase.
 
     Regression guard for the `-match` (case-insensitive) vs `-cmatch`
-    (case-sensitive) divergence — with `-match`, every short non-stop word
+    (case-sensitive) divergence - with `-match`, every short non-stop word
     leaked into the branch name even when it was lowercase.
     """
 

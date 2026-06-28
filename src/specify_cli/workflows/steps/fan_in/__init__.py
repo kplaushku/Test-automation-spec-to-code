@@ -1,4 +1,4 @@
-"""Fan-in step — join point for parallel steps."""
+"""Fan-in step - join point for parallel steps."""
 
 from __future__ import annotations
 

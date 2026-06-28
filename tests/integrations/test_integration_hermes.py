@@ -135,7 +135,7 @@ class TestHermesIntegration(SkillsIntegrationTests):
     def test_modified_file_survives_uninstall(self, tmp_path, monkeypatch):
         """Override: Hermes global skills are ALWAYS removed on uninstall
         (they live outside the project root and aren't hash-tracked in the
-        manifest), so a modified global skill is still removed — matching
+        manifest), so a modified global skill is still removed - matching
         the standard behaviour where all integration files are cleaned up."""
         home = _fake_home(tmp_path)
         monkeypatch.setattr(Path, "home", lambda: home)
@@ -313,7 +313,7 @@ class TestHermesIntegration(SkillsIntegrationTests):
         # Verify local marker exists
         assert (tmp_path / ".hermes" / "skills").is_dir()
 
-        # Teardown — global skills removed without needing force=True
+        # Teardown - global skills removed without needing force=True
         removed, skipped = i.teardown(tmp_path, m, force=False)
 
         # Global skills removed

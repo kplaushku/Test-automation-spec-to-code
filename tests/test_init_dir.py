@@ -2,7 +2,7 @@
 
 SPECIFY_INIT_DIR lets a non-interactive / CI caller target a member project from
 outside its directory (e.g. a monorepo root) without `cd`. It names the project
-root — the directory *containing* `.specify/` — and is strict: it must exist and
+root - the directory *containing* `.specify/` - and is strict: it must exist and
 contain `.specify/`, otherwise the resolver hard-errors with no silent fallback to
 cwd or the git toplevel.
 
@@ -221,10 +221,10 @@ def test_empty_string_treated_as_unset(tmp_path: Path) -> None:
 @requires_bash
 def test_invalid_init_dir_fails_feature_paths_chain(tmp_path: Path) -> None:
     """N5: an invalid SPECIFY_INIT_DIR hard-fails the load-bearing call site
-    (get_feature_paths), not just get_repo_root — this is what the decl/assign
+    (get_feature_paths), not just get_repo_root - this is what the decl/assign
     split guards against (a `local x=$(get_repo_root)` would mask the failure
     and emit a FEATURE_DIR under the wrong root). SPECIFY_FEATURE_DIRECTORY is
-    set so a feature dir *is* resolvable — only the propagation stops a
+    set so a feature dir *is* resolvable - only the propagation stops a
     wrong-root FEATURE_DIR, so a revert to the masked form fails this test."""
     web = _make_project(tmp_path, "web")  # valid project at cwd
     missing = tmp_path / "does_not_exist"
@@ -241,7 +241,7 @@ def test_invalid_init_dir_fails_feature_paths_chain(tmp_path: Path) -> None:
 
 @requires_bash
 def test_nonexistent_path_errors_no_fallback(tmp_path: Path) -> None:
-    """N3: a non-existent path hard-errors — even from inside a valid project,
+    """N3: a non-existent path hard-errors - even from inside a valid project,
     proving there is no silent fallback to the cwd walk-up or git root."""
     web = _make_project(tmp_path, "web")  # valid project at cwd
     missing = tmp_path / "does_not_exist"

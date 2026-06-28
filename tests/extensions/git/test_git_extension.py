@@ -888,7 +888,7 @@ class TestAutoCommitPowerShellCRLF:
 
         result = _run_pwsh("auto-commit.ps1", project, "after_specify")
         assert result.returncode == 0
-        # Should not have committed anything — config file missing means disabled.
+        # Should not have committed anything - config file missing means disabled.
         log = subprocess.run(
             ["git", "log", "--oneline"],
             cwd=project, capture_output=True, text=True,

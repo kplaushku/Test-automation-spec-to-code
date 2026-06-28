@@ -1,4 +1,4 @@
-"""Gate step — human review gate."""
+"""Gate step - human review gate."""
 
 from __future__ import annotations
 
@@ -12,8 +12,8 @@ from specify_cli.workflows.expressions import evaluate_expression
 
 #: Control characters except tab: C0 (incl. LF, so an embedded newline cannot
 #: break the boxed layout), DEL, and C1 (incl. ``\x9b`` CSI). Stripped from
-#: anything derived from a ``show_file`` before it is printed — the file's
-#: contents and the path itself — so neither can inject ANSI/terminal escapes.
+#: anything derived from a ``show_file`` before it is printed - the file's
+#: contents and the path itself - so neither can inject ANSI/terminal escapes.
 _CONTROL_CHARS = re.compile(r"[\x00-\x08\x0a-\x1f\x7f-\x9f]")
 
 
@@ -98,7 +98,7 @@ class GateStep(StepBase):
         When ``show_file`` names a file, its contents (read safely, see
         ``_read_show_file``) are appended below the message so the operator
         can review the referenced material before choosing. Always returns a
-        ``str`` — possibly multi-line — for ``_prompt`` to render in the box.
+        ``str`` - possibly multi-line - for ``_prompt`` to render in the box.
         """
         text = str(message)
         if not show_file:

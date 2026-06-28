@@ -153,15 +153,15 @@ def _install_shared_infra(
 
     Overwrite policy:
 
-    * ``force=True``  — overwrite every existing file (still skips symlinks
+    * ``force=True``  - overwrite every existing file (still skips symlinks
       to avoid following links outside the project root).
-    * ``refresh_managed=True`` — overwrite only files whose on-disk hash
+    * ``refresh_managed=True`` - overwrite only files whose on-disk hash
       still matches the previously recorded manifest hash (i.e. unmodified
       files installed by spec-kit). Files with diverging hashes are
       treated as user customizations and preserved with a warning.
-    * Default — only add missing files; existing ones are skipped.
+    * Default - only add missing files; existing ones are skipped.
 
-    *refresh_hint* — caller-supplied rich-text fragment shown after the
+    *refresh_hint* - caller-supplied rich-text fragment shown after the
     "Preserved customized files" warning to tell the user which flag/command
     they should re-run with to overwrite their customizations. Each caller
     passes the flag that's actually valid in its CLI surface (e.g.
@@ -452,7 +452,7 @@ SKILL_DESCRIPTIONS = {
 
 
 # ===== init command =====
-# Moved to commands/init.py — registered here to preserve CLI surface.
+# Moved to commands/init.py - registered here to preserve CLI surface.
 from .commands import init as _init_cmd  # noqa: E402
 _init_cmd.register(app)
 
@@ -576,14 +576,14 @@ app.add_typer(_self_app, name="self")
 
 # ===== Extension Commands =====
 
-# Moved to extensions/_commands.py — registered here to preserve CLI surface.
+# Moved to extensions/_commands.py - registered here to preserve CLI surface.
 from .extensions._commands import register as _register_extension_cmds  # noqa: E402
 _register_extension_cmds(app)
 
 
 # ===== Integration Commands =====
 
-# Moved to integrations/_commands.py — registered here to preserve CLI surface.
+# Moved to integrations/_commands.py - registered here to preserve CLI surface.
 from .integrations._commands import register as _register_integration_cmds  # noqa: E402
 _register_integration_cmds(app)
 
@@ -607,14 +607,14 @@ def _require_specify_project() -> Path:
 
 # ===== Preset Commands =====
 
-# Moved to presets/_commands.py — registered here to preserve CLI surface.
+# Moved to presets/_commands.py - registered here to preserve CLI surface.
 from .presets._commands import register as _register_preset_cmds  # noqa: E402
 _register_preset_cmds(app)
 
 
 # ===== Bundle Commands =====
 
-# Bundler subcommand group (specify bundle ...) — see commands/bundle/.
+# Bundler subcommand group (specify bundle ...) - see commands/bundle/.
 from .commands.bundle import register as _register_bundle_cmds  # noqa: E402
 _register_bundle_cmds(app)
 
@@ -684,8 +684,8 @@ def _workflow_run_payload(state: Any) -> dict[str, Any]:
 def _is_gate_step(step: dict[str, Any]) -> bool:
     """Whether a recorded step result is a gate.
 
-    Prefers the persisted ``type`` field, but when it is absent — a run paused
-    by an older version, whose step record predates ``type`` being stored —
+    Prefers the persisted ``type`` field, but when it is absent - a run paused
+    by an older version, whose step record predates ``type`` being stored -
     falls back to the gate's unique output signature: only ``GateStep`` writes
     an ``on_reject`` key. A record carrying a *different* known ``type`` is not
     a gate, so the fallback applies only when ``type`` is missing entirely.
@@ -708,9 +708,9 @@ def _gate_outcome(state: Any) -> dict[str, Any] | None:
     orchestrators drive review gates without parsing the human-facing stream.
     """
     # Two run states rest *on* a gate: `paused` (awaiting a decision) and
-    # `aborted` (a gate rejected with `on_reject: abort` — the only path that
-    # sets ABORTED, leaving current_step_id on that gate). Any other status —
-    # notably `completed`/`failed` — must be suppressed: current_step_id is
+    # `aborted` (a gate rejected with `on_reject: abort` - the only path that
+    # sets ABORTED, leaving current_step_id on that gate). Any other status -
+    # notably `completed`/`failed` - must be suppressed: current_step_id is
     # not cleared when a run whose last executed step was a gate moves on, so
     # without this guard it would surface stale detail (run/resume/status).
     if getattr(state.status, "value", state.status) not in ("paused", "aborted"):
@@ -739,7 +739,7 @@ def _normalize_gate_options(options: Any) -> list[str] | None:
     A valid gate stores a list, but an unvalidated workflow could leave a
     scalar or tuple. ``None`` stays ``None`` (no options); a list/tuple maps
     each element through ``str``; any other scalar becomes a single-element
-    list — so the emitted JSON schema is always ``list[str] | None``. A bare
+    list - so the emitted JSON schema is always ``list[str] | None``. A bare
     string is treated as one option, never iterated character-by-character.
     """
     if options is None:
@@ -775,7 +775,7 @@ def _stdout_to_stderr_when(active: bool):
 
     Suppressing the banner and the step-start callback is not enough to
     keep a ``--json`` stream clean: individual steps may still write to
-    stdout while the engine runs — the gate step prints its prompt,
+    stdout while the engine runs - the gate step prints its prompt,
     and the prompt step runs a subprocess that inherits the process's
     stdout file descriptor. Either would corrupt the single JSON object.
 
@@ -1412,7 +1412,7 @@ def workflow_info(
             for name, inp in definition.inputs.items():
                 if isinstance(inp, dict):
                     req = "required" if inp.get("required") else "optional"
-                    console.print(f"    {name} ({inp.get('type', 'string')}) — {req}")
+                    console.print(f"    {name} ({inp.get('type', 'string')}) - {req}")
 
         if definition.steps:
             console.print(f"\n  [bold]Steps ({len(definition.steps)}):[/bold]")
@@ -1458,7 +1458,7 @@ def workflow_catalog_list():
     console.print("\n[bold cyan]Workflow Catalog Sources:[/bold cyan]\n")
     for i, cfg in enumerate(configs):
         install_status = "[green]install allowed[/green]" if cfg["install_allowed"] else "[yellow]discovery only[/yellow]"
-        console.print(f"  [{i}] [bold]{cfg['name']}[/bold] — {install_status}")
+        console.print(f"  [{i}] [bold]{cfg['name']}[/bold] - {install_status}")
         console.print(f"      {cfg['url']}")
         if cfg.get("description"):
             console.print(f"      [dim]{cfg['description']}[/dim]")
@@ -1513,7 +1513,7 @@ def workflow_step_list():
     project_root = _require_specify_project()
     specify_dir = project_root / ".specify"
 
-    # Read installed custom steps from registry only — no dynamic imports
+    # Read installed custom steps from registry only - no dynamic imports
     installed: dict = {}
     if specify_dir.exists():
         registry = StepRegistry(project_root)
@@ -2110,7 +2110,7 @@ def workflow_step_catalog_list():
             if cfg["install_allowed"]
             else "[yellow]discovery only[/yellow]"
         )
-        console.print(f"  [{i}] [bold]{cfg['name']}[/bold] — {install_status}")
+        console.print(f"  [{i}] [bold]{cfg['name']}[/bold] - {install_status}")
         console.print(f"      {cfg['url']}")
         if cfg.get("description"):
             console.print(f"      [dim]{cfg['description']}[/dim]")

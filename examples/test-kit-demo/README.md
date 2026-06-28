@@ -1,4 +1,4 @@
-# Test Kit demo — Posts API
+# Test Kit demo - Posts API
 
 A worked, **runnable** example of the Specto pipeline. One neutral spec
 produces two executable suites (Robot Framework and Playwright) against the
@@ -21,7 +21,7 @@ command produces a neutral matrix; data and config are separated from logic.
 | [`traceability.md`](traceability.md) | requirement-to-test matrix | generated |
 
 Note how `robot/config/` + `robot/data/` and `playwright/config/` + `playwright/data/`
-hold base URL, headers, and payloads — **never inline** in the tests.
+hold base URL, headers, and payloads - **never inline** in the tests.
 
 ## Run it
 

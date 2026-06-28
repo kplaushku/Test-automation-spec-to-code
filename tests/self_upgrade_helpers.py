@@ -41,7 +41,7 @@ runner = CliRunner()
 # into the tmp dir, and assert POSIX executable-bit semantics (chmod / X_OK).
 # None of that maps cleanly onto Windows: `os.access(path, X_OK)` ignores the
 # mode bits, and pytest cannot rmtree a tmp dir that is still the cwd, so the
-# fixtures raise PermissionError during teardown. Skip these on Windows — the
+# fixtures raise PermissionError during teardown. Skip these on Windows - the
 # realistic absolute-path and bare-PATH-command branches stay covered there.
 requires_posix = pytest.mark.skipif(
     os.name == "nt",

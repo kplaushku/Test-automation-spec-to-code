@@ -4,7 +4,7 @@ Each per-agent test file sets ``KEY``, ``FOLDER``, ``COMMANDS_SUBDIR``,
 ``REGISTRAR_DIR``, and ``CONTEXT_FILE``, then inherits all verification
 logic from ``YamlIntegrationTests``.
 
-Mirrors ``TomlIntegrationTests`` closely — same test structure,
+Mirrors ``TomlIntegrationTests`` closely - same test structure,
 adapted for YAML recipe output format.
 """
 
@@ -18,15 +18,15 @@ from specify_cli.integrations.manifest import IntegrationManifest
 
 
 class YamlIntegrationTests:
-    """Mixin — set class-level constants and inherit these tests.
+    """Mixin - set class-level constants and inherit these tests.
 
     Required class attrs on subclass::
 
-        KEY: str              — integration registry key
-        FOLDER: str           — e.g. ".goose/"
-        COMMANDS_SUBDIR: str  — e.g. "recipes"
-        REGISTRAR_DIR: str    — e.g. ".goose/recipes"
-        CONTEXT_FILE: str     — e.g. "AGENTS.md"
+        KEY: str              - integration registry key
+        FOLDER: str           - e.g. ".goose/"
+        COMMANDS_SUBDIR: str  - e.g. "recipes"
+        REGISTRAR_DIR: str    - e.g. ".goose/recipes"
+        CONTEXT_FILE: str     - e.g. "AGENTS.md"
     """
 
     KEY: str

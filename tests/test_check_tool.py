@@ -1,4 +1,4 @@
-"""Tests for check_tool() — Claude Code CLI detection across install methods.
+"""Tests for check_tool() - Claude Code CLI detection across install methods.
 
 Covers issue https://github.com/github/spec-kit/issues/550:
   `specify check` reports "Claude Code CLI (not found)" even when claude is

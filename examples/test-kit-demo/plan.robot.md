@@ -1,4 +1,4 @@
-# Test Plan: Posts API (demo) — Robot variant
+# Test Plan: Posts API (demo) - Robot variant
 
 > Identical to the Playwright variant except for the `framework:` line.
 
@@ -31,4 +31,4 @@ Base URL and headers in `config/environment.yaml`. No inline literals.
 
 ## App-Access Strategy
 
-None — API/contract works from the contract.
+None - API/contract works from the contract.

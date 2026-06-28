@@ -1,4 +1,4 @@
-# Test Plan: Posts API (demo) — Playwright variant
+# Test Plan: Posts API (demo) - Playwright variant
 
 > Identical to the Robot variant except for the `framework:` line. This is the
 > whole point: re-targeting the same spec is a one-line change.
@@ -34,4 +34,4 @@ Base URL and headers in `config/environment.json`. No inline literals.
 
 ## App-Access Strategy
 
-None — API/contract works from the contract.
+None - API/contract works from the contract.

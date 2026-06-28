@@ -55,7 +55,7 @@ class TestKiroCliIntegration(MarkdownIntegrationTests):
         assert i.registrar_config["extension"] == ".md"
 
     def test_registrar_config_args_is_exact_prose_fallback(self):
-        """Layer 1 — pin the exact fallback so wording drift requires a
+        """Layer 1 - pin the exact fallback so wording drift requires a
         deliberate paired commit (production constant + test update)."""
         i = get_integration(self.KEY)
         assert i.registrar_config["args"] == _KIRO_ARG_FALLBACK, (
@@ -66,7 +66,7 @@ class TestKiroCliIntegration(MarkdownIntegrationTests):
         )
 
     def test_registrar_config_args_does_not_look_like_a_placeholder_token(self):
-        """Layer 2 — independent regression guard: even if someone bypasses
+        """Layer 2 - independent regression guard: even if someone bypasses
         layer-1 by changing both constant and test, the value still must not
         look like ANY placeholder token shape ($X, ${X}, {{X}}, <X>, %X%, {0},
         {% %}). Catches the class of regression Copilot called out: a swap
@@ -76,14 +76,14 @@ class TestKiroCliIntegration(MarkdownIntegrationTests):
         args = i.registrar_config["args"]
         assert not _looks_like_placeholder_token(args), (
             f"registrar_config['args'] = {args!r} matches a known placeholder-"
-            f"token shape — Kiro CLI does not substitute placeholders so this "
+            f"token shape - Kiro CLI does not substitute placeholders so this "
             f"would reach the model verbatim and break the prompt (issue #1926). "
             f"Use a prose fallback instead."
         )
 
     def test_rendered_prompts_do_not_contain_raw_arguments(self, tmp_path):
         """Rendered Kiro prompt files must NOT contain the raw ``$ARGUMENTS``
-        token — Kiro CLI does not substitute it, so the literal would reach
+        token - Kiro CLI does not substitute it, so the literal would reach
         the model and break the prompt (issue #1926)."""
         integration = get_integration(self.KEY)
         manifest = IntegrationManifest(self.KEY, tmp_path)
@@ -105,7 +105,7 @@ class TestKiroCliIntegration(MarkdownIntegrationTests):
         one rendered prompt (proves substitution actually fired, not just
         that $ARGUMENTS was removed). Imports the fallback constant directly
         instead of reading the field back so the test stays independent of
-        the integration's own config — even if the registrar_config['args']
+        the integration's own config - even if the registrar_config['args']
         regresses, this test still verifies the FALLBACK STRING is in the
         rendered output."""
         integration = get_integration(self.KEY)

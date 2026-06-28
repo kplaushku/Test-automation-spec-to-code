@@ -344,7 +344,7 @@ class TestArgvAssemblyUvTool:
         assert "git+https://github.com/github/spec-kit.git@v0.8.0.dev0" in argv
         assert (
             "upgrade" not in argv
-        )  # never `uv tool upgrade` — does not accept --tag pinning
+        )  # never `uv tool upgrade` - does not accept --tag pinning
 
     def test_missing_uv_returns_no_installer_argv(self):
         with patch("specify_cli._version.shutil.which", return_value=None):
@@ -376,7 +376,7 @@ class TestBareUpgradeUvTool:
             assert call.kwargs.get("shell", False) is False
 
     def test_one_user_action_no_prompt(self, uv_tool_argv0, clean_environ):
-        # The single `invoke` represents the single user action — no prompt.
+        # The single `invoke` represents the single user action - no prompt.
         # If a prompt existed, runner.invoke would hang waiting for input.
         with patch("specify_cli.authentication.http.urllib.request.urlopen") as mock_urlopen, patch(
             "specify_cli._version.shutil.which", return_value="uv"
@@ -536,7 +536,7 @@ class TestDryRunUvTool:
 
         assert result.exit_code == 0
         out = strip_ansi(result.output)
-        assert "Dry run — no changes will be made." in out
+        assert "Dry run - no changes will be made." in out
         assert "Detected install method: uv tool" in out
         assert "Current version: 0.7.5" in out
         assert "Target version: v0.7.6" in out
@@ -597,12 +597,12 @@ class TestDryRunUvTool:
 
 
 # ===========================================================================
-# Phase 4 — User Story 2: `pipx` immediate upgrade (P2)
+# Phase 4 - User Story 2: `pipx` immediate upgrade (P2)
 # ===========================================================================
 
 
 class TestDetectionPipx:
-    """Pipx detection — tier 1 (path) and tier 3 (registry)."""
+    """Pipx detection - tier 1 (path) and tier 3 (registry)."""
 
     def test_posix_pipx_prefix_matches(self, pipx_argv0):
         method, signals = _detect_install_method(include_signals=True)
@@ -816,7 +816,7 @@ class TestTagValidationWhitespace:
 
 
 class TestArgvAssemblyPipx:
-    """pipx installer argv shape — pipx 1.5+ uses positional PACKAGE_SPEC, never `--spec` or `upgrade`."""
+    """pipx installer argv shape - pipx 1.5+ uses positional PACKAGE_SPEC, never `--spec` or `upgrade`."""
 
     def test_pipx_argv_uses_install_force_positional_not_upgrade(self):
         with patch("specify_cli._version.shutil.which", return_value="pipx"):

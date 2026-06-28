@@ -66,7 +66,7 @@ def resolve_install_plan(
             "Cannot resolve an invalid manifest:\n  - " + "\n  - ".join(structural)
         )
 
-    # FR-016: SpecKit version gate — refuse incompatible installs.
+    # FR-016: SpecKit version gate - refuse incompatible installs.
     if enforce_version and manifest.requires.speckit_version:
         if not satisfies(speckit_version, manifest.requires.speckit_version):
             raise BundlerError(
@@ -75,7 +75,7 @@ def resolve_install_plan(
                 f"{speckit_version}. Update Spec Kit or choose a compatible bundle."
             )
 
-    # FR-019: integration-compatibility — a bundle that pins a different
+    # FR-019: integration-compatibility - a bundle that pins a different
     # integration than the project's active one halts (no silent change).
     effective_integration = active_integration
     if manifest.integration is not None:

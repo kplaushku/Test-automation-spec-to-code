@@ -1,5 +1,5 @@
 ---
-description: "Process community preset submission issues — validate, add to catalog, and open a PR for maintainer review"
+description: "Process community preset submission issues - validate, add to catalog, and open a PR for maintainer review"
 emoji: "🎨"
 
 on:
@@ -57,7 +57,7 @@ added is `preset-submission`. By the time you run, that condition has already
 passed. Before processing, verify that the issue title starts with `[Preset]:`.
 If it does not, stop without commenting.
 
-## Step 1 — Read and Parse the Issue
+## Step 1 - Read and Parse the Issue
 
 Read issue #${{ github.event.issue.number }}.
 
@@ -86,7 +86,7 @@ The issue body uses GitHub's issue form format. Each field appears under a
 heading matching the field label (e.g., `### Preset ID` followed by the
 value). Parse accordingly.
 
-## Step 2 — Validate the Submission
+## Step 2 - Validate the Submission
 
 Run **all** of the following validation checks. Collect all results before
 deciding pass/fail:
@@ -99,18 +99,18 @@ deciding pass/fail:
 - Must follow semver: `X.Y.Z` (digits only, no `v` prefix)
 
 ### 2c. Repository validation
-- Fetch the repository URL — confirm it exists and is publicly accessible
+- Fetch the repository URL - confirm it exists and is publicly accessible
 - Confirm the repository contains a `preset.yml` file
 - Confirm the repository contains a `LICENSE` file
 
 > The README requirement is enforced once, in **Step 2d**, against the specific file the
-> `documentation` field points to — not a generic repository-root `README.md`. This avoids
+> `documentation` field points to - not a generic repository-root `README.md`. This avoids
 > the monorepo false-positive where a root README exists but isn't the preset-usage doc.
 
 ### 2d. Documentation README validation
 
 The `documentation` field must point to the README that explains **how to use this
-preset** — not just any file named `README.md`, and not a product/framework pitch.
+preset** - not just any file named `README.md`, and not a product/framework pitch.
 
 - **Restrict the URL to GitHub before fetching.** The `documentation` value is
   user-provided input. Only accept GitHub-hosted README URLs:
@@ -123,13 +123,13 @@ preset** — not just any file named `README.md`, and not a product/framework pi
   below), the URL path must end with `README.md` (case-insensitive). If it points at some
   other Markdown file, **fail this check** and ask the submitter to link the preset's README.
 - Fetch the **exact URL** in the `documentation` field. First strip any fragment (`#...`)
-  or query string (`?...`) — these are common when copying from the browser UI and must be
+  or query string (`?...`) - these are common when copying from the browser UI and must be
   ignored so the fetch target is deterministic. Then resolve the raw content to fetch:
   - For a `github.com/<owner>/<repo>/blob/<ref>/<path>` URL, fetch the equivalent
     `github.com/<owner>/<repo>/raw/<ref>/<path>` URL (only swap `/blob/` → `/raw/`).
   - Fetch `github.com/.../raw/...` and `raw.githubusercontent.com/...` URLs as-is.
 
-  Do **not** rewrite into `raw.githubusercontent.com/<owner>/<repo>/<ref>/<path>` form — that
+  Do **not** rewrite into `raw.githubusercontent.com/<owner>/<repo>/<ref>/<path>` form - that
   format can't reliably represent refs containing slashes (e.g. a `feature/foo` branch).
   Confirm the fetched URL resolves to a readable Markdown file.
 - **Validate that the README contains a valid Specto CLI install command.** The fetched
@@ -141,12 +141,12 @@ preset** — not just any file named `README.md`, and not a product/framework pi
 
   A `specify preset add --from <url>` command only counts when its `<url>` **matches the
   submitted Download URL exactly**. A `--from` command pointing at a *different* URL does
-  **not** satisfy the install-command requirement (treat it as if absent) — but the README
+  **not** satisfy the install-command requirement (treat it as if absent) - but the README
   may still pass on one of the other accepted forms (`specify preset add <preset-id>` or
   `specify preset add --dev <path>`).
 
   If **no** accepted `specify preset add ...` command is present, the README is treated as a
-  generic description/pitch rather than preset-usage documentation — **fail this check** and
+  generic description/pitch rather than preset-usage documentation - **fail this check** and
   tell the submitter to add a valid install command (ideally
   `specify preset add --from <download-url>`).
 - **Prefer a preset-scoped README in monorepos.** If `documentation` resolves to a generic
@@ -174,21 +174,21 @@ If **any** validation fails:
 1. Add a comment on the issue listing each failed check with a clear explanation
    of what's wrong and how to fix it
 2. Add the `validation-failed` label
-3. **Stop — do not proceed further**
+3. **Stop - do not proceed further**
 
 If all validations pass:
 1. Add the `validation-passed` label
 2. Continue to Step 3
 
-## Step 3 — Determine Add vs Update
+## Step 3 - Determine Add vs Update
 
 Search `presets/catalog.community.json` for the preset ID.
 
 - **Not found** → this is a **new addition**
-- **Found** → this is an **update** — replace the existing entry in-place;
+- **Found** → this is an **update** - replace the existing entry in-place;
   preserve `created_at` from the existing entry
 
-## Step 4 — Update `presets/catalog.community.json`
+## Step 4 - Update `presets/catalog.community.json`
 
 Edit `presets/catalog.community.json` to add or update the preset entry.
 
@@ -208,7 +208,7 @@ Insert the entry in **alphabetical order by preset ID** within the
     "repository": "<repository>",
     "download_url": "<download_url>",
     "homepage": "<homepage or repository>",
-    "documentation": "<documentation URL — the validated preset-usage README>",
+    "documentation": "<documentation URL - the validated preset-usage README>",
     "license": "<license>",
     "requires": {
       "speckit_version": "<speckit_version>"
@@ -261,7 +261,7 @@ python3 -c "import json; json.load(open('presets/catalog.community.json')); prin
 
 If validation fails, fix the JSON and re-validate before continuing.
 
-## Step 5 — Update `docs/community/presets.md`
+## Step 5 - Update `docs/community/presets.md`
 
 Edit `docs/community/presets.md` to add or update a row in the Community
 Presets table.
@@ -275,7 +275,7 @@ Insert a new row in **alphabetical order by preset name**:
 ```
 
 For the Requires column:
-- Use `—` if no extensions are required
+- Use `-` if no extensions are required
 - List required extension names if any (e.g., `AIDE extension`)
 
 If the preset provides scripts, include them: `<N> templates, <N> commands, <N> scripts`
@@ -284,7 +284,7 @@ If the preset provides scripts, include them: `<N> templates, <N> commands, <N> 
 
 Find the existing row and update any changed fields in-place.
 
-## Step 6 — Create Pull Request
+## Step 6 - Create Pull Request
 
 Create a pull request with the changes. Use this branch naming convention:
 
@@ -321,17 +321,17 @@ Include:
 - A summary of what changed
 - Validation results (all checks passed)
 - `Closes #${{ github.event.issue.number }}`
-- `cc @<issue-author>` — mention the submitter
+- `cc @<issue-author>` - mention the submitter
 
 ## Important Rules
 
-- **Alphabetical order matters** — entries must be sorted by ID in the JSON and
+- **Alphabetical order matters** - entries must be sorted by ID in the JSON and
   by name in the docs table
-- **Always validate JSON** after editing — a trailing comma or missing brace
+- **Always validate JSON** after editing - a trailing comma or missing brace
   will break the catalog
-- **Use `Closes` not `Fixes`** — `Closes #N` is the correct keyword for
+- **Use `Closes` not `Fixes`** - `Closes #N` is the correct keyword for
   submission issues
-- **Preserve `created_at` on updates** — keep the original value; only update
+- **Preserve `created_at` on updates** - keep the original value; only update
   `updated_at`
-- **Do not modify any other files** — only `presets/catalog.community.json`
+- **Do not modify any other files** - only `presets/catalog.community.json`
   and `docs/community/presets.md`

@@ -160,7 +160,7 @@ def integration_switch(
             if skipped:
                 console.print(f"  [yellow]⚠[/yellow]  {len(skipped)} modified file(s) preserved")
         elif not current_integration and manifest_path.exists():
-            # Integration removed from registry but manifest exists — use manifest-only uninstall
+            # Integration removed from registry but manifest exists - use manifest-only uninstall
             console.print(f"Uninstalling unknown integration '{installed_key}' via manifest")
             try:
                 old_manifest = IntegrationManifest.load(installed_key, project_root)
@@ -227,7 +227,7 @@ def integration_switch(
     # supported-agent list) would silently break the new integration.
     #
     # Use refresh_managed=True so only files that match their previously
-    # recorded hash are overwritten — user customizations are detected via
+    # recorded hash are overwritten - user customizations are detected via
     # hash divergence and preserved with a warning. Pass
     # --refresh-shared-infra to overwrite customizations as well. See #2293.
     _install_shared_infra_or_exit(
@@ -467,7 +467,7 @@ def integration_upgrade(
         else:
             _refresh_init_options_speckit_version(project_root)
     except Exception as exc:
-        # Don't teardown — setup overwrites in-place, so teardown would
+        # Don't teardown - setup overwrites in-place, so teardown would
         # delete files that were working before the upgrade.  Just report.
         console.print(f"[red]Error:[/red] Failed to {_cli_phase_label('upgrade', 'integration', key)}.")
         console.print(f"[dim]Details:[/dim] {_cli_error_detail(exc)}")
@@ -492,7 +492,7 @@ def integration_upgrade(
             console.print(f"  Removed {len(stale_removed)} stale file(s) from previous install")
 
     # Re-register enabled extensions for the upgraded agent so its extension
-    # commands are (re)created — including agents installed before this
+    # commands are (re)created - including agents installed before this
     # back-fill existed. Mirrors switch for command registration; see #2886.
     # Done after the upgrade has fully settled (Phase 2 included) and outside
     # the try/except above so this best-effort step cannot affect upgrade

@@ -1,4 +1,4 @@
-"""ZCode integration — skills-based agent (Z.AI).
+"""ZCode integration - skills-based agent (Z.AI).
 
 ZCode uses the ``.zcode/skills/speckit-<name>/SKILL.md`` layout, matching
 the Claude Code skill format. Skills are invoked in chat with

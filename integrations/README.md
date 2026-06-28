@@ -10,16 +10,16 @@ Contains integrations that ship with Specto. These are maintained by the core te
 
 ### Community Catalog (`catalog.community.json`)
 
-Community-contributed integrations. Listed for discovery only — users install from the source repositories.
+Community-contributed integrations. Listed for discovery only - users install from the source repositories.
 
 ## Catalog Configuration
 
 The catalog stack is resolved in this order (first match wins):
 
-1. **Environment variable** — `SPECKIT_INTEGRATION_CATALOG_URL` overrides all catalogs with a single URL
-2. **Project config** — `.specify/integration-catalogs.yml` in the project root
-3. **User config** — `~/.specify/integration-catalogs.yml` in the user home directory
-4. **Built-in defaults** — `catalog.json` + `catalog.community.json`
+1. **Environment variable** - `SPECKIT_INTEGRATION_CATALOG_URL` overrides all catalogs with a single URL
+2. **Project config** - `.specify/integration-catalogs.yml` in the project root
+3. **User config** - `~/.specify/integration-catalogs.yml` in the user home directory
+4. **Built-in defaults** - `catalog.json` + `catalog.community.json`
 
 Example `integration-catalogs.yml`:
 

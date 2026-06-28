@@ -25,7 +25,7 @@ specify extension search  # Now uses your organization's catalog instead of the 
 ### Community Reference Catalog (`catalog.community.json`)
 
 > [!NOTE]
-> Community extensions are independently created and maintained by their respective authors. Maintainers only verify that catalog entries are complete and correctly formatted — they do **not review, audit, endorse, or support the extension code itself**. Review extension source code before installation and use at your own discretion.
+> Community extensions are independently created and maintained by their respective authors. Maintainers only verify that catalog entries are complete and correctly formatted - they do **not review, audit, endorse, or support the extension code itself**. Review extension source code before installation and use at your own discretion.
 
 - **Purpose**: Browse available community-contributed extensions
 - **Status**: Active - contains extensions submitted by the community
@@ -72,7 +72,7 @@ specify extension add <extension-name> --from https://github.com/org/spec-kit-ex
 ## Available Community Extensions
 
 > [!NOTE]
-> Community extensions are independently created and maintained by their respective authors. Maintainers only verify that catalog entries are complete and correctly formatted — they do **not review, audit, endorse, or support the extension code itself**. The Community Extensions website is also a third-party resource. Review extension source code before installation and use at your own discretion.
+> Community extensions are independently created and maintained by their respective authors. Maintainers only verify that catalog entries are complete and correctly formatted - they do **not review, audit, endorse, or support the extension code itself**. The Community Extensions website is also a third-party resource. Review extension source code before installation and use at your own discretion.
 
 🔍 **Browse and search community extensions on the [Community Extensions website](https://speckit-community.github.io/extensions/).**
 
@@ -90,7 +90,7 @@ To add your extension to the community catalog:
 1. **Prepare your extension** following the [Extension Development Guide](EXTENSION-DEVELOPMENT-GUIDE.md)
 2. **Create a GitHub release** for your extension
 3. **File an issue** using the [Extension Submission](https://github.com/github/spec-kit/issues/new?template=extension_submission.yml) template with all required metadata
-4. **Wait for review** — a maintainer will review the submission, update the catalog, and close the issue
+4. **Wait for review** - a maintainer will review the submission, update the catalog, and close the issue
 
 See the [Extension Publishing Guide](EXTENSION-PUBLISHING-GUIDE.md) for detailed step-by-step instructions.
 

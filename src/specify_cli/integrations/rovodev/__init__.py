@@ -1,4 +1,4 @@
-"""RovoDev integration — Atlassian Rovo Dev via ``acli rovodev``.
+"""RovoDev integration - Atlassian Rovo Dev via ``acli rovodev``.
 
 Extends ``SkillsIntegration`` to generate skill files under
 ``.rovodev/skills/`` and additionally generates prompt wrappers
@@ -46,7 +46,7 @@ class RovodevIntegration(SkillsIntegration):
     def _resolve_executable(self) -> str:
         """Return the binary to invoke (``acli``).
 
-        RovoDev is invoked as ``acli rovodev …`` — ``acli`` is the executable
+        RovoDev is invoked as ``acli rovodev …`` - ``acli`` is the executable
         and ``rovodev`` is a subcommand. The base implementation falls back
         to ``self.key`` (``"rovodev"``), which is the wrong binary, so we
         override the fallback to ``"acli"`` while still honouring the

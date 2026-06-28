@@ -10,9 +10,9 @@ constitution  →  specify  →  clarify  →  plan  →  tasks  →  implement
    (strategy)    (neutral)   (resolve)  (pick fw)  (neutral)  (per-adapter)
 ```
 
-- **Neutral layers** — `constitution`, `specify`, `plan`, `tasks` — carry no
+- **Neutral layers** - `constitution`, `specify`, `plan`, `tasks` - carry no
   framework syntax. (`clarify`, `analyze`, `checklist` are reused from core.)
-- **Framework layer** — `implement` only — routes each test group to its
+- **Framework layer** - `implement` only - routes each test group to its
   adapter.
 
 ## Capability matrix
@@ -41,7 +41,7 @@ against this matrix and the constitution.
 
 Every requirement has a neutral id `REQ-NNN` (defined in the constitution,
 attached in `specify`, carried through `tasks`, and written by each adapter in
-its native form — a Robot `[Tags]`, a Playwright marker/comment). The
+its native form - a Robot `[Tags]`, a Playwright marker/comment). The
 [`traceability` extension](../../extensions/traceability/) reads these back into
 a requirement-to-test matrix and flags uncovered requirements.
 

@@ -1,4 +1,4 @@
-"""Hermes Agent integration — skills-based agent.
+"""Hermes Agent integration - skills-based agent.
 
 Hermes Agent (https://github.com/NousResearch/hermes-agent) is an open-source
 AI agent framework by Nous Research.  It stores skills in
@@ -27,7 +27,7 @@ class HermesIntegration(SkillsIntegration):
 
     Hermes loads skills from ``~/.hermes/skills/`` (user home directory)
     rather than a project-local path.  Skills are installed directly to
-    the global directory — no project-local copies are created since
+    the global directory - no project-local copies are created since
     Hermes discovers them globally.  A project-local marker directory
     (``.hermes/skills/`` empty) is created so extension commands (e.g.
     git) can detect Hermes as an active integration.  Uninstall removes
@@ -56,7 +56,7 @@ class HermesIntegration(SkillsIntegration):
 
     @staticmethod
     def _hermes_home_skills_dir() -> Path:
-        """Return ``~/.hermes/skills/`` — the global skills directory."""
+        """Return ``~/.hermes/skills/`` - the global skills directory."""
         return Path.home() / ".hermes" / "skills"
 
     # -- Options -----------------------------------------------------------
@@ -86,7 +86,7 @@ class HermesIntegration(SkillsIntegration):
         Writes each skill directly to
         ``~/.hermes/skills/speckit-<name>/SKILL.md`` where Hermes
         discovers them at runtime.  No project-local SKILL.md copies are
-        created — the global directory is the single source of truth.
+        created - the global directory is the single source of truth.
         A project-local marker (``.hermes/skills/`` empty) is created
         so extension commands (e.g. git) can detect Hermes as an active
         integration.
@@ -144,7 +144,7 @@ class HermesIntegration(SkillsIntegration):
                 context_file=context_file_display,
                 invoke_separator=self.invoke_separator,
             )
-            # Strip the processed frontmatter — we rebuild it for skills.
+            # Strip the processed frontmatter - we rebuild it for skills.
             if processed_body.startswith("---"):
                 parts = processed_body.split("---", 2)
                 if len(parts) >= 3:
@@ -188,7 +188,7 @@ class HermesIntegration(SkillsIntegration):
 
         # Create project-local marker directory so extension commands
         # (e.g. git) can detect Hermes as an active integration.
-        # Hermes itself ignores this directory — skills live globally.
+        # Hermes itself ignores this directory - skills live globally.
         (project_root / ".hermes" / "skills").mkdir(parents=True, exist_ok=True)
 
         return created
@@ -209,7 +209,7 @@ class HermesIntegration(SkillsIntegration):
         ``manifest.uninstall()`` for project-local tracked files, and
         removes all ``speckit-*`` skills under ``~/.hermes/skills/``.
 
-        Global skills are always removed on teardown — this matches the
+        Global skills are always removed on teardown - this matches the
         standard integration behaviour where all files created by the
         integration are removed on ``specify integration uninstall``.
         """
@@ -228,7 +228,7 @@ class HermesIntegration(SkillsIntegration):
             if hermes_dir.is_dir() and not any(hermes_dir.iterdir()):
                 hermes_dir.rmdir()
 
-        # Remove all global Hermes skills for speckit — these are always
+        # Remove all global Hermes skills for speckit - these are always
         # removed on uninstall regardless of the force flag, matching the
         # standard behaviour where all integration files are cleaned up.
         global_skills_dir = self._hermes_home_skills_dir()

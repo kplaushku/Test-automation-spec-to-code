@@ -1,4 +1,4 @@
-"""Antigravity (agy) integration — skills-based agent.
+"""Antigravity (agy) integration - skills-based agent.
 
 Antigravity uses ``.agents/skills/speckit-<name>/SKILL.md`` layout (enforced since v1.20.5).
 """

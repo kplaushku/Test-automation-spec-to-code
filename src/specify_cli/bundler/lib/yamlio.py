@@ -31,7 +31,7 @@ def ensure_within(root: Path, candidate: Path) -> Path:
         candidate_resolved.relative_to(root_resolved)
     except ValueError as exc:
         raise BundlerError(
-            f"Refusing path '{candidate}' — it escapes the allowed root '{root}'."
+            f"Refusing path '{candidate}' - it escapes the allowed root '{root}'."
         ) from exc
     return candidate_resolved
 

@@ -11,7 +11,7 @@ from tests.self_upgrade_helpers import (
 )
 
 # ===========================================================================
-# Phase 5 — User Story 3: non-upgradable path guidance (P3)
+# Phase 5 - User Story 3: non-upgradable path guidance (P3)
 # ===========================================================================
 
 
@@ -31,7 +31,7 @@ class TestUvxEphemeral:
         assert result.exit_code == 0
         expected = (
             "Running via uvx (ephemeral); the next uvx invocation already "
-            "resolves to latest — no upgrade action needed."
+            "resolves to latest - no upgrade action needed."
         )
         assert expected in strip_ansi(result.output)
         assert mock_run.call_count == 0
@@ -167,7 +167,7 @@ class TestDryRunNonUpgradablePaths:
             result = runner.invoke(app, ["self", "upgrade", "--dry-run"])
         assert result.exit_code == 0
         out = strip_ansi(result.output)
-        assert "Dry run — no changes will be made." not in out
+        assert "Dry run - no changes will be made." not in out
         assert "uvx (ephemeral)" in out
 
     def test_dry_run_on_unsupported_emits_manual_commands(

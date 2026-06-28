@@ -126,7 +126,7 @@ def test_bash_absolute_feature_dir_under_project_root(tmp_path: Path) -> None:
     now = time.time()
     os.utime(active, (now - 10, now - 10))
     os.utime(stale, (now, now))
-    # Write POSIX absolute path — mtime would pick 000-stale without feature.json
+    # Write POSIX absolute path - mtime would pick 000-stale without feature.json
     _write_feature_json(tmp_path, _bash_posix_path(tmp_path / "specs" / "001-active"))
 
     result = _run_bash_agent_context_script(tmp_path)
@@ -164,7 +164,7 @@ def test_ps_uses_feature_json_when_plan_exists(tmp_path: Path) -> None:
     now = time.time()
     os.utime(active, (now - 10, now - 10))
     os.utime(stale, (now, now))
-    # Native str() — PowerShell expects Windows-native paths, not MSYS2 /c/... form
+    # Native str() - PowerShell expects Windows-native paths, not MSYS2 /c/... form
     _write_feature_json(tmp_path, str(tmp_path / "specs" / "001-active"))
 
     result = _run_powershell_agent_context_script(tmp_path)

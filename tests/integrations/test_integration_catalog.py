@@ -47,7 +47,7 @@ class TestIntegrationCatalogEntry:
 
 
 # ---------------------------------------------------------------------------
-# IntegrationCatalog — URL validation
+# IntegrationCatalog - URL validation
 # ---------------------------------------------------------------------------
 
 
@@ -69,7 +69,7 @@ class TestCatalogURLValidation:
 
 
 # ---------------------------------------------------------------------------
-# IntegrationCatalog — active catalogs
+# IntegrationCatalog - active catalogs
 # ---------------------------------------------------------------------------
 
 
@@ -158,7 +158,7 @@ class TestActiveCatalogs:
 
 
 # ---------------------------------------------------------------------------
-# IntegrationCatalog — fetch & search (using monkeypatched urlopen responses)
+# IntegrationCatalog - fetch & search (using monkeypatched urlopen responses)
 # ---------------------------------------------------------------------------
 
 
@@ -695,7 +695,7 @@ class TestIntegrationUpgrade:
 
 
 # ---------------------------------------------------------------------------
-# IntegrationCatalog — catalog source management (get_catalog_configs / add / remove)
+# IntegrationCatalog - catalog source management (get_catalog_configs / add / remove)
 # ---------------------------------------------------------------------------
 
 

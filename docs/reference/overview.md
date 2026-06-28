@@ -1,6 +1,6 @@
 # CLI Reference
 
-The Specify CLI (`specify`) manages the full lifecycle of Spec-Driven Development — from project initialization to workflow automation.
+The Specify CLI (`specify`) manages the full lifecycle of Spec-Driven Development - from project initialization to workflow automation.
 
 ## Core Commands
 
@@ -16,13 +16,13 @@ Integrations connect Specto to your AI coding agent. Each integration sets up th
 
 ## Extensions
 
-Extensions add new capabilities to Specto — domain-specific commands, external tool integrations, quality gates, and more. They are discovered through catalogs and can be installed, updated, enabled, disabled, or removed independently. Multiple extensions can coexist in a single project.
+Extensions add new capabilities to Specto - domain-specific commands, external tool integrations, quality gates, and more. They are discovered through catalogs and can be installed, updated, enabled, disabled, or removed independently. Multiple extensions can coexist in a single project.
 
 [Extensions reference →](extensions.md)
 
 ## Presets
 
-Presets customize how Specto works — overriding command files, template files, and script files without changing any tooling. They let you enforce organizational standards, adapt the workflow to your methodology, or localize the entire experience. Multiple presets can be stacked with priority ordering to layer customizations.
+Presets customize how Specto works - overriding command files, template files, and script files without changing any tooling. They let you enforce organizational standards, adapt the workflow to your methodology, or localize the entire experience. Multiple presets can be stacked with priority ordering to layer customizations.
 
 [Presets reference →](presets.md)
 
@@ -34,6 +34,6 @@ Workflows automate multi-step Spec-Driven Development processes into repeatable 
 
 ## Bundles
 
-Bundles compose existing extensions, presets, workflows, and steps into a single, versioned, installable unit. Rather than adding new behavior, a bundle curates a stack of primitives — everything a team or role needs — and installs it in one step through each component's own machinery, with version pinning, conflict checks, and provenance tracking for clean updates and removal.
+Bundles compose existing extensions, presets, workflows, and steps into a single, versioned, installable unit. Rather than adding new behavior, a bundle curates a stack of primitives - everything a team or role needs - and installs it in one step through each component's own machinery, with version pinning, conflict checks, and provenance tracking for clean updates and removal.
 
 [Bundles reference →](bundles.md)

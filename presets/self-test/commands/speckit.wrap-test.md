@@ -1,5 +1,5 @@
 ---
-description: "Self-test wrap command — pre/post around core"
+description: "Self-test wrap command - pre/post around core"
 strategy: wrap
 ---
 

@@ -1,4 +1,4 @@
-"""specify extension * and catalog * command handlers — app objects and register().
+"""specify extension * and catalog * command handlers - app objects and register().
 
 Moved out of __init__.py (PR-7/8). Handlers reference helpers that remain in
 the package root (`_require_specify_project`, `_locate_bundled_extension`,
@@ -436,7 +436,7 @@ def extension_add(
 
         safe_url = _escape_markup(from_url)
 
-        # Warn about untrusted sources — default-deny confirmation
+        # Warn about untrusted sources - default-deny confirmation
         console.print()
         console.print(Panel(
             f"[bold]You are installing an extension from an external URL that is not\n"
@@ -745,7 +745,7 @@ def extension_search(
                 if install_allowed:
                     console.print(f"  [dim]Catalog:[/dim] {catalog_name}")
                 else:
-                    console.print(f"  [dim]Catalog:[/dim] {catalog_name} [yellow](discovery only — not installable)[/yellow]")
+                    console.print(f"  [dim]Catalog:[/dim] {catalog_name} [yellow](discovery only - not installable)[/yellow]")
 
             # Stats
             stats = []
@@ -1240,7 +1240,7 @@ def extension_update(
                         current_metadata = manager.registry.get(extension_id)
                         if current_metadata is None or not isinstance(current_metadata, dict):
                             raise RuntimeError(
-                                f"Registry entry for '{extension_id}' missing or corrupted after install — update incomplete"
+                                f"Registry entry for '{extension_id}' missing or corrupted after install - update incomplete"
                             )
                         new_metadata = dict(current_metadata)
 
