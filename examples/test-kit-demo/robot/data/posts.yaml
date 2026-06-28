@@ -1,0 +1,4 @@
+VALID_POST:
+  title: "spectest demo title"
+  body: "spectest demo body"
+  userId: 1

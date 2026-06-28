@@ -1,0 +1,38 @@
+schema_version: "1.0"
+
+extension:
+  id: traceability
+  name: "Requirement Traceability"
+  version: "0.1.0"
+  description: "Reads the spec and generated tests in any framework, extracts REQ-NNN markers, and produces a requirement-to-test matrix, flagging uncovered requirements."
+  category: visibility
+  effect: read-write
+  # CUSTOMIZE: your name / org
+  author: "Specto authors"
+  # CUSTOMIZE: your repository URL
+  repository: "https://github.com/kplaushku/Test-automation-spec-to-code"
+  license: MIT
+
+requires:
+  speckit_version: ">=0.9.0"
+
+provides:
+  commands:
+    - name: speckit.traceability.matrix
+      file: commands/speckit.traceability.matrix.md
+      description: "Build the requirement-to-test matrix from spec.md and the generated tests, and flag uncovered requirements"
+      aliases: ["speckit.traceability"]
+
+# Offer to run automatically after tests are generated.
+hooks:
+  after_implement:
+    command: "speckit.traceability.matrix"
+    optional: true
+    prompt: "Build the requirement-to-test traceability matrix now?"
+    description: "Generate the requirement-to-test matrix after implementation"
+
+tags:
+  - "traceability"
+  - "coverage"
+  - "qa"
+  - "testing"
