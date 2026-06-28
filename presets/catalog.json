@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "updated_at": "2026-04-24T00:00:00Z",
+  "catalog_url": "https://raw.githubusercontent.com/kplaushku/Test-automation-spec-to-code/main/presets/catalog.json",
+  "presets": {
+    "test-kit": {
+      "name": "Test Kit",
+      "id": "test-kit",
+      "version": "0.1.0",
+      "description": "Spec-driven test generation. Neutral test scenarios in, executable tests out, framework chosen at plan time via per-framework adapters.",
+      "author": "Specto authors",
+      "repository": "https://github.com/kplaushku/Test-automation-spec-to-code",
+      "license": "MIT",
+      "bundled": true,
+      "requires": {
+        "speckit_version": ">=0.6.0"
+      },
+      "provides": {
+        "commands": 5,
+        "templates": 5
+      },
+      "tags": [
+        "testing",
+        "test-automation",
+        "multi-framework",
+        "robot-framework",
+        "playwright"
+      ]
+    },
+    "lean": {
+      "name": "Lean Workflow",
+      "id": "lean",
+      "version": "1.0.0",
+      "description": "Minimal core workflow commands - just the prompt, just the artifact",
+      "author": "github",
+      "repository": "https://github.com/github/spec-kit",
+      "license": "MIT",
+      "bundled": true,
+      "requires": {
+        "speckit_version": ">=0.6.0"
+      },
+      "provides": {
+        "commands": 5,
+        "templates": 0
+      },
+      "tags": [
+        "lean",
+        "minimal",
+        "workflow",
+        "core"
+      ]
+    }
+  }
+}

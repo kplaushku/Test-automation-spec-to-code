@@ -1,0 +1,86 @@
+schema_version: "1.0"
+
+preset:
+  id: "test-kit"
+  name: "Test Kit"
+  version: "0.1.0"
+  description: "Spec-driven test generation. Neutral test scenarios in, executable tests out, framework chosen at plan time via per-framework adapters."
+  # CUSTOMIZE: your name / org
+  author: "Specto authors"
+  # CUSTOMIZE: your repository URL (create before publishing)
+  repository: "https://github.com/kplaushku/Test-automation-spec-to-code"
+  license: "MIT"
+
+requires:
+  speckit_version: ">=0.6.0"
+
+provides:
+  templates:
+    # --- Neutral workflow commands (override core) ---
+    - type: "command"
+      name: "speckit.constitution"
+      file: "commands/speckit.constitution.md"
+      description: "Test strategy: allowed frameworks + default, levels, naming, coverage, flaky definition"
+      replaces: "speckit.constitution"
+
+    - type: "command"
+      name: "speckit.specify"
+      file: "commands/speckit.specify.md"
+      description: "Describe what to test, framework-neutral (precondition / input / object / output / errors)"
+      replaces: "speckit.specify"
+
+    - type: "command"
+      name: "speckit.plan"
+      file: "commands/speckit.plan.md"
+      description: "Test plan: framework per group, suite structure, fixtures, data, app-access strategy"
+      replaces: "speckit.plan"
+
+    - type: "command"
+      name: "speckit.tasks"
+      file: "commands/speckit.tasks.md"
+      description: "Neutral list of test cases to implement, with REQ ids, dependencies and parallel markers"
+      replaces: "speckit.tasks"
+
+    # --- Framework layer (override core) ---
+    - type: "command"
+      name: "speckit.implement"
+      file: "commands/speckit.implement.md"
+      description: "Generate test code in the framework chosen in plan.md, routing to the matching adapter"
+      replaces: "speckit.implement"
+
+    # --- Document scaffolds ---
+    - type: "template"
+      name: "spec-template"
+      file: "templates/spec-template.md"
+      description: "Neutral test specification scaffold"
+      replaces: "spec-template"
+
+    - type: "template"
+      name: "plan-template"
+      file: "templates/plan-template.md"
+      description: "Test plan scaffold with framework selection per group"
+      replaces: "plan-template"
+
+    - type: "template"
+      name: "tasks-template"
+      file: "templates/tasks-template.md"
+      description: "Neutral test-case list scaffold"
+      replaces: "tasks-template"
+
+    # --- Framework adapters (reference guides, bundled with the preset) ---
+    - type: "template"
+      name: "adapter-robot"
+      file: "templates/adapters/robot/ADAPTER.md"
+      description: "Robot Framework adapter: rendering rules for neutral test cases (API layer)"
+
+    - type: "template"
+      name: "adapter-playwright"
+      file: "templates/adapters/playwright/ADAPTER.md"
+      description: "Playwright adapter: rendering rules for neutral test cases (API layer)"
+
+tags:
+  - "testing"
+  - "test-automation"
+  - "multi-framework"
+  - "robot-framework"
+  - "playwright"
