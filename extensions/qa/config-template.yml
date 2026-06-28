@@ -1,0 +1,27 @@
+# Live QA configuration for Specto.
+# All optional. API/contract testing ignores this file entirely.
+
+qa:
+  # Preferred browser driver. "auto" probes for an available MCP in order:
+  # claude-in-chrome -> claude-preview -> computer-use. Override to pin one,
+  # or set "gstack-browse" to drive via the gstack `browse` skill if installed.
+  driver: "auto"          # auto | claude-in-chrome | claude-preview | computer-use | gstack-browse
+
+  # Base URL of the running app under test (UI/web only).
+  base_url: "http://localhost:3000"
+
+  # Viewport used when reading the DOM and taking evidence screenshots.
+  viewport:
+    width: 1280
+    height: 800
+
+  # Where bound structural locators are written, relative to the feature dir.
+  # UI adapters read semantic locators inline and structural ones from here.
+  locator_file: "config/locators.generated.json"
+
+  # On a UI failure, capture this evidence before proposing a fix.
+  evidence:
+    screenshot: true
+    dom_snapshot: true
+    console: true
+    network: false

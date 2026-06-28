@@ -34,6 +34,11 @@ artifacts (`spec.md`, `plan.md`, `tasks.md`) are inputs only - never edit them.
    constitution:
    - **Separation.** Test logic, test data, and locators/config live in separate
      files. No inline URLs, payloads, selectors, or credentials.
+   - **UI locators.** For UI/web/mobile groups, write *semantic* locators
+     (text/role from the spec) inline, but emit *structural* locators as
+     `__BIND__:<name>` placeholders in the locator file. The `qa` extension's
+     `speckit.qa.bind-locators` resolves them against the live app. Skip this
+     for API/contract groups.
    - **Requirement marker.** Every generated test carries its `REQ-NNN` id,
      written in that framework's native way (the adapter specifies how - a Robot
      `[Tags]` entry, a Playwright tag/annotation). This is what the traceability

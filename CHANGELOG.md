@@ -18,6 +18,12 @@ history.
   and Appium stubbed.
 - `traceability` extension: requirement-to-test matrix keyed on neutral
   `REQ-NNN` markers, framework-agnostic.
+- `qa` extension (QA approach adapted from gstack, MIT): browser-driven
+  `speckit.qa.bind-locators` (resolves structural UI locators against the live
+  app), `speckit.qa.run` (run + evidence-based failure triage), and
+  `speckit.qa.investigate` (single-failure root-cause). Closes the app-access
+  gap for UI/web tests; wired into the plan app-access strategy, the UI
+  adapters, and `implement` via `__BIND__:<name>` locator placeholders.
 - Worked, runnable example in `examples/test-kit-demo/` (Robot 3/3 + Playwright
   3/3 against a live API from one neutral spec).
 - Original project branding: `media/logo.svg`, rebranded CLI tagline, rewritten

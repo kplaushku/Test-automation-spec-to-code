@@ -3,6 +3,22 @@
   "updated_at": "2026-06-05T00:00:00Z",
   "catalog_url": "https://raw.githubusercontent.com/kplaushku/Test-automation-spec-to-code/main/extensions/catalog.json",
   "extensions": {
+    "qa": {
+      "name": "Live QA & Locator Binding",
+      "id": "qa",
+      "version": "0.1.0",
+      "description": "Browser-driven QA for Specto: bind structural locators from a live app, run generated UI suites with evidence, and root-cause failures. Closes the app-access gap for UI/web tests.",
+      "author": "Specto authors",
+      "repository": "https://github.com/kplaushku/Test-automation-spec-to-code",
+      "bundled": true,
+      "tags": [
+        "qa",
+        "browser",
+        "ui-testing",
+        "locators",
+        "testing"
+      ]
+    },
     "traceability": {
       "name": "Requirement Traceability",
       "id": "traceability",

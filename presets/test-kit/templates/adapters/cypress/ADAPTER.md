@@ -11,5 +11,7 @@ with Robot + Playwright. To activate: implement the rendering rules below and ad
   `// REQ: REQ-001` comment for grep-based traceability.
 - **Separation:** logic in `*.cy.js`; data in `cypress/fixtures/*.json`;
   config/locators in `cypress.config.js` / a locators module.
-- **UI note:** requires an app-access strategy before generating UI tests
-  (see the preset README). API tests via `cy.request` do not.
+- **UI note:** requires an app-access strategy before generating UI tests (see
+  the preset README). Emit structural locators as `__BIND__:<name>` placeholders
+  and resolve them with the `qa` extension's `speckit.qa.bind-locators`. API
+  tests via `cy.request` need no app access.

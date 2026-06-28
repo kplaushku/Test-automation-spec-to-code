@@ -55,6 +55,12 @@ separately). Semantic locators (by text/role) derived from visible labels in the
 spec often render correctly without app access; only structural locators need
 binding.
 
+The **[`qa` extension](../../extensions/qa/)** realizes the locator-binding and
+MCP strategies: `speckit.qa.bind-locators` opens the live app via a browser MCP,
+reads the real DOM, and resolves the `__BIND__:<name>` placeholders that UI
+adapters emit. `speckit.qa.run` then runs the suite and QAs UI failures with
+screenshot/DOM evidence. This closes the app-access gap for UI/web tests.
+
 ## Install
 
 ```

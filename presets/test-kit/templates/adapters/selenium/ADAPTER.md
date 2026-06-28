@@ -11,6 +11,8 @@ to the constitution's allowed frameworks.
 - **Separation:** logic in test methods; data in a data file; locators in a Page
   Object / locators module - never inline selectors.
 - **UI note:** always requires an app-access strategy (MCP, source, or
-  locator-binding) - Selenium has no API layer to fall back on.
+  locator-binding) - Selenium has no API layer to fall back on. Prefer
+  locator-binding: emit `__BIND__:<name>` placeholders and resolve them with the
+  `qa` extension's `speckit.qa.bind-locators`.
 - **Relation:** shares the WebDriver protocol with Appium; Appium is its mobile
   counterpart.
