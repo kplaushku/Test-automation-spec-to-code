@@ -43,13 +43,17 @@ Evidence collected against the project spec's acceptance criteria (section 13).
   `kplaushku/Test-automation-spec-to-code`). Install **by id** works offline from the bundled
   preset (verified above); only remote *discovery/search* is pending real
   hosting.
-- **Placeholders remain**: `your-org`, contact emails, final project name
-  ("Specto" is a working name).
+- **Name + repo resolved**: project named **Specto**; published to
+  `github.com/kplaushku/Test-automation-spec-to-code`. The only remaining
+  `your-org` strings are intentional generic examples inside the upstream
+  preset/extension *authoring guides* (`presets/PUBLISHING.md`,
+  `extensions/EXTENSION-*.md`), not project placeholders.
 - **Robot TLS**: `RequestsLibrary` does not verify TLS by default (warning in
   the demo run); the adapter notes passing `verify` explicitly for real targets.
-- **Upstream residue**: some non-governance docs still reference spec-kit
-  (`AGENTS.md`, `CHANGELOG.md`, `spec-driven.md`, `newsletters/`, parts of
-  `docs/`). Tracked for cleanup; not blocking the acceptance criteria.
+- **Upstream docs residue**: headlines and governance are rebranded to Specto;
+  some deeper `docs/` body prose still describes the upstream software-dev
+  workflow and would benefit from a test-oriented rewrite. Not blocking the
+  acceptance criteria.
 
 ## Reproduce
 
