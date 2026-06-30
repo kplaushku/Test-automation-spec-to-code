@@ -70,6 +70,10 @@ def driver():
     d = webdriver.Remote("http://localhost:4723", options=AppiumOptions().load_capabilities(caps))
     yield d
     d.quit()
+
+@pytest.fixture(scope="session")
+def L():
+    return json.loads(Path("tests/config/locators.json").read_text())
 ```
 
 ```python

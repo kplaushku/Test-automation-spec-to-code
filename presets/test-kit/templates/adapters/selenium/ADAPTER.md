@@ -68,7 +68,17 @@ def driver():
 @pytest.fixture(scope="session")
 def L():
     return json.loads(Path("tests/config/locators.json").read_text())
+
+@pytest.fixture(scope="session")
+def base_url():
+    return os.environ.get("BASE_URL", "http://localhost:3000")
+
+@pytest.fixture(scope="session")
+def creds():
+    return json.loads(Path("tests/data/login.json").read_text())
 ```
+
+(`import os` at the top; `creds` and `base_url` come from data/config, never inline.)
 
 ```python
 # test_login.py
