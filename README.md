@@ -228,7 +228,9 @@ the neutral layers never change.
 | Extension | Commands | Purpose |
 |---|---|---|
 | **[traceability](extensions/traceability/)** | `/speckit.traceability.matrix` | Requirement-to-test matrix from the spec + generated tests; flags uncovered requirements. Framework-neutral. |
-| **[qa](extensions/qa/)** | `/speckit.qa.bind-locators`, `.run`, `.verify`, `.investigate`, `.review` | Browser-driven QA: bind UI locators from the live DOM, run suites with screenshot/DOM evidence, verify tests truly exercise their requirement, root-cause failures, and review test quality before landing. |
+| **[qa](extensions/qa/)** | `/speckit.qa.bind-locators`, `.heal`, `.run`, `.verify`, `.investigate`, `.review` | Browser-driven QA: bind UI locators from the live DOM, self-heal drifted selectors, run suites with screenshot/DOM evidence, verify tests truly exercise their requirement, root-cause failures, and review test quality. |
+| **[reliability](extensions/reliability/)** | `/speckit.reliability.flake`, `.score` | Make trust a metric: detect and quarantine flaky tests, and compute a single 0-100 reliability score from coverage, flakiness, assertion strength, and drift. |
+| **[contract](extensions/contract/)** | `/speckit.contract.check` | Catch "green suite, changed API": diff the live API's schema/responses against the spec and flag drift, mapped to each requirement. |
 
 ## Architecture
 
@@ -262,7 +264,9 @@ Framework layer
 │       └── adapters/            # one folder per framework
 ├── extensions/
 │   ├── traceability/            # requirement-to-test matrix
-│   └── qa/                      # live-DOM QA, run, verify, review
+│   ├── qa/                      # live-DOM QA, run, verify, review, heal
+│   ├── reliability/             # flake detection + quarantine + trust score
+│   └── contract/                # API contract-drift detection
 ├── examples/
 │   ├── test-kit-demo/           # one spec -> Robot + Playwright (API, runnable)
 │   └── qa-ui-demo/              # the UI locator-binding flow
@@ -275,6 +279,7 @@ Framework layer
 - ✅ Neutral pipeline + Robot/Playwright API adapters (runnable demo)
 - ✅ Traceability matrix and browser-driven QA extension
 - ✅ Playwright UI layer with live-DOM locator generation
+- ✅ Reliability (flake quarantine + trust score), contract-drift, self-healing locators
 - ⏳ Robot UI (SeleniumLibrary) and Cypress/Selenium/Appium adapters
 - ⏳ Unit/integration level and CI recipes
 

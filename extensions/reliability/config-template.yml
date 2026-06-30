@@ -1,0 +1,23 @@
+# Suite reliability configuration. All optional.
+
+reliability:
+  # How many times to re-run each test when measuring flakiness.
+  flake_runs: 5
+
+  # A test is flaky if it neither always-passes nor always-fails across the runs.
+  # Quarantine when its failure rate is within this band (exclusive 0 and 1).
+  flaky_band: [0.05, 0.95]
+
+  # Tag applied to quarantined tests, in each framework's native form
+  # (Robot [Tags], pytest marker, etc.). The CI recipe can then run them apart.
+  quarantine_tag: "quarantine"
+
+  # Weights for the composite reliability score (must sum to 1.0).
+  score_weights:
+    requirement_coverage: 0.35   # from the traceability extension
+    flake_free: 0.30             # 1 - flake_rate
+    assertion_strength: 0.20     # 1 - false_green_rate (from qa.verify)
+    drift_free: 0.15             # 1 - contract/selector drift incidents
+
+  # Minimum acceptable score (0..100). Below this, score reports a FAIL.
+  min_score: 80

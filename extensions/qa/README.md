@@ -11,6 +11,7 @@ resolves them - so the UI suite actually runs against the real selectors.
 | Command | What it does |
 |---|---|
 | `speckit.qa.bind-locators` | **Fallback / re-bind.** Open the live app, read the DOM, and fill `__BIND__` placeholders - used when `implement` ran without app access, or to re-bind after selector drift. (The default is the integrated single-pass flow inside `implement`.) |
+| `speckit.qa.heal` | **Self-healing locators.** Detect a drifted selector, re-derive the stable locator from the live DOM by the element's semantic identity, and re-bind - without touching test logic. Distinguishes drift from a real UI change. |
 | `speckit.qa.run` | Run the generated suite; for UI/web failures, capture screenshot + DOM + console evidence and propose a minimal, correctly-scoped fix. |
 | `speckit.qa.investigate` | Deep root-cause of a single failing or flaky test: reproduce, isolate one variable, fix minimally. |
 | `speckit.qa.verify` | Confirm a generated test truly exercises its requirement against real behavior - runs with observation on and falsifies it, flagging `weak` and `false-green` tests. |

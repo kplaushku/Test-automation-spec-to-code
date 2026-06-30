@@ -1,0 +1,21 @@
+# API contract drift configuration. All optional.
+
+contract:
+  # Base URL of the live API to probe.
+  base_url: "http://localhost:8080"
+
+  # Optional source of truth for the expected schema. If set, the spec's
+  # expectations are reconciled against it; if empty, expectations are taken
+  # from spec.md (status codes + named response fields).
+  openapi: ""            # e.g. "./openapi.yaml" or "https://.../openapi.json"
+
+  # How to treat each kind of drift. "fail" blocks, "warn" reports only.
+  severity:
+    removed_field: fail        # a field the spec relies on disappeared
+    changed_type: fail         # a field changed type
+    changed_status: fail       # the endpoint's status code changed
+    new_required_field: warn   # a new required request field appeared
+    added_field: warn          # a new response field appeared (usually safe)
+
+  # Endpoints to skip (health checks, etc.).
+  ignore_paths: []

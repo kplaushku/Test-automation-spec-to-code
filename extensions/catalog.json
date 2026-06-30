@@ -3,6 +3,38 @@
   "updated_at": "2026-06-05T00:00:00Z",
   "catalog_url": "https://raw.githubusercontent.com/kplaushku/Test-automation-spec-to-code/main/extensions/catalog.json",
   "extensions": {
+    "reliability": {
+      "name": "Suite Reliability",
+      "id": "reliability",
+      "version": "0.1.0",
+      "description": "Turn trust into a metric: detect and quarantine flaky tests, and compute a reliability score from coverage, flakiness, false-greens, and drift.",
+      "author": "Specto authors",
+      "repository": "https://github.com/kplaushku/Test-automation-spec-to-code",
+      "bundled": true,
+      "tags": [
+        "reliability",
+        "flaky",
+        "quality",
+        "qa",
+        "testing"
+      ]
+    },
+    "contract": {
+      "name": "API Contract Drift",
+      "id": "contract",
+      "version": "0.1.0",
+      "description": "Catch the silent failure mode where the suite is green but the API changed: compares the live API schema/responses against the spec's expectations and flags drift.",
+      "author": "Specto authors",
+      "repository": "https://github.com/kplaushku/Test-automation-spec-to-code",
+      "bundled": true,
+      "tags": [
+        "contract",
+        "api",
+        "drift",
+        "reliability",
+        "testing"
+      ]
+    },
     "qa": {
       "name": "Live QA & Locator Binding",
       "id": "qa",

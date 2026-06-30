@@ -30,6 +30,9 @@ provides:
       file: commands/speckit.qa.bind-locators.md
       description: "Open the live app via a browser, read the DOM/accessibility tree, and resolve the structural locators that UI adapters left as placeholders"
       aliases: ["speckit.qa.bind"]
+    - name: speckit.qa.heal
+      file: commands/speckit.qa.heal.md
+      description: "Self-heal broken UI locators: detect selector drift, re-derive the stable locator from the live DOM, and re-bind without touching test logic"
     - name: speckit.qa.run
       file: commands/speckit.qa.run.md
       description: "Run the generated suite for a feature; for UI/web failures, capture screenshot + DOM evidence and propose a fix"

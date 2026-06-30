@@ -25,8 +25,17 @@ history.
   gap for UI/web tests; wired into the plan app-access strategy, the UI
   adapters, and `implement` via `__BIND__:<name>` locator placeholders.
   Also `speckit.qa.verify` (confirm a test truly exercises its requirement;
-  flags weak / false-green tests) and `speckit.qa.review` (pre-landing quality
-  review of the generated test code), adapted from gstack `verify` / `review`.
+  flags weak / false-green tests), `speckit.qa.review` (pre-landing quality
+  review of the generated test code), and `speckit.qa.heal` (self-healing
+  locators: re-derive a drifted selector from the live DOM and re-bind).
+- `reliability` extension: `speckit.reliability.flake` (run N times, score, and
+  quarantine flaky tests per the constitution's flaky definition) and
+  `speckit.reliability.score` (a single 0-100 trust score from coverage,
+  flakiness, assertion strength, and drift).
+- `contract` extension: `speckit.contract.check` detects API contract drift -
+  compares the live API's schema/responses against the spec's expectations and
+  flags changed status codes, removed/changed fields, and new required fields,
+  mapped back to each `REQ-NNN`.
 - Worked, runnable example in `examples/test-kit-demo/` (Robot 3/3 + Playwright
   3/3 against a live API from one neutral spec).
 - Original project branding: `media/logo.svg`, rebranded CLI tagline, rewritten
