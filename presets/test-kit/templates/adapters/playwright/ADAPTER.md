@@ -103,16 +103,22 @@ def test_create_order_rejects_missing_field(api, orders):  # REQ: REQ-001
 For UI groups, render real browser tests using the integrated Playwright API
 (the `page` fixture from `pytest-playwright`), not the `request` fixture.
 
-### Locator strategy (semantic inline, structural bound)
+### Locator strategy (semantic inline, structural from the live DOM)
+
+Applies only when the plan chose a UI group (see `implement`'s gated UI rule).
 
 - **Semantic locators inline** - use the Playwright role/label/text API derived
   from the spec's visible labels: `page.get_by_role("button", name="Log in")`,
   `page.get_by_label("Email")`, `page.get_by_text(...)`. These need no app
   access and are the preferred, stable form.
-- **Structural locators bound** - anything not knowable from the spec is a
-  `__BIND__:<name>` placeholder loaded from the locator file and resolved by the
-  `qa` extension's `speckit.qa.bind-locators` against the live DOM. Never inline
-  a raw css/xpath selector.
+- **Structural locators, two modes:**
+  - **Integrated (default when the plan gave a URL + a browser is available):**
+    `implement` navigates to the app, reads the real DOM, and writes the correct
+    structural locator **inline in one pass** (`data-testid` > role+name >
+    stable `id` > minimal CSS).
+  - **Fallback (no app access at generation time):** emit a `__BIND__:<name>`
+    placeholder in the locator file for `speckit.qa.bind-locators` to resolve
+    later. Never inline a guessed css/xpath selector.
 
 ### Rendering a neutral UI case
 

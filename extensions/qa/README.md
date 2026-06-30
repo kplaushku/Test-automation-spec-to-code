@@ -10,7 +10,7 @@ resolves them - so the UI suite actually runs against the real selectors.
 
 | Command | What it does |
 |---|---|
-| `speckit.qa.bind-locators` | Open the live app via a browser, read the DOM/accessibility tree, fill the structural-locator file the adapters reference. Realizes the **locator-binding / MCP** app-access strategy. |
+| `speckit.qa.bind-locators` | **Fallback / re-bind.** Open the live app, read the DOM, and fill `__BIND__` placeholders - used when `implement` ran without app access, or to re-bind after selector drift. (The default is the integrated single-pass flow inside `implement`.) |
 | `speckit.qa.run` | Run the generated suite; for UI/web failures, capture screenshot + DOM + console evidence and propose a minimal, correctly-scoped fix. |
 | `speckit.qa.investigate` | Deep root-cause of a single failing or flaky test: reproduce, isolate one variable, fix minimally. |
 | `speckit.qa.verify` | Confirm a generated test truly exercises its requirement against real behavior - runs with observation on and falsifies it, flagging `weak` and `false-green` tests. |
@@ -31,11 +31,14 @@ layers.
 
 ## How it wires into the pipeline
 
-- `plan` declares the app-access strategy. For UI/web, the strategy is
-  `locator-binding`, realized by `speckit.qa.bind-locators`.
-- `implement` generates UI tests with semantic locators inline and structural
-  ones as `__BIND__:<name>` placeholders in the locator file.
-- `speckit.qa.bind-locators` resolves the placeholders against the live app.
+- `plan` declares whether a group is UI/web and its app-access strategy
+  (including the URL). UI generation only happens when the plan chose it.
+- **Default (integrated):** when the plan gives a UI group a reachable URL,
+  `implement` itself navigates, reads the DOM, and writes correct locators
+  inline in one pass - no separate binding step.
+- **Fallback:** if `implement` had no app access, it leaves `__BIND__:<name>`
+  placeholders, and `speckit.qa.bind-locators` resolves them later (also used to
+  re-bind after selector drift).
 - `speckit.qa.run` executes and QAs the result; a hook offers it right after
   `implement`.
 

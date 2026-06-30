@@ -10,11 +10,16 @@ $ARGUMENTS
 
 ## Outline
 
-This realizes Specto's **locator-binding** app-access strategy. Generated UI
-tests carry *semantic* locators (by text/role, derived from the spec) inline,
-but leave *structural* locators (css/xpath/test-id) as placeholders. This
-command opens the running app, reads the real DOM, and fills those placeholders
-so the UI suite actually runs. API/contract suites need none of this.
+This is the **fallback / re-bind** path for structural locators. The default is
+the integrated single-pass flow inside `implement`: when the plan declares a UI
+group with a reachable URL, `implement` itself navigates, reads the DOM, and
+writes correct locators inline. Use this command when:
+- `implement` ran **without** app access, so structural locators were left as
+  `__BIND__:<name>` placeholders; or
+- selectors **drifted** and need re-binding against the current DOM.
+
+It opens the running app, reads the real DOM, and fills the placeholders so the
+UI suite runs. API/contract suites need none of this.
 
 1. Read `.specify/feature.json` for the feature directory. Load
    `<feature_directory>/spec.md` (semantic intent) and the QA config

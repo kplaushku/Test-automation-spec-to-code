@@ -35,9 +35,12 @@ untouched; the choice lives here so the same spec can target different framework
    - **Locators / structural identifiers.** For the API layer this is base URLs,
      endpoints, headers - kept in a config/data file, not in tests.
    - **App-access strategy.** For API/contract: none required (work from the
-     contract). For UI/mobile: declare MCP, source, or locator-binding before
-     any such test is generated. Prefer **locator-binding**, realized by the
-     `qa` extension's `speckit.qa.bind-locators`, which resolves structural
-     locators against the live app.
+     contract). UI/web is generated **only if you explicitly mark a group as UI
+     here** - never inferred downstream. When you do, declare a reachable
+     **URL** (`base_url` / route, local or remote): that lets `implement` do the
+     integrated single-pass flow (navigate -> read DOM -> generate correct
+     locators inline). If you cannot give a URL at plan time, `implement` leaves
+     `__BIND__` placeholders and the `qa` extension's `speckit.qa.bind-locators`
+     resolves them later (the fallback).
 
 4. Do not write framework code here. Output is a plan, not tests.

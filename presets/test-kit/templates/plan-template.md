@@ -51,9 +51,11 @@ tests/
 ## App-Access Strategy
 
 - **API / contract:** none required - work from the contract.
-- **UI / mobile:** [MCP | source | locator-binding] - declare before generating
-  any such test. Default and recommended: **locator-binding** - tests carry
-  semantic locators (text/role) inline and structural ones as `__BIND__:<name>`
-  placeholders, resolved against the live app by the **qa** extension's
-  `speckit.qa.bind-locators`. Use **source** when the frontend source is
-  available, or **MCP** to drive the real app directly.
+- **UI / web:** generated only if a group is explicitly marked UI above.
+  - **URL:** `[http://localhost:3000 | https://... ]` - giving a reachable URL
+    lets `implement` do the **integrated single-pass** flow: navigate, read the
+    DOM, and write correct locators inline (semantic preferred; structural from
+    `data-testid` > role+name > id > minimal CSS).
+  - **No URL at plan time:** `implement` leaves `__BIND__:<name>` placeholders;
+    the **qa** extension's `speckit.qa.bind-locators` resolves them later
+    (fallback), or use **source** if the frontend source is available.

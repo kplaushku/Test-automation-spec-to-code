@@ -34,11 +34,24 @@ artifacts (`spec.md`, `plan.md`, `tasks.md`) are inputs only - never edit them.
    constitution:
    - **Separation.** Test logic, test data, and locators/config live in separate
      files. No inline URLs, payloads, selectors, or credentials.
-   - **UI locators.** For UI/web/mobile groups, write *semantic* locators
-     (text/role from the spec) inline, but emit *structural* locators as
-     `__BIND__:<name>` placeholders in the locator file. The `qa` extension's
-     `speckit.qa.bind-locators` resolves them against the live app. Skip this
-     for API/contract groups.
+   - **UI locators - gated on an explicit upstream UI decision.** First check
+     the plan: a group qualifies for live DOM access **only if** `constitution`
+     and `plan` already declared it a UI/web group **and** gave an app-access
+     strategy with a reachable URL (`base_url` / route, local or remote). The
+     user must have chosen UI testing in the earlier steps - never infer it here.
+     - **If UI was chosen and a URL is available** (and a browser driver exists:
+       claude-in-chrome / claude-preview / computer-use, per `qa-config.yml`),
+       do the **integrated single-pass flow**: navigate to the declared URL (or
+       localhost), read the DOM / accessibility tree for each route the tasks
+       touch, then generate each UI test in **one pass with correct locators
+       inline** - semantic (role / text / label) preferred, structural derived
+       from the real DOM (`data-testid` > role+name > stable `id` > minimal CSS).
+     - **Otherwise** (UI not chosen upstream, no URL/app-access declared, or no
+       browser driver) **do not navigate**: emit structural locators as
+       `__BIND__:<name>` placeholders for `speckit.qa.bind-locators` to resolve
+       later. Semantic locators from the spec are still written inline.
+     - **Never start a browser for API/contract or unit groups, and never
+       navigate when UI testing was not decided in `plan`.**
    - **Requirement marker.** Every generated test carries its `REQ-NNN` id,
      written in that framework's native way (the adapter specifies how - a Robot
      `[Tags]` entry, a Playwright tag/annotation). This is what the traceability
