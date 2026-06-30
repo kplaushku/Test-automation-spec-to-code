@@ -20,7 +20,7 @@ constitution  →  specify  →  clarify  →  plan  →  tasks  →  implement
 | Framework | Web UI | Mobile native | API | Unit/integr. | Language | Status |
 |---|---|---|---|---|---|---|
 | Robot Framework | via SeleniumLibrary | via AppiumLibrary | RequestsLibrary | Python keywords | keyword-driven / Python | **active (API)** |
-| Playwright | yes | web emulation only | request | partial | TS/JS/Python/.NET/Java | **active (API)** |
+| Playwright | yes | web emulation only | request | partial | TS/JS/Python/.NET/Java | **active (API + UI)** |
 | Cypress | yes | no | cy.request | partial | JS/TS | planned |
 | Selenium | yes | no | no | no | cross-language | planned |
 | Appium | no | iOS/Android | no | no | cross-language | planned |
@@ -31,11 +31,13 @@ against this matrix and the constitution.
 
 ## Current scope
 
-- **Level:** API / contract (no application access required).
-- **Active adapters:** `robot`, `playwright`.
-- UI-web and mobile adapters are stubbed under
-  [`templates/adapters/`](templates/adapters/) and activate once the app-access
-  strategy is decided.
+- **Level:** API / contract (no app access required) for both adapters; plus
+  **Playwright UI / web** (DOM-integrated), which needs the `qa` extension and a
+  browser to bind structural locators.
+- **Active adapters:** `robot` (API), `playwright` (API + UI).
+- Cypress, Selenium, and Appium remain stubbed under
+  [`templates/adapters/`](templates/adapters/); activate them by writing their
+  rendering rules and adding them to the constitution.
 
 ## Requirement traceability
 

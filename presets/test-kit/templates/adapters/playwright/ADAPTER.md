@@ -1,7 +1,8 @@
-# Adapter: Playwright - API layer
+# Adapter: Playwright - API + UI layers
 
 Rendering rules that turn a neutral test case (from `tasks.md`) into Playwright
-tests for the **API / contract** level, using the `request` fixture. Default
+tests. Two layers: **API / contract** (the `request` fixture) and **UI / web**
+(the DOM-integrated `page` fixture - see the UI section below). Default
 language: **Python** (`pytest-playwright`), to share one runtime with the Robot
 adapter. A TypeScript variant is noted at the end.
 
@@ -97,12 +98,65 @@ def test_create_order_rejects_missing_field(api, orders):  # REQ: REQ-001
     assert resp.status == 422
 ```
 
+## UI / web layer (DOM-integrated)
+
+For UI groups, render real browser tests using the integrated Playwright API
+(the `page` fixture from `pytest-playwright`), not the `request` fixture.
+
+### Locator strategy (semantic inline, structural bound)
+
+- **Semantic locators inline** - use the Playwright role/label/text API derived
+  from the spec's visible labels: `page.get_by_role("button", name="Log in")`,
+  `page.get_by_label("Email")`, `page.get_by_text(...)`. These need no app
+  access and are the preferred, stable form.
+- **Structural locators bound** - anything not knowable from the spec is a
+  `__BIND__:<name>` placeholder loaded from the locator file and resolved by the
+  `qa` extension's `speckit.qa.bind-locators` against the live DOM. Never inline
+  a raw css/xpath selector.
+
+### Rendering a neutral UI case
+
+For a task `T010 [REQ-010] login - successful login shows dashboard`:
+
+```python
+import pytest
+from playwright.sync_api import expect
+
+from .locators import L   # bound structural locators, loaded from the locator file
+
+
+@pytest.mark.req("REQ-010")
+def test_successful_login_shows_dashboard(page, base_url, creds):  # REQ: REQ-010
+    page.goto(f"{base_url}/login")
+    # Semantic locators (real Playwright API, no binding needed):
+    page.get_by_label("Email").fill(creds["valid"]["email"])
+    page.get_by_label("Password").fill(creds["valid"]["password"])
+    page.get_by_role("button", name="Log in").click()
+    # Structural locator bound from the live DOM via qa.bind-locators:
+    expect(page.locator(L["dashboard_greeting"])).to_be_visible()
+```
+
+- **Auto-wait:** rely on Playwright's built-in auto-wait and `expect(...)`
+  retrying assertions. Do **not** add bare `sleep`s (flaky per the constitution).
+- **Fixtures:** `page` (and `browser`/`context`) come from `pytest-playwright`;
+  `base_url` and `creds` from config/data files - never inline.
+- **Evidence on failure:** enable trace + screenshot so `speckit.qa.run` can
+  triage UI failures (`--tracing=retain-on-failure --screenshot=only-on-failure`).
+
 ## Run
 
 ```
-pip install pytest-playwright && playwright install
+# API only:
+pip install pytest-playwright
 pytest tests/
+
+# UI (needs browser binaries):
+playwright install
+pytest tests/ --tracing=retain-on-failure --screenshot=only-on-failure
 ```
+
+For UI groups, resolve `__BIND__` placeholders first with
+`speckit.qa.bind-locators` against the running app.
 
 ## TypeScript variant
 
