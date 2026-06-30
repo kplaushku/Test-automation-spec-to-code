@@ -21,6 +21,14 @@ it. No framework names, no syntax, no selectors, no code.
    { "feature_directory": "<feature_directory>" }
    ```
 
+2b. **Optional - seed from a source.** If the user points at an API
+   documentation (OpenAPI/Swagger), or source/route code, or the module to unit
+   test, **read it** and seed the requirements from what it actually exposes
+   (endpoints, status codes, fields; or functions and signatures) instead of
+   asking them to retype it. Still express the result as neutral requirements -
+   the source is input, not the spec. Record the source path in the plan later
+   (`contract_source` / `source_under_test`) so `implement` reads it again.
+
 3. Load `.specify/memory/constitution.md` for the requirement-id scheme and the
    active test levels.
 

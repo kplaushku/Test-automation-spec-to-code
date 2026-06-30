@@ -10,6 +10,13 @@ history.
 ## [Unreleased]
 
 ### Added
+- Source-grounded generation: `implement` reads real code/contracts, not just
+  prose. Unit/integration groups declare `source_under_test` and tests are
+  generated against the analyzed source (signatures, types, branches). API groups
+  may declare a `contract_source` (OpenAPI doc or route code) that `implement`
+  reads to build the real contract. `specify` can also seed requirements by
+  reading a provided source. Wired through plan, specify, implement, and the
+  Robot/Playwright/Cypress adapters.
 - `test-kit` preset: spec-driven **test generation**. Neutral commands
   (`constitution`, `specify`, `plan`, `tasks`) plus a framework-routing
   `implement`, and document scaffolds.

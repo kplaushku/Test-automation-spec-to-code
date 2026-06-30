@@ -30,6 +30,15 @@ untouched; the choice lives here so the same spec can target different framework
      allowed, and any choice whose capabilities don't fit the test level (see
      the capability matrix in the preset README).
    - **Suite structure.** Directory layout, file-per-group mapping.
+   - **Source under test (unit/integration groups).** Declare
+     `source_under_test:` - the module / package / file paths whose code these
+     tests exercise. `implement` reads and analyzes that source (signatures,
+     types, branches) to generate tests against the real code API. Required for
+     unit/integration groups; omit for API/UI.
+   - **API contract source (optional, API groups).** Declare `contract_source:`
+     when available - an OpenAPI/Swagger doc (file or URL) or the route/handler
+     source code. `implement` reads it to build the real contract instead of
+     relying only on the spec's prose. Omit to build from the spec.
    - **Fixtures, mocks, setup/teardown.** What is shared, what is per-test.
    - **Test data.** Named data sets in a dedicated data file - never inline.
    - **Locators / structural identifiers.** For the API layer this is base URLs,

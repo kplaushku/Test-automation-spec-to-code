@@ -205,6 +205,23 @@ def test_successful_login_shows_dashboard(page, base_url, creds):  # REQ: REQ-01
 
 See [`examples/qa-ui-demo/`](examples/qa-ui-demo/) for the full flow.
 
+## Tests from real source, not guesses
+
+The same "read reality, do not invent" principle applies beyond the DOM:
+
+- **Unit / integration - reads your code.** When the plan points a unit group at
+  `source_under_test` (module / package / file paths), `implement` analyzes the
+  real source - import paths, function signatures, types, branches, exceptions -
+  and generates tests against the actual code API. If a symbol is missing, it
+  stops and asks rather than guessing.
+- **API - reads your contract (optional).** Beyond describing the API in plain
+  language, you can point a group at a `contract_source`: an OpenAPI/Swagger doc
+  or the route/handler source. `implement` reads it to build the real endpoints,
+  status codes, and fields. No source? It builds the contract from the spec.
+
+So UI reads the DOM, unit reads the source, and API can read the OpenAPI/route
+code - each layer is grounded in reality, gated on what the plan declares.
+
 ## Supported frameworks
 
 The framework is bound to the **test level** - only Robot covers API + unit

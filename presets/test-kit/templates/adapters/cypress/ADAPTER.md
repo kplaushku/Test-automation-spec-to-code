@@ -74,6 +74,10 @@ on a fixed timer (flaky per the constitution).
 
 ## API case (`cy.request`)
 
+When the plan declares a `contract_source` (OpenAPI doc or route code),
+`implement` reads it to build the real endpoints/status/fields; otherwise the
+contract comes from the spec's prose.
+
 ```js
 it("create order returns 201", { tags: ["REQ-001"] }, () => {
   // REQ: REQ-001

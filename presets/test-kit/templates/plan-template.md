@@ -12,12 +12,18 @@
 
 - **Requirements:** REQ-001, REQ-002, ...
 - **framework:** [robot | playwright]   <!-- must be allowed by the constitution -->
+- **level:** [api | unit | ui | mobile]
+- **source_under_test:** [unit/integration only - module/package/file paths the
+  tests exercise; implement reads these to generate against the real code API]
+- **contract_source:** [api only, optional - OpenAPI doc (file/URL) or route
+  source code; implement reads it to build the real contract]
 - **Rationale:** [why this framework fits this group and level]
 
 ### Group: [another-group]
 
 - **Requirements:** REQ-003, ...
 - **framework:** [...]
+- **level:** [...]
 - **Rationale:** [...]
 
 ## Suite Structure

@@ -6,6 +6,10 @@ Framework tests. Robot is a meta-framework: it routes to a sub-library per layer
 and plain Python keyword libraries (unit/integration). The API rendering is
 below; the UI and unit sections follow.
 
+> For API groups, when the plan declares a `contract_source` (OpenAPI doc or
+> route code), `implement` reads it to build the real endpoints/status/fields;
+> otherwise the contract comes from the spec's prose.
+
 ## Capabilities
 
 | Web UI | Mobile | API | Unit/integration | Language |
@@ -134,4 +138,6 @@ Discount Applies To Eligible Cart
 ```
 
 Keep the keyword library (`*.py`) as the only place that imports the code under
-test; the `.robot` file stays declarative. Run: `robot tests/`.
+test; the `.robot` file stays declarative. The wrapper's imports and the real
+function signatures come from analyzing the plan's `source_under_test`, not from
+guessing. Run: `robot tests/`.

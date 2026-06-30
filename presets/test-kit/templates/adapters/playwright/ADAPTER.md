@@ -6,6 +6,10 @@ tests. Two layers: **API / contract** (the `request` fixture) and **UI / web**
 language: **Python** (`pytest-playwright`), to share one runtime with the Robot
 adapter. A TypeScript variant is noted at the end.
 
+> For API groups, when the plan declares a `contract_source` (OpenAPI doc or
+> route code), `implement` reads it to build the real endpoints/status/fields;
+> otherwise the contract comes from the spec's prose.
+
 ## Capabilities
 
 | Web UI | Mobile | API | Unit/integration | Language |
@@ -180,6 +184,9 @@ def test_discount_applies_to_eligible_cart(carts):  # REQ: REQ-020
     assert apply_discount(carts["eligible"], code="SAVE10") == 90.00
 ```
 
+- **Read the real source.** Import path, function signature, and types come from
+  analyzing the actual `source_under_test` declared in the plan - not guessed.
+  Exercise the real branches/exceptions the spec's edge cases name.
 - **Data** (fixtures/carts) in `data/*.json` loaded by a fixture; never inline.
 - For **integration**, isolate external systems with fixtures/mocks declared in
   the plan; keep each test deterministic (constitution flaky rule).

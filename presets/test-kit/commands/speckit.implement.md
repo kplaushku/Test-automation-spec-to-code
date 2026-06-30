@@ -52,6 +52,25 @@ artifacts (`spec.md`, `plan.md`, `tasks.md`) are inputs only - never edit them.
        later. Semantic locators from the spec are still written inline.
      - **Never start a browser for API/contract or unit groups, and never
        navigate when UI testing was not decided in `plan`.**
+   - **Unit/integration - read the real source.** For unit/integration groups,
+     do not write tests against an imagined API. The plan declares
+     `source_under_test` (the module / package / file paths). Before generating:
+     - **Read and analyze that source**: resolve the real import paths, the
+       function / method / class **signatures**, parameter and return **types**,
+       raised exceptions, and the branches an edge case must hit. Use the actual
+       names and arities - never invent a signature.
+     - **Generate tests against the real code API**: correct imports, real call
+       signatures, and assertions tied to the spec's expected output. Cover the
+       error/edge cases the spec names by exercising the real branches/exceptions.
+     - If `source_under_test` is missing or a symbol cannot be found, **stop and
+       report** the gap (ask for the path) rather than guessing the code's API.
+     - No app access, no network - this is pure source analysis.
+   - **API contract - prefer a declared source over prose.** If the plan declares
+     an API `contract_source` (an OpenAPI/Swagger doc, or the route/handler source
+     code), **read it** and build the expected endpoints, request shapes, status
+     codes, and response fields from it, reconciled with the spec. Use the spec's
+     prose only to fill what the source does not cover. With no source, build the
+     contract from the spec's prose as before.
    - **Requirement marker.** Every generated test carries its `REQ-NNN` id,
      written in that framework's native way (the adapter specifies how - a Robot
      `[Tags]` entry, a Playwright tag/annotation). This is what the traceability
