@@ -71,12 +71,27 @@ provides:
     - type: "template"
       name: "adapter-robot"
       file: "templates/adapters/robot/ADAPTER.md"
-      description: "Robot Framework adapter: rendering rules for neutral test cases (API layer)"
+      description: "Robot Framework adapter: API (RequestsLibrary) + Web UI (SeleniumLibrary) + Python-keyword unit"
 
     - type: "template"
       name: "adapter-playwright"
       file: "templates/adapters/playwright/ADAPTER.md"
-      description: "Playwright adapter: rendering rules for neutral test cases (API layer)"
+      description: "Playwright adapter: API (request) + UI (page) + pytest unit"
+
+    - type: "template"
+      name: "adapter-cypress"
+      file: "templates/adapters/cypress/ADAPTER.md"
+      description: "Cypress adapter: Web UI + API (cy.request)"
+
+    - type: "template"
+      name: "adapter-selenium"
+      file: "templates/adapters/selenium/ADAPTER.md"
+      description: "Selenium adapter: Web UI over WebDriver (Python)"
+
+    - type: "template"
+      name: "adapter-appium"
+      file: "templates/adapters/appium/ADAPTER.md"
+      description: "Appium adapter: native mobile (iOS/Android) over WebDriver"
 
 tags:
   - "testing"

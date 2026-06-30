@@ -17,7 +17,7 @@
       },
       "provides": {
         "commands": 5,
-        "templates": 5
+        "templates": 8
       },
       "tags": [
         "testing",

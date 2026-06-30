@@ -23,11 +23,13 @@ artifacts (`spec.md`, `plan.md`, `tasks.md`) are inputs only - never edit them.
 3. **Resolve the framework per task.** For each task, find its group in
    `plan.md` and read that group's `framework:` value. This selects the adapter.
 
-4. **Load the matching adapter** rules:
-   - `robot` → `adapter-robot`
-     (`presets/test-kit/templates/adapters/robot/ADAPTER.md`)
-   - `playwright` → `adapter-playwright`
-     (`presets/test-kit/templates/adapters/playwright/ADAPTER.md`)
+4. **Load the matching adapter** rules from
+   `presets/test-kit/templates/adapters/<framework>/ADAPTER.md`:
+   - `robot` → `adapter-robot` (API + Web UI + unit)
+   - `playwright` → `adapter-playwright` (API + UI + unit)
+   - `cypress` → `adapter-cypress` (Web UI + `cy.request`)
+   - `selenium` → `adapter-selenium` (Web UI)
+   - `appium` → `adapter-appium` (native mobile)
    Refuse any framework not allowed by the constitution.
 
 5. **Generate tests** following the adapter, honoring three rules from the
