@@ -19,11 +19,11 @@ constitution  →  specify  →  clarify  →  plan  →  tasks  →  implement
 
 | Framework | Web UI | Mobile native | API | Unit/integr. | Language | Status |
 |---|---|---|---|---|---|---|
-| Robot Framework | via SeleniumLibrary | via AppiumLibrary | RequestsLibrary | Python keywords | keyword-driven / Python | **active (API)** |
-| Playwright | yes | web emulation only | request | partial | TS/JS/Python/.NET/Java | **active (API + UI)** |
-| Cypress | yes | no | cy.request | partial | JS/TS | planned |
-| Selenium | yes | no | no | no | cross-language | planned |
-| Appium | no | iOS/Android | no | no | cross-language | planned |
+| Robot Framework | SeleniumLibrary | via AppiumLibrary | RequestsLibrary | Python keywords | keyword-driven / Python | **active (API + UI + unit)** |
+| Playwright | yes | web emulation only | request | pytest unit | TS/JS/Python/.NET/Java | **active (API + UI + unit)** |
+| Cypress | yes | no | cy.request | partial | JS/TS | **active (UI + API)** |
+| Selenium | yes | no | no | no | cross-language | **active (UI)** |
+| Appium | no | iOS/Android | no | no | cross-language | **active (mobile)** |
 
 Framework choice is bound to the **test level**: only Robot covers API+unit
 comfortably; the others are UI or mobile. `plan` validates each group's choice
@@ -31,13 +31,13 @@ against this matrix and the constitution.
 
 ## Current scope
 
-- **Level:** API / contract (no app access required) for both adapters; plus
-  **Playwright UI / web** (DOM-integrated), which needs the `qa` extension and a
-  browser to bind structural locators.
-- **Active adapters:** `robot` (API), `playwright` (API + UI).
-- Cypress, Selenium, and Appium remain stubbed under
-  [`templates/adapters/`](templates/adapters/); activate them by writing their
-  rendering rules and adding them to the constitution.
+- **Levels:** API / contract (no app access), unit / integration, and UI / web.
+  Mobile (Appium) generation is codified; a live run needs a device/emulator.
+- **Active adapters:** all five have real rendering rules -
+  `robot` (API + UI + unit), `playwright` (API + UI + unit), `cypress` (UI + API),
+  `selenium` (UI), `appium` (mobile).
+- UI/mobile groups need an app-access strategy (a URL in the plan), realized by
+  the `qa` extension; API and unit need none.
 
 ## Requirement traceability
 

@@ -13,9 +13,14 @@ history.
 - `test-kit` preset: spec-driven **test generation**. Neutral commands
   (`constitution`, `specify`, `plan`, `tasks`) plus a framework-routing
   `implement`, and document scaffolds.
-- Framework adapters under `presets/test-kit/templates/adapters/`: Robot
-  Framework and Playwright active for the API/contract layer; Cypress, Selenium,
-  and Appium stubbed.
+- Framework adapters under `presets/test-kit/templates/adapters/`, all with real
+  rendering rules: Robot (API + Web UI via SeleniumLibrary + Python-keyword unit),
+  Playwright (API + UI + pytest unit), Cypress (UI + `cy.request`), Selenium (Web
+  UI), and Appium (native mobile).
+- Unit/integration level (pytest and Robot Python keywords) and a `ci` extension
+  (`speckit.ci.generate`) that emits GitHub Actions / GitLab CI running the suite,
+  isolating quarantined flaky tests in a non-blocking job, and publishing the
+  traceability + reliability artifacts.
 - `traceability` extension: requirement-to-test matrix keyed on neutral
   `REQ-NNN` markers, framework-agnostic.
 - `qa` extension (QA approach adapted from gstack, MIT): browser-driven

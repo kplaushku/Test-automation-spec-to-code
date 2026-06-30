@@ -164,6 +164,27 @@ pytest tests/ --tracing=retain-on-failure --screenshot=only-on-failure
 For UI groups, resolve `__BIND__` placeholders first with
 `speckit.qa.bind-locators` against the running app.
 
+## Unit / integration layer (pytest)
+
+For Python unit/integration groups, render plain `pytest` tests - no browser, no
+`request`, no app access. Same separation and marker rules.
+
+```python
+import pytest
+
+from app.pricing import apply_discount   # the code under test
+
+
+@pytest.mark.req("REQ-020")
+def test_discount_applies_to_eligible_cart(carts):  # REQ: REQ-020
+    assert apply_discount(carts["eligible"], code="SAVE10") == 90.00
+```
+
+- **Data** (fixtures/carts) in `data/*.json` loaded by a fixture; never inline.
+- For **integration**, isolate external systems with fixtures/mocks declared in
+  the plan; keep each test deterministic (constitution flaky rule).
+- Run: `pytest tests/`.
+
 ## TypeScript variant
 
 If the project's constitution sets the Playwright language to TS, use

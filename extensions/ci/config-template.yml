@@ -1,0 +1,24 @@
+# CI recipe configuration. All optional.
+
+ci:
+  # Which CI to generate. "auto" picks GitHub Actions if a .github/ exists,
+  # else GitLab if .gitlab-ci.yml is referenced, else GitHub Actions.
+  provider: "auto"          # auto | github | gitlab
+
+  # When to run.
+  triggers: ["push", "pull_request"]
+
+  # How to treat quarantined flaky tests (tagged by speckit.reliability.flake):
+  #   separate  -> a non-blocking job that runs them and reports, never fails CI
+  #   skip      -> excluded entirely
+  #   include   -> run with the rest (blocking)
+  quarantine: "separate"
+
+  # Publish these as CI artifacts / job summaries when present.
+  publish:
+    traceability: true       # traceability.md
+    reliability: true        # reliability.md
+    contract_drift: true     # contract-drift.md
+
+  # Fail the build if the reliability score is below this (0..100; null disables).
+  min_reliability_score: null

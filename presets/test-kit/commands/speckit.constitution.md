@@ -23,7 +23,8 @@ framework-neutral except for declaring which frameworks are allowed.
      and `playwright` (API layer). Record the default explicitly, e.g.
      `default_framework: robot`.
    - **Test levels in scope.** Any of: API/contract, unit/integration, UI web,
-     mobile native. State which are active. (Current scope: API/contract only.)
+     mobile native. State which are active. All four have adapter support; API
+     and unit need no app access, UI/mobile require an app-access strategy.
    - **Requirement identifiers.** Every requirement carries a stable neutral id
      of the form `REQ-NNN` (e.g. `REQ-001`). These ids are the link between
      spec and tests and MUST appear on every generated test. Define the scheme

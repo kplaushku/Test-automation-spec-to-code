@@ -1,0 +1,29 @@
+# Reference recipe: GitLab CI for a Specto suite.
+# speckit.ci.generate tailors this to the frameworks in your plan.
+stages:
+  - test
+  - flaky
+
+image: python:3.11
+
+before_script:
+  - pip install robotframework robotframework-requests pyyaml pytest-playwright
+
+tests:
+  stage: test
+  script:
+    - robot --outputdir out tests/robot || true
+    - pytest tests/playwright -m "not quarantine"
+  artifacts:
+    when: always
+    paths:
+      - "**/traceability.md"
+      - "**/reliability.md"
+      - "**/contract-drift.md"
+
+# Quarantined flaky tests: tracked, never blocking.
+flaky:
+  stage: flaky
+  allow_failure: true
+  script:
+    - pytest tests/playwright -m "quarantine" || true

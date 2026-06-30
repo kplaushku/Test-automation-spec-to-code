@@ -3,6 +3,22 @@
   "updated_at": "2026-06-05T00:00:00Z",
   "catalog_url": "https://raw.githubusercontent.com/kplaushku/Test-automation-spec-to-code/main/extensions/catalog.json",
   "extensions": {
+    "ci": {
+      "name": "CI Recipes",
+      "id": "ci",
+      "version": "0.1.0",
+      "description": "Generate CI config that runs the suite, runs quarantined flaky tests apart, and publishes the traceability matrix and reliability score.",
+      "author": "Specto authors",
+      "repository": "https://github.com/kplaushku/Test-automation-spec-to-code",
+      "bundled": true,
+      "tags": [
+        "ci",
+        "github-actions",
+        "gitlab",
+        "reliability",
+        "testing"
+      ]
+    },
     "reliability": {
       "name": "Suite Reliability",
       "id": "reliability",

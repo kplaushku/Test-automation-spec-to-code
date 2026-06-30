@@ -1,0 +1,45 @@
+# Reference recipe: GitHub Actions for a Specto suite.
+# speckit.ci.generate tailors this to the frameworks in your plan.
+name: specto-tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install
+        run: pip install robotframework robotframework-requests pyyaml pytest-playwright
+      # Add per-framework runs as your plan requires:
+      - name: Robot suite
+        run: robot --outputdir out tests/robot || true
+      - name: Playwright API suite
+        run: pytest tests/playwright -m "not quarantine"
+      - name: Publish reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: specto-reports
+          path: |
+            **/traceability.md
+            **/reliability.md
+            **/contract-drift.md
+
+  # Quarantined flaky tests: tracked, never blocking.
+  flaky:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pytest-playwright
+      - name: Run quarantined tests (non-blocking)
+        run: pytest tests/playwright -m "quarantine" || true

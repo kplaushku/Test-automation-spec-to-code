@@ -213,11 +213,14 @@ this matrix.
 
 | Framework | Web UI | Mobile | API | Unit | Language | Status |
 |---|---|---|---|---|---|---|
-| **Robot Framework** | via SeleniumLibrary | via AppiumLibrary | RequestsLibrary | Python keywords | keyword-driven / Python | **active (API)** |
-| **Playwright** | yes | web emulation | request | partial | TS / JS / Python / .NET / Java | **active (API + UI)** |
-| Cypress | yes | no | `cy.request` | partial | JS / TS | planned |
-| Selenium | yes | no | no | no | cross-language | planned |
-| Appium | no | iOS / Android | no | no | cross-language | planned |
+| **Robot Framework** | SeleniumLibrary | via AppiumLibrary | RequestsLibrary | Python keywords | keyword-driven / Python | **active (API + UI + unit)** |
+| **Playwright** | yes | web emulation | request | pytest unit | TS / JS / Python / .NET / Java | **active (API + UI + unit)** |
+| **Cypress** | yes | no | `cy.request` | partial | JS / TS | **active (UI + API)** |
+| **Selenium** | yes | no | no | no | cross-language | **active (UI)** |
+| **Appium** | no | iOS / Android | no | no | cross-language | **active (mobile)** |
+
+> Mobile (Appium) generation is complete; a live run needs an Appium server + a
+> device/emulator, which is a runner concern.
 
 Adding a framework means adding one **adapter** under
 [`presets/test-kit/templates/adapters/`](presets/test-kit/templates/adapters/) -
@@ -231,6 +234,7 @@ the neutral layers never change.
 | **[qa](extensions/qa/)** | `/speckit.qa.bind-locators`, `.heal`, `.run`, `.verify`, `.investigate`, `.review` | Browser-driven QA: bind UI locators from the live DOM, self-heal drifted selectors, run suites with screenshot/DOM evidence, verify tests truly exercise their requirement, root-cause failures, and review test quality. |
 | **[reliability](extensions/reliability/)** | `/speckit.reliability.flake`, `.score` | Make trust a metric: detect and quarantine flaky tests, and compute a single 0-100 reliability score from coverage, flakiness, assertion strength, and drift. |
 | **[contract](extensions/contract/)** | `/speckit.contract.check` | Catch "green suite, changed API": diff the live API's schema/responses against the spec and flag drift, mapped to each requirement. |
+| **[ci](extensions/ci/)** | `/speckit.ci.generate` | Generate GitHub Actions / GitLab CI that runs the suite, runs quarantined flaky tests in a non-blocking job, and publishes the traceability + reliability artifacts. |
 
 ## Architecture
 
@@ -266,7 +270,8 @@ Framework layer
 │   ├── traceability/            # requirement-to-test matrix
 │   ├── qa/                      # live-DOM QA, run, verify, review, heal
 │   ├── reliability/             # flake detection + quarantine + trust score
-│   └── contract/                # API contract-drift detection
+│   ├── contract/                # API contract-drift detection
+│   └── ci/                      # CI recipes (GitHub Actions / GitLab)
 ├── examples/
 │   ├── test-kit-demo/           # one spec -> Robot + Playwright (API, runnable)
 │   └── qa-ui-demo/              # the UI locator-binding flow
@@ -280,8 +285,9 @@ Framework layer
 - ✅ Traceability matrix and browser-driven QA extension
 - ✅ Playwright UI layer with live-DOM locator generation
 - ✅ Reliability (flake quarantine + trust score), contract-drift, self-healing locators
-- ⏳ Robot UI (SeleniumLibrary) and Cypress/Selenium/Appium adapters
-- ⏳ Unit/integration level and CI recipes
+- ✅ Web UI adapters (Cypress, Selenium, Robot/SeleniumLibrary) + Appium mobile
+- ✅ Unit/integration level and CI recipes (GitHub Actions / GitLab)
+- ⏳ Live end-to-end UI/mobile demos (need a target app + device)
 
 See [`VALIDATION.md`](VALIDATION.md) for acceptance-criteria evidence.
 

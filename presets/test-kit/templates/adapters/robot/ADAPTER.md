@@ -1,16 +1,16 @@
-# Adapter: Robot Framework - API layer
+# Adapter: Robot Framework - API + Web UI + unit
 
 Rendering rules that turn a neutral test case (from `tasks.md`) into Robot
-Framework tests for the **API / contract** level, using `RequestsLibrary`.
+Framework tests. Robot is a meta-framework: it routes to a sub-library per layer
+- `RequestsLibrary` (API), `SeleniumLibrary` (Web UI), `AppiumLibrary` (mobile),
+and plain Python keyword libraries (unit/integration). The API rendering is
+below; the UI and unit sections follow.
 
 ## Capabilities
 
 | Web UI | Mobile | API | Unit/integration | Language |
 |--------|--------|-----|------------------|----------|
-| via SeleniumLibrary | via AppiumLibrary | **RequestsLibrary** | Python keywords | keyword-driven / Python |
-
-Robot is a meta-framework: for the API layer it routes to `RequestsLibrary`.
-Only the API rendering is defined here; UI/mobile sub-adapters come later.
+| **SeleniumLibrary** | via AppiumLibrary | **RequestsLibrary** | **Python keywords** | keyword-driven / Python |
 
 ## File layout
 
@@ -87,3 +87,51 @@ robot tests/
 files. If the target uses self-signed or otherwise unverified TLS, pass
 `verify=${False}` (or a CA bundle path) to `Create Session` explicitly rather
 than silencing the warning - `RequestsLibrary` does not verify by default.
+
+## Web UI layer (SeleniumLibrary)
+
+For UI groups, use `SeleniumLibrary`. Keep locators in a resource/variables file
+(bound, never inline) and use Robot's built-in waits.
+
+```robotframework
+*** Settings ***
+Library      SeleniumLibrary
+Variables    ${CURDIR}/../config/locators.yaml
+Variables    ${CURDIR}/../config/environment.yaml
+Variables    ${CURDIR}/../data/login.yaml
+
+*** Test Cases ***
+Successful Login Shows Dashboard
+    [Tags]    REQ-010
+    Open Browser    ${BASE_URL}/login    headlesschrome
+    Input Text       ${EMAIL_FIELD}        ${VALID_USER}[email]
+    Input Password    ${PASSWORD_FIELD}     ${VALID_USER}[password]
+    Click Button      xpath=//button[normalize-space()='Log in']
+    Wait Until Element Is Visible    ${DASHBOARD_GREETING}    timeout=10s
+    [Teardown]    Close Browser
+```
+
+- **Semantic locators** (text/role) preferred; **structural** ones come from
+  `config/locators.yaml`, written inline by `implement` when the plan gives a URL
+  (live DOM) or left as `__BIND__:<name>` for `speckit.qa.bind-locators`.
+- **Waits:** `Wait Until ...` keywords, never `Sleep` (flaky per the constitution).
+- Run: `pip install robotframework-seleniumlibrary` then `robot tests/`.
+
+## Unit / integration layer (Python keywords)
+
+For unit/integration, no app access is needed. Wrap the unit under test in a
+Python keyword library and assert with Robot keywords.
+
+```robotframework
+*** Settings ***
+Library    pricing_keywords.py    # thin wrapper over the code under test
+
+*** Test Cases ***
+Discount Applies To Eligible Cart
+    [Tags]    REQ-020
+    ${total}=    Apply Discount    cart=${ELIGIBLE_CART}    code=SAVE10
+    Should Be Equal As Numbers    ${total}    90.00
+```
+
+Keep the keyword library (`*.py`) as the only place that imports the code under
+test; the `.robot` file stays declarative. Run: `robot tests/`.
